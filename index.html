@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manga Verde Moda Feminina · Limeira/SP</title>
+<meta name="description" content="Moda feminina em Limeira/SP. Escolha a peça por tamanho e cor e peça pelo WhatsApp. Duas lojas e entrega na sua casa.">
+<meta name="theme-color" content="#3E4A28">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400;1,6..96,600&family=Instrument+Sans:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+<!-- Tailwind via CDN (v4, build de navegador). Versão fixada de propósito. -->
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.4"></script>
+<style type="text/tailwindcss">
+@theme static {
+  /* Paleta extraída do Instagram e do logo da loja */
+  --color-ink: #151515;        /* preto do logo e dos painéis de grade */
+  --color-wall: #E9E8E3;       /* parede cinza-clara das fotos */
+  --color-cream: #F6F2EA;      /* off-white das peças */
+  --color-leaf: #3E4A28;       /* verde da árvore em vaso */
+  --color-leafdeep: #29331A;
+  --color-mango: #F0B52F;      /* amarelo-manga da blusa de poá */
+  --color-choc: #5A3A2B;       /* chocolate do body e do blazer */
+  --color-berry: #C8202B;      /* vermelho "cor mais desejada do momento" */
+  --font-display: "Bodoni Moda", Didot, "Bodoni 72", "Times New Roman", serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-script: "Pinyon Script", "Snell Roundhand", cursive;
+}
+</style>
+
+<style>
+/* ============================================================
+   ELEMENTOS ASSINATURA DA MANGA VERDE
+   1) Recorte "folha": dois cantos opostos bem curvos, dois retos.
+      Vem do V do monograma e da forma de uma folha, sem desenhar folha.
+   2) Painel de grade: o mesmo painel de arame preto das fotos da loja.
+   3) O "v" itálico (do Mv) como seta dos botões.
+   ============================================================ */
+:root{ --r: 72px; }
+html{ scroll-behavior:smooth; scroll-padding-top:84px; -webkit-text-size-adjust:100%; }
+body{ overflow-x:clip; background:var(--color-cream); color:var(--color-ink); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+
+.leaf{ border-radius:0 var(--r) 0 var(--r); }
+.leaf-flip{ border-radius:var(--r) 0 var(--r) 0; }
+.leaf-sm{ --r:18px; }
+.leaf-md{ --r:44px; }
+.leaf-lg{ --r:clamp(64px,16vw,132px); }
+
+.gridpanel{
+  background-image:
+    linear-gradient(var(--color-ink) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, var(--color-ink) 1.5px, transparent 1.5px);
+  background-size:26px 26px;
+  border:2px solid var(--color-ink);
+}
+
+.skip{ position:absolute; left:-999px; top:8px; background:var(--color-ink); color:var(--color-cream); padding:10px 14px; z-index:100 }
+.skip:focus{ left:8px }
+:focus-visible{ outline:3px solid var(--color-mango); outline-offset:3px; }
+.on-dark :focus-visible, .bg-leaf :focus-visible, .bg-ink :focus-visible{ outline-color:var(--color-mango); }
+
+/* Reveal ao rolar (só se o JS rodar) */
+.js [data-reveal]{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.js [data-reveal].in{ opacity:1; transform:none; }
+
+/* ---------- Botões ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.7rem;
+  min-height:54px; padding:0 26px; font-weight:600; font-size:16px; letter-spacing:.01em;
+  border-radius:0 18px 0 18px; border:2px solid var(--color-ink);
+  transition:background .25s, color .25s, border-color .25s, border-radius .35s;
+  cursor:pointer; text-align:center; text-decoration:none;
+}
+.btn:hover{ border-radius:18px 0 18px 0; }
+.btn .v{ font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.35em; line-height:1; display:inline-block; transition:transform .3s; }
+.btn:hover .v{ transform:translateY(3px); }
+.btn-ink{ background:var(--color-ink); color:var(--color-cream); }
+.btn-ink:hover{ background:var(--color-leaf); border-color:var(--color-leaf); }
+.btn-mango{ background:var(--color-mango); color:var(--color-ink); }
+.btn-mango:hover{ background:var(--color-ink); color:var(--color-mango); }
+.btn-line{ background:transparent; color:inherit; border-color:currentColor; }
+.btn-line:hover{ background:var(--color-ink); color:var(--color-cream); border-color:var(--color-ink); }
+.btn-wa{ background:var(--color-leaf); color:var(--color-cream); border-color:var(--color-leaf); }
+.btn-wa:hover{ background:var(--color-leafdeep); border-color:var(--color-leafdeep); }
+.btn-block{ width:100%; }
+
+/* ---------- Chips ---------- */
+.chip{
+  min-height:46px; min-width:46px; padding:0 18px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border:1.5px solid var(--color-ink); border-radius:0 14px 0 14px; font-weight:600; font-size:15px; white-space:nowrap;
+  background:transparent; cursor:pointer; transition:background .2s,color .2s, border-radius .3s;
+}
+.chip:hover{ border-radius:14px 0 14px 0; }
+.chip[aria-pressed="true"]{ background:var(--color-ink); color:var(--color-cream); }
+.chip.off{ opacity:.35; text-decoration:line-through; }
+.swatch{ width:46px; height:46px; border-radius:50%; border:1.5px solid rgba(21,21,21,.35); cursor:pointer; position:relative; transition:transform .2s; }
+.swatch:hover{ transform:scale(1.08); }
+.swatch[aria-pressed="true"]{ box-shadow:0 0 0 3px var(--color-cream), 0 0 0 5px var(--color-ink); }
+.dot{ width:12px; height:12px; border-radius:50%; border:1px solid rgba(21,21,21,.3); display:inline-block; }
+
+/* ---------- Cards de produto ---------- */
+.card{ display:block; position:relative; }
+.card-media{ position:relative; aspect-ratio:3/4; overflow:hidden; background:var(--color-wall); --r:clamp(44px,12vw,84px); }
+.card.flip .card-media{ border-radius:var(--r) 0 var(--r) 0; }
+.card-media .m{ position:absolute; inset:0; transition:opacity .55s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+.card-media .m2{ opacity:0; transform:scale(1.04); }
+.card:hover .m1{ opacity:0; }
+.card:hover .m2{ opacity:1; transform:none; }
+.m svg, .m img{ width:100%; height:100%; object-fit:cover; display:block; }
+.stamp{
+  position:absolute; z-index:2; top:12px; left:12px; background:var(--color-mango); color:var(--color-ink);
+  font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:6px 11px; transform:rotate(-4deg);
+  border-radius:0 10px 0 10px;
+}
+.card .num{ font-family:var(--font-display); font-style:italic; font-size:14px; opacity:.55; }
+.card h3{ font-family:var(--font-display); font-weight:600; font-size:clamp(17px,4.6vw,22px); line-height:1.15; letter-spacing:-.005em; }
+.card .more{ position:absolute; z-index:2; right:10px; bottom:10px; background:var(--color-ink); color:var(--color-cream); font-size:13px; font-weight:600; padding:9px 14px; border-radius:0 12px 0 12px; opacity:0; transform:translateY(6px); transition:.3s; }
+@media (hover:hover){ .card:hover .more{ opacity:1; transform:none; } }
+.stagger > :nth-child(even){ margin-top:2.25rem; }
+@media (min-width:1024px){ .stagger.cols4 > :nth-child(even){ margin-top:3.5rem; } }
+
+/* ---------- Faixa ---------- */
+.marquee{ overflow:hidden; white-space:nowrap; }
+.marquee-track{ display:inline-flex; animation:slide 38s linear infinite; }
+.marquee:hover .marquee-track{ animation-play-state:paused; }
+@keyframes slide{ to{ transform:translateX(-50%); } }
+.marquee .sep{ display:inline-block; width:12px; height:12px; background:var(--color-mango); border-radius:0 6px 0 6px; margin:0 28px; transform:rotate(0deg); }
+
+/* ---------- Header ---------- */
+.site-header{ position:sticky; top:0; z-index:50; background:var(--color-cream); border-bottom:1.5px solid var(--color-ink); }
+.logo-mv{ font-family:var(--font-display); font-weight:600; font-size:40px; line-height:.9; letter-spacing:-.04em; }
+.logo-mv i{ font-style:normal; font-weight:400; margin-left:-3px; position:relative; top:5px; }
+.logo-script{ font-family:var(--font-script); font-size:22px; line-height:1; white-space:nowrap; }
+.logo-sub{ font-size:8px; letter-spacing:.3em; font-weight:500; white-space:nowrap; }
+@media (max-width:420px){ .logo-mv{font-size:34px} .logo-script{font-size:19px} .logo-sub{font-size:7px;letter-spacing:.24em} }
+.navlink{ font-weight:600; font-size:15px; padding:10px 4px; background:linear-gradient(var(--color-mango),var(--color-mango)) no-repeat 0 100%/0 3px; transition:background-size .3s; }
+.navlink:hover{ background-size:100% 3px; }
+.bagcount{ display:inline-flex; min-width:22px; height:22px; align-items:center; justify-content:center; background:var(--color-mango); color:var(--color-ink); font-size:12px; font-weight:700; border-radius:0 9px 0 9px; padding:0 5px; }
+
+/* ---------- Tipografia ---------- */
+.eyebrow{ font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+.h-display{ font-family:var(--font-display); font-weight:600; letter-spacing:-.02em; line-height:.95; }
+.h-display em{ font-style:italic; font-weight:400; }
+
+/* ---------- Categorias (índice) ---------- */
+.cat-row{ display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:14px; padding:18px 14px; border-top:1.5px solid var(--color-ink); transition:background .3s,color .3s,padding .3s; }
+.cat-row:last-child{ border-bottom:1.5px solid var(--color-ink); }
+.cat-row:hover{ background:var(--color-leaf); color:var(--color-cream); padding-left:26px; }
+.cat-row .cat-name{ font-family:var(--font-display); font-weight:600; font-size:clamp(30px,7vw,64px); line-height:1; letter-spacing:-.02em; }
+.cat-row .cat-n{ font-family:var(--font-display); font-style:italic; opacity:.6; }
+.cat-thumb{ display:none; width:84px; aspect-ratio:3/4; overflow:hidden; --r:30px; background:var(--color-wall); }
+@media (min-width:768px){ .cat-thumb{ display:block; } .cat-row{ grid-template-columns:60px 1fr 84px 90px; } }
+
+/* ---------- WhatsApp flutuante ---------- */
+.wa-float{
+  position:fixed; right:14px; bottom:14px; z-index:60; display:flex; align-items:center; gap:10px;
+  height:60px; padding:0 22px 0 16px; background:var(--color-leaf); color:var(--color-cream); font-weight:700;
+  border-radius:0 30px 0 30px; border:2px solid var(--color-ink); box-shadow:5px 5px 0 var(--color-ink); transition:transform .25s, box-shadow .25s, border-radius .35s;
+}
+.wa-float:hover{ transform:translate(2px,2px); box-shadow:3px 3px 0 var(--color-ink); border-radius:30px 0 30px 0; }
+.wa-float .tick{ position:absolute; top:-7px; left:-7px; width:16px; height:16px; background:var(--color-mango); border:2px solid var(--color-ink); border-radius:0 8px 0 8px; }
+body.has-bar .wa-float{ bottom:96px; }
+@media (min-width:1024px){ body.has-bar .wa-float{ bottom:14px; } }
+
+.pbar{ position:fixed; left:0; right:0; bottom:0; z-index:55; background:var(--color-cream); border-top:1.5px solid var(--color-ink); padding:10px 14px calc(10px + env(safe-area-inset-bottom)); display:flex; align-items:center; gap:12px; }
+@media (min-width:1024px){ .pbar{ display:none; } }
+
+/* ---------- Toast ---------- */
+.toast{ position:fixed; left:50%; bottom:90px; transform:translate(-50%,20px); background:var(--color-ink); color:var(--color-cream); padding:14px 20px; border-radius:0 16px 0 16px; font-weight:600; font-size:15px; opacity:0; pointer-events:none; transition:.35s; z-index:80; max-width:90vw; }
+.toast.show{ opacity:1; transform:translate(-50%,0); }
+.toast a{ color:var(--color-mango); text-decoration:underline; margin-left:10px; }
+
+@keyframes shake{ 20%,60%{transform:translateX(-6px)} 40%,80%{transform:translateX(6px)} }
+.shake{ animation:shake .4s; }
+
+input[type=search], input[type=text]{ -webkit-appearance:none; appearance:none; }
+.field{ width:100%; min-height:54px; padding:0 18px; border:2px solid var(--color-ink); background:var(--color-cream); font-size:16px; border-radius:0 18px 0 18px; }
+.field::placeholder{ color:rgba(21,21,21,.5); }
+.hide-scroll{ scrollbar-width:none; } .hide-scroll::-webkit-scrollbar{ display:none; }
+.ph{ display:block; width:100%; height:100%; }
+</style>
+</head>
+
+<body>
+<a href="#main" class="skip">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="mx-auto flex max-w-[1280px] items-center justify-between gap-3 px-4 py-2.5 md:px-8">
+    <a href="#/" class="flex items-center gap-2 sm:gap-3" aria-label="Manga Verde Moda Feminina, página inicial">
+      <span class="logo-mv" aria-hidden="true">M<i>v</i></span>
+      <span class="flex flex-col gap-1.5">
+        <span class="logo-script">manga verde</span>
+        <span class="logo-sub">MODA FEMININA</span>
+      </span>
+    </a>
+    <nav class="flex items-center gap-2 sm:gap-3 md:gap-7" aria-label="Principal">
+      <a class="navlink hidden md:inline-block" href="#/novidades">Novidades</a>
+      <a class="navlink" href="#/catalogo">Catálogo</a>
+      <a class="navlink hidden md:inline-block" href="#/lojas">Lojas</a>
+      <a href="#/sacola" class="btn btn-ink !min-h-[46px] !px-3 sm:!px-4 !text-[15px]" aria-label="Abrir sacola">
+        Sacola <span class="bagcount" id="bagcount">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="bg-ink text-cream on-dark">
+  <div class="mx-auto max-w-[1280px] px-4 pb-28 pt-14 md:px-8 lg:pb-14">
+    <div class="grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <div class="flex items-end gap-3">
+          <span class="logo-mv !text-[64px]" aria-hidden="true">M<i>v</i></span>
+          <span class="logo-script !text-[34px] pb-1">manga verde</span>
+        </div>
+        <p class="mt-1 text-[10px] tracking-[.34em]">MODA FEMININA · LIMEIRA/SP</p>
+      </div>
+      <div class="md:col-span-3">
+        <p class="eyebrow text-mango">Fale com a gente</p>
+        <p class="mt-3"><a class="underline decoration-mango underline-offset-4" id="f-wa" target="_blank" rel="noopener">WhatsApp (19) 99258-2006</a><br><span class="opacity-60 text-sm">Vendas e entregas</span></p>
+        <p class="mt-3"><a class="underline decoration-mango underline-offset-4" href="https://instagram.com/mangaverdemodafeminina" target="_blank" rel="noopener">@mangaverdemodafeminina</a><br><span class="opacity-60 text-sm">62 mil seguidores</span></p>
+      </div>
+      <div class="md:col-span-4">
+        <p class="eyebrow text-mango">Nossas lojas</p>
+        <p class="mt-3"><strong>Loja 1</strong><br><span class="opacity-80">R. Carlos Gomes, 885 - Centro, Limeira/SP</span></p>
+        <p class="mt-3"><strong>Loja 2</strong><br><span class="opacity-80">Av. Dr. Lauro Corrêa da Silva, 5341 - Jd. do Lago, Limeira/SP</span></p>
+      </div>
+    </div>
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-2 border-t border-cream/20 pt-5 text-xs opacity-70">
+      <span>© Manga Verde Moda Feminina</span>
+      <span>Protótipo desenvolvido por EZF Tech</span>
+    </div>
+  </div>
+</footer>
+
+<a id="wa-float" class="wa-float" target="_blank" rel="noopener" aria-label="Chamar a Manga Verde no WhatsApp">
+  <span class="tick" aria-hidden="true"></span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.4A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.18-3.1.82.83-3.02-.2-.31A8.1 8.1 0 0 1 12.04 3.8zm-3.3 4.1c-.2 0-.5.07-.76.35-.26.28-1 .98-1 2.4s1.03 2.78 1.17 2.97c.15.2 2 3.2 4.95 4.37 2.45.97 2.95.78 3.48.73.53-.05 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.57-.35-.3-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.3-.77.95-.94 1.15-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57z"/></svg>
+  <span>Chamar</span>
+</a>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ============================================================
+   CONFIGURAÇÃO DA LOJA  (edite aqui)
+   ============================================================ */
+const CONFIG = {
+  whatsapp: '5519992582006',               // formato wa.me: 55 + DDD + número
+  whatsappExibicao: '(19) 99258-2006',
+  instagram: 'mangaverdemodafeminina',
+  // TROCAR: link direto das avaliações do Google (Maps > loja > "Avaliações" > compartilhar)
+  googleAvaliacoes: 'https://www.google.com/maps/search/?api=1&query=Manga+Verde+Moda+Feminina+Limeira',
+  lojas: [
+    { id:'loja1', nome:'Loja 1', bairro:'Centro',
+      endereco:'R. Carlos Gomes, 885 - Centro, Limeira/SP',
+      curto:'R. Carlos Gomes, 885 · Centro',
+      horario:'Seg a Sáb · 9h às 18h' },            // TODO: preencher com o horário real
+    { id:'loja2', nome:'Loja 2', bairro:'Jd. do Lago',
+      endereco:'Av. Dr. Lauro Corrêa da Silva, 5341 - Jd. do Lago, Limeira/SP',
+      curto:'Av. Dr. Lauro Corrêa da Silva, 5341 · Jd. do Lago',
+      horario:'Seg a Sáb · 9h às 18h' }             // TODO: preencher com o horário real
+  ],
+  horarioEhExemplo: true   // mostra "(horário de exemplo)" na tela. Ponha false quando preencher.
+};
+
+const ENTREGAS = [
+  { id:'loja1', label:'Retirar na Loja 1', detalhe:'R. Carlos Gomes, 885 · Centro',                    msg:'Retirar na Loja 1 (R. Carlos Gomes, 885 - Centro)' },
+  { id:'loja2', label:'Retirar na Loja 2', detalhe:'Av. Dr. Lauro Corrêa da Silva, 5341 · Jd. do Lago', msg:'Retirar na Loja 2 (Av. Dr. Lauro Corrêa da Silva, 5341 - Jd. do Lago)' },
+  { id:'casa',  label:'Receber em casa',   detalhe:'Combinamos endereço e frete pelo WhatsApp',          msg:'Receber em casa' }
+];
+
+/* ============================================================
+   PRODUTOS  (edite aqui — é só um array)
+   ------------------------------------------------------------
+   nome, categoria, preco (número), tamanhos, cores, novo (true/false)
+   fotos: lista de fotos da peça (a 1ª é a capa, a 2ª aparece ao passar o mouse).
+
+   >>> ONDE TROCAR PELAS FOTOS REAIS <<<
+   Hoje as fotos são ilustrações geradas: 'placeholder:tipo' ou 'placeholder:tipo:detail'.
+   Para usar foto real, troque pelo caminho/URL da imagem. Exemplo:
+       fotos: ['fotos/vestido-vinho-1.jpg', 'fotos/vestido-vinho-2.jpg']
+   Dica: fotos em pé (proporção 3:4), até ~1200px de largura, em .webp ou .jpg.
+
+   Preços e descrições abaixo são EXEMPLOS.
+   ============================================================ */
+const CATEGORIAS = ['Vestidos','Blusas e Blazers','Calças e Jeans','Conjuntos','Moda Festa','Acessórios'];
+
+const PRODUTOS = [
+  { id:'vestido-longo-renda-vinho', nome:'Vestido Longo Renda Vinho', categoria:'Moda Festa', preco:289.90,
+    tamanhos:['P','M','G'], cores:['Vinho','Preto'], novo:true,
+    fotos:['placeholder:dressLong','placeholder:dressLong:detail'],
+    descricao:'Longo com alças finas e barra de renda. Para casamento, formatura e jantar.' },
+  { id:'conjunto-top-short-rose', nome:'Conjunto Top e Short Rosé', categoria:'Conjuntos', preco:199.90,
+    tamanhos:['P','M','G','GG'], cores:['Rosé','Off White'], novo:true,
+    fotos:['placeholder:set','placeholder:set:detail'],
+    descricao:'Top estruturado e short de alfaiataria. Vendido junto.' },
+  { id:'vestido-babados-azul-ceu', nome:'Vestido Babados Azul Céu', categoria:'Vestidos', preco:179.90,
+    tamanhos:['P','M','G'], cores:['Azul Céu','Rosa'], novo:true,
+    fotos:['placeholder:dressRuffle','placeholder:dressRuffle:detail'],
+    descricao:'Curto, gola frente única e babados assimétricos na saia.' },
+  { id:'calca-pantalona-off-white', nome:'Calça Pantalona Off White', categoria:'Calças e Jeans', preco:169.90,
+    tamanhos:['P','M','G','GG'], cores:['Off White','Preto'], novo:false,
+    fotos:['placeholder:pants','placeholder:pants:detail'],
+    descricao:'Cintura alta e perna larga. Combina com cropped e blusas soltas.' },
+  { id:'blusa-peplum-poa', nome:'Blusa Peplum Poá', categoria:'Blusas e Blazers', preco:99.90,
+    tamanhos:['P','M','G'], cores:['Amarelo','Preto'], novo:true,
+    fotos:['placeholder:topDots','placeholder:topDots:detail'],
+    descricao:'Alça larga, decote coração e peplum leve na barra.' },
+  { id:'top-babadinhos', nome:'Top Babadinhos', categoria:'Blusas e Blazers', preco:89.90,
+    tamanhos:['P','M','G'], cores:['Azul Céu','Branco','Amarelo','Rosa'], novo:true,
+    fotos:['placeholder:topRuffle','placeholder:topRuffle:detail'],
+    descricao:'Frente única com camadas de babado. Vem em quatro cores.' },
+  { id:'body-halter-chocolate', nome:'Body Halter Chocolate', categoria:'Blusas e Blazers', preco:119.90,
+    tamanhos:['P','M','G'], cores:['Chocolate'], novo:true,
+    fotos:['placeholder:body','placeholder:body:detail'],
+    descricao:'Decote halter, recorte off white e fivela dourada.' },
+  { id:'blazer-alfaiataria-chocolate', nome:'Blazer Alfaiataria Chocolate', categoria:'Blusas e Blazers', preco:229.90,
+    tamanhos:['P','M','G','GG'], cores:['Chocolate','Preto'], novo:false,
+    fotos:['placeholder:blazer','placeholder:blazer:detail'],
+    descricao:'Corte reto e ombro marcado. Peça-chave para trabalhar e sair.' },
+  { id:'short-jeans-alfaiataria', nome:'Short Jeans Alfaiataria', categoria:'Calças e Jeans', preco:139.90,
+    tamanhos:['P','M','G','GG'], cores:['Jeans Claro','Jeans Médio'], novo:false,
+    fotos:['placeholder:shorts','placeholder:shorts:detail'],
+    descricao:'Bermuda curta de jeans, cintura alta e caimento reto.' },
+  { id:'calca-jeans-wide-leg', nome:'Calça Jeans Wide Leg', categoria:'Calças e Jeans', preco:189.90,
+    tamanhos:['P','M','G','GG'], cores:['Jeans Claro','Jeans Médio'], novo:true,
+    fotos:['placeholder:pants','placeholder:pants:detail'],
+    descricao:'Perna larga, cintura alta e lavagem natural.' },
+  { id:'vestido-frente-unica-vermelho', nome:'Vestido Frente Única Vermelho', categoria:'Vestidos', preco:219.90,
+    tamanhos:['P','M','G'], cores:['Vermelho','Preto'], novo:true,
+    fotos:['placeholder:dressShort','placeholder:dressShort:detail'],
+    descricao:'Frente única, costas abertas e saia evasê.' },
+  { id:'colar-coracao-dourado', nome:'Colar Coração Dourado', categoria:'Acessórios', preco:59.90,
+    tamanhos:['Único'], cores:['Dourado','Prateado'], novo:false,
+    fotos:['placeholder:necklace','placeholder:necklace:detail'],
+    descricao:'Corrente fina com pingente de coração.' }
+];
+
+// Cores: nome → hex (usado nas bolinhas e nas fotos de exemplo)
+const CORES = {
+  'Vinho':'#4A1F33','Preto':'#1B1B1B','Rosé':'#F0B4C8','Off White':'#F1EADB','Azul Céu':'#A9C8EA','Rosa':'#F4B5C8',
+  'Amarelo':'#F2CB45','Branco':'#FBFBF8','Chocolate':'#5A3A2B','Jeans Claro':'#A9C1DC','Jeans Médio':'#5F81AA',
+  'Vermelho':'#C8202B','Dourado':'#D4AF37','Prateado':'#C9CED3'
+};
+PRODUTOS.forEach((p,i)=>{ p.num = i+1; });
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+const brl = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const pad = n => String(n).padStart(2,'0');
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wa = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const mapsDir = end => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(end)}`;
+const byId = id => PRODUTOS.find(p=>p.id===id);
+const entrega = id => ENTREGAS.find(e=>e.id===id) || ENTREGAS[2];
+const horarioTxt = l => l.horario + (CONFIG.horarioEhExemplo ? ' (horário de exemplo)' : '');
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+
+/* ============================================================
+   FOTOS DE EXEMPLO (ilustrações no clima das fotos da loja:
+   parede cinza, painel de grade preto, árvore em vaso, arara)
+   ============================================================ */
+function shade(hex,p){
+  const n=parseInt(hex.slice(1),16); let r=n>>16, g=n>>8&255, b=n&255;
+  const t=p<0?0:255, k=Math.abs(p);
+  r=Math.round((t-r)*k+r); g=Math.round((t-g)*k+g); b=Math.round((t-b)*k+b);
+  return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+}
+let artUid = 0;
+const G = {
+  dressLong:(c,d)=>`
+    <path d="M126 94 L174 94 L172 168 Q178 250 202 358 L98 358 Q122 250 128 168 Z" fill="${c}"/>
+    <path d="M99 326 Q150 344 201 326 L202 358 L98 358 Z" fill="${d}" opacity=".8"/>
+    <path d="M150 170 L150 330 M137 190 L120 330 M163 190 L180 330" stroke="${d}" stroke-width="2" opacity=".35" fill="none"/>
+    <path d="M128 168 L172 168" stroke="${d}" stroke-width="3" opacity=".5"/>`,
+  dressShort:(c,d)=>`
+    <path d="M134 90 L166 90 L162 150 Q164 178 208 268 L92 268 Q136 178 138 150 Z" fill="${c}"/>
+    <path d="M150 150 L150 266 M135 190 L112 264 M165 190 L188 264" stroke="${d}" stroke-width="2" opacity=".3" fill="none"/>
+    <path d="M138 150 L162 150" stroke="${d}" stroke-width="3" opacity=".5"/>`,
+  dressRuffle:(c,d,l)=>`
+    <path d="M124 92 L176 92 L168 150 L206 236 L182 262 L168 246 L150 296 L128 252 L98 262 L134 150 Z" fill="${c}"/>
+    <path d="M134 150 Q150 168 168 150 M120 192 Q150 214 188 190" stroke="${d}" stroke-width="2.5" fill="none" opacity=".45"/>
+    <path d="M110 232 Q150 258 192 230" stroke="${l}" stroke-width="2.5" fill="none" opacity=".7"/>`,
+  pants:(c,d,l,c2,o)=>`
+    <path d="M116 94 L184 94 L188 132 Q200 250 214 358 L160 358 L150 212 L140 358 L86 358 Q100 250 112 132 Z" fill="${c}"/>
+    <path d="M116 94 L184 94 L185 110 L115 110 Z" fill="${d}" opacity=".55"/>
+    <path d="M150 112 L150 212" stroke="${d}" stroke-width="2" opacity=".5"/>
+    ${o.denim?`<path d="M122 120 Q132 140 144 132 M178 120 Q168 140 156 132" stroke="${l}" stroke-width="2" stroke-dasharray="4 3" fill="none"/>`:''}`,
+  shorts:(c,d,l,c2,o)=>`
+    <path d="M116 94 L184 94 L188 134 L202 240 L158 240 L150 172 L142 240 L98 240 L112 134 Z" fill="${c}"/>
+    <path d="M116 94 L184 94 L185 110 L115 110 Z" fill="${d}" opacity=".55"/>
+    <path d="M150 112 L150 172" stroke="${d}" stroke-width="2" opacity=".5"/>
+    ${o.denim?`<path d="M122 122 Q132 142 144 134 M178 122 Q168 142 156 134" stroke="${l}" stroke-width="2" stroke-dasharray="4 3" fill="none"/>`:''}`,
+  set:(c,d)=>`
+    <path d="M128 92 L172 92 L170 118 Q150 134 130 118 Z" fill="${c}"/>
+    <path d="M130 118 Q150 134 170 118 L168 158 L132 158 Z" fill="${c}"/>
+    <path d="M132 158 L168 158" stroke="${d}" stroke-width="3" opacity=".5"/>
+    <path d="M120 178 L180 178 L186 218 L196 278 L156 278 L150 222 L144 278 L104 278 L114 218 Z" fill="${c}"/>
+    <path d="M120 178 L180 178 L181 190 L119 190 Z" fill="${d}" opacity=".5"/>`,
+  topDots:(c,d,l,c2,o)=>`
+    <path d="M122 92 L142 92 Q150 108 158 92 L178 92 L182 168 Q198 212 206 242 L94 242 Q102 212 118 168 Z" fill="${c}"/>
+    <path d="M122 92 L142 92 Q150 108 158 92 L178 92 L182 168 Q198 212 206 242 L94 242 Q102 212 118 168 Z" fill="url(#dots${o.uid})"/>
+    <path d="M118 168 L182 168" stroke="${d}" stroke-width="3" opacity=".5"/>`,
+  topRuffle:(c,d,l)=>`
+    <path d="M128 92 L172 92 L176 138 L182 240 L118 240 L124 138 Z" fill="${c}"/>
+    ${[150,174,198,222].map(y=>`<path d="M121 ${y} q7 8 14 0 q7 8 14 0 q7 8 14 0 q7 8 14 0 q7 8 14 0 q7 8 14 0" stroke="${d}" stroke-width="2.5" fill="${l}" fill-opacity=".25"/>`).join('')}`,
+  body:(c,d,l,c2)=>`
+    <path d="M132 92 L168 92 L160 148 L166 190 L134 190 L140 148 Z" fill="${c}"/>
+    <path d="M134 190 L166 190 L172 234 L128 234 Z" fill="${c2}"/>
+    <path d="M132 92 L150 124 L168 92" fill="none" stroke="#151515" stroke-width="3.5"/>
+    <rect x="144" y="186" width="12" height="10" fill="#D4AF37" stroke="#8a6d1c" stroke-width="1"/>`,
+  blazer:(c,d,l,c2)=>`
+    <path d="M126 92 L174 92 L214 142 L202 332 L172 332 L170 162 L130 162 L128 332 L98 332 L86 142 Z" fill="${c}"/>
+    <path d="M138 94 L162 94 L150 152 Z" fill="${c2}"/>
+    <path d="M126 92 L150 152 L130 162 M174 92 L150 152 L170 162" stroke="${d}" stroke-width="3" fill="none"/>
+    <circle cx="150" cy="198" r="3.5" fill="${d}"/><circle cx="150" cy="226" r="3.5" fill="${d}"/>`,
+  necklace:(c)=>`
+    <path d="M92 58 Q150 350 208 58" fill="none" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="92" cy="58" r="5" fill="none" stroke="#151515" stroke-width="2"/><circle cx="208" cy="58" r="5" fill="none" stroke="#151515" stroke-width="2"/>
+    <path transform="translate(150,196)" d="M0 44 C-28 24 -28 -4 -9 -4 C-3 -4 0 1 0 5 C0 1 3 -4 9 -4 C28 -4 28 24 0 44Z" fill="${c}" stroke="${shade(c,-.3)}" stroke-width="1.5"/>`
+};
+const NO_HANGER = new Set(['necklace']);
+
+function art(spec, colorName, label){
+  const [kind, variant='main'] = spec.split(':');
+  const uid = ++artUid;
+  const c = CORES[colorName] || '#8899aa';
+  const d = shade(c,-.3), l = shade(c,.4);
+  const c2 = kind==='body' ? CORES['Off White'] : kind==='blazer' ? CORES['Branco'] : c;
+  const opts = { uid, denim: /jeans/i.test(colorName||'') };
+  const detail = variant==='detail';
+  const garment = (G[kind]||G.dressLong)(c,d,l,c2,opts);
+  const hanger = NO_HANGER.has(kind) ? '' :
+    `<path d="M150 76 V66 a6 6 0 1 1 6 6" fill="none" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>
+     <path d="M150 76 L106 96 M150 76 L194 96" stroke="#222" stroke-width="3" stroke-linecap="round"/>`;
+  const dotColor = shade(c,-.45);
+  const bg = detail ? `
+    <rect width="300" height="400" fill="#F1ECE0"/>
+    <ellipse cx="40" cy="330" rx="120" ry="40" transform="rotate(-38 40 330)" fill="#3E4A28" opacity=".12"/>
+    <ellipse cx="280" cy="60" rx="110" ry="34" transform="rotate(28 280 60)" fill="#3E4A28" opacity=".10"/>
+    <rect y="372" width="300" height="28" fill="#E3DCCB"/>`
+  : `
+    <rect width="300" height="400" fill="#E7E6E1"/>
+    <rect y="356" width="300" height="44" fill="#D8D6CE"/>
+    <g transform="translate(206 30)">
+      <rect width="86" height="326" fill="#E7E6E1" stroke="#151515" stroke-width="3"/>
+      ${Array.from({length:7},(_,i)=>`<path d="M${(i+1)*10.75} 0 V326" stroke="#151515" stroke-width="1.4"/>`).join('')}
+      ${Array.from({length:19},(_,i)=>`<path d="M0 ${(i+1)*16.3} H86" stroke="#151515" stroke-width="1.4"/>`).join('')}
+    </g>
+    <g>
+      <path d="M36 312 Q40 240 30 196" stroke="#6b5a45" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="30" cy="170" rx="30" ry="22" fill="#6C7A4A" opacity=".9"/>
+      <ellipse cx="54" cy="206" rx="26" ry="18" fill="#55633A" opacity=".9"/>
+      <ellipse cx="14" cy="224" rx="22" ry="16" fill="#55633A" opacity=".9"/>
+      <ellipse cx="46" cy="150" rx="20" ry="14" fill="#55633A" opacity=".9"/>
+      <path d="M12 314 H62 L58 358 H16 Z" fill="#D6CCB8"/>
+    </g>
+    <path d="M0 56 H300" stroke="#151515" stroke-width="2.5"/>`;
+  const t = detail ? 'translate(-79 -52) scale(1.52)' : '';
+  return `<svg class="ph" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(label||'Foto de exemplo')}">
+    <defs><pattern id="dots${uid}" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2.1" fill="${dotColor}"/><circle cx="12" cy="12" r="2.1" fill="${dotColor}"/></pattern></defs>
+    ${bg}
+    <g transform="${t}">${hanger}${garment}</g>
+    <text x="150" y="391" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="8" letter-spacing="1.6" fill="#151515" opacity=".4">FOTO DE EXEMPLO</text>
+  </svg>`;
+}
+function photo(src, p, colorName, alt){
+  alt = alt || p.nome;
+  if (src.startsWith('placeholder:')) return art(src.slice(12), colorName || p.cores[0], alt);
+  return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async">`;
+}
+
+/* ============================================================
+   BLOCOS DE INTERFACE
+   ============================================================ */
+function card(p, i){
+  const flip = i%2 ? ' flip':'';
+  const second = p.fotos[1] || p.fotos[0];
+  return `<a href="#/produto/${p.id}" class="card${flip}" data-reveal aria-label="${esc(p.nome)}, ${brl(p.preco)}">
+    <div class="card-media leaf">
+      <div class="m m1">${photo(p.fotos[0],p)}</div>
+      <div class="m m2">${photo(second,p)}</div>
+      ${p.novo?'<span class="stamp">Novo</span>':''}
+      <span class="more">Ver peça</span>
+    </div>
+    <div class="mt-3 flex items-baseline justify-between gap-2">
+      <span class="num">Nº ${pad(p.num)}</span>
+      <span class="flex gap-1 items-center">${p.cores.slice(0,4).map(c=>`<i class="dot" style="background:${CORES[c]}" title="${c}"></i>`).join('')}</span>
+    </div>
+    <h3 class="mt-1">${esc(p.nome)}</h3>
+    <p class="mt-1 text-[15px]"><span class="font-semibold">${brl(p.preco)}</span> <span class="opacity-60">· ${p.tamanhos.join(' ')}</span></p>
+  </a>`;
+}
+const sectionHead = (eyebrow, title, right='') => `
+  <div class="mb-8 flex flex-wrap items-end justify-between gap-4" data-reveal>
+    <div><p class="eyebrow">${eyebrow}</p><h2 class="h-display mt-2 text-[clamp(2.4rem,7vw,5rem)]">${title}</h2></div>${right}
+  </div>`;
+const vBtn = (txt, href, cls, extra='') => `<a href="${href}" class="btn ${cls}" ${extra}>${txt}<i class="v" aria-hidden="true">v</i></a>`;
+
+/* ============================================================
+   HOME
+   ============================================================ */
+function renderHome(){
+  const novos = PRODUTOS.filter(p=>p.novo).slice(0,8);
+  const A = byId('vestido-babados-azul-ceu'), B = byId('conjunto-top-short-rose');
+  const faixa = ['Duas lojas em Limeira','Entregamos na sua casa','Atendimento pelo WhatsApp'];
+  const faixaItens = faixa.map(t=>`<span class="font-display text-[22px] italic md:text-[28px]">${t}</span><span class="sep" aria-hidden="true"></span>`).join('');
+  const contagemTam = t => PRODUTOS.filter(p=>p.tamanhos.includes(t)).length;
+
+  $('#main').innerHTML = `
+  <!-- ABERTURA -->
+  <section class="relative overflow-hidden">
+    <span aria-hidden="true" class="font-display pointer-events-none absolute -right-6 -top-10 select-none text-[62vw] italic leading-none text-leaf/[.07] lg:text-[34rem]">Mv</span>
+    <div class="relative mx-auto grid max-w-[1280px] items-center gap-6 px-4 pb-14 pt-8 md:px-8 lg:grid-cols-12 lg:pt-12">
+      <div class="relative z-10 lg:col-span-7 lg:pr-0">
+        <p class="eyebrow" data-reveal>Moda feminina · Limeira/SP</p>
+        <h1 class="h-display mt-4 text-[clamp(3.6rem,13.5vw,6.5rem)] lg:text-[clamp(5rem,7.4vw,7.6rem)] lg:-mr-20" data-reveal>Bora ver o que <em class="text-leaf">chegou?</em></h1>
+        <p class="mt-6 max-w-[34rem] text-[19px] leading-snug" data-reveal>Toda a loja por tamanho e cor. Achou a peça, é só mandar no WhatsApp que a gente separa pra você.</p>
+        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+          ${vBtn('Ver novidades','#/novidades','btn-ink')}
+          <a class="btn btn-line" href="#/catalogo">Ver o catálogo todo</a>
+        </div>
+      </div>
+      <div class="relative h-[430px] sm:h-[520px] lg:col-span-5 lg:h-[640px]" data-reveal>
+        <div class="gridpanel absolute right-0 top-[8%] h-[78%] w-[58%] bg-transparent"></div>
+        <div class="leaf leaf-lg absolute left-[2%] top-0 aspect-[3/4] w-[58%] overflow-hidden bg-wall">
+          ${photo(A.fotos[0],A,'Azul Céu')}
+        </div>
+        <div class="leaf leaf-flip leaf-lg absolute bottom-0 right-[2%] aspect-[3/4] w-[46%] overflow-hidden border-2 border-cream bg-wall" style="--r:clamp(48px,12vw,100px)">
+          ${photo(B.fotos[1],B,'Rosé')}
+        </div>
+        <span class="stamp !left-auto !right-[6%] !top-[3%] !text-[12px]">Novidades da semana</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAIXA -->
+  <section class="marquee border-y-[1.5px] border-ink bg-leaf py-4 text-cream" aria-label="Duas lojas em Limeira, entregamos na sua casa, atendimento pelo WhatsApp">
+    <div class="marquee-track" aria-hidden="true">${faixaItens.repeat(4)}</div>
+  </section>
+
+  <!-- ACHE SUA PEÇA -->
+  <section class="bg-wall">
+    <div class="mx-auto max-w-[1280px] px-4 py-16 md:px-8 md:py-24">
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-6" data-reveal>
+          <p class="eyebrow">Ache sua peça em dois toques</p>
+          <h2 class="h-display mt-2 text-[clamp(2.6rem,8vw,5.6rem)]">Qual é o seu <em>tamanho?</em></h2>
+          <p class="mt-4 max-w-md text-[17px]">No Instagram são mais de 17 mil posts. Aqui você escolhe o tamanho e vê só o que tem pra você.</p>
+          <form id="home-search" class="mt-8 flex max-w-md gap-2" role="search">
+            <label class="sr-only" for="hs">Buscar peça</label>
+            <input id="hs" name="q" type="search" class="field" placeholder="Buscar: vestido, calça, poá…" autocomplete="off">
+            <button class="btn btn-ink !px-5" type="submit" aria-label="Buscar">Buscar</button>
+          </form>
+        </div>
+        <div class="grid min-w-0 grid-cols-4 gap-2 sm:gap-3 lg:col-span-6" data-reveal>
+          ${['P','M','G','GG'].map((t,i)=>`
+            <a href="#/catalogo?tam=${t}" class="group flex min-w-0 aspect-[3/4] flex-col justify-between border-2 border-ink bg-cream p-3 transition-colors hover:bg-ink hover:text-cream ${i%2?'leaf-flip':'leaf'}" style="--r:clamp(28px,8vw,64px)">
+              <span class="font-display text-[clamp(2rem,9vw,5rem)] font-semibold leading-none">${t}</span>
+              <span class="text-[12px] font-semibold leading-tight sm:text-sm">${contagemTam(t)} peças</span>
+            </a>`).join('')}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOVIDADES -->
+  <section id="novidades" class="mx-auto max-w-[1280px] px-4 py-16 md:px-8 md:py-24">
+    ${sectionHead('Chegou agora','Novidades <em>da semana</em>', `<a class="font-semibold underline decoration-mango decoration-[3px] underline-offset-[6px]" href="#/catalogo">Ver todas as peças →</a>`)}
+    <div class="stagger cols4 grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 lg:grid-cols-4">${novos.map((p,i)=>card(p,i)).join('')}</div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="bg-cream">
+    <div class="mx-auto max-w-[1280px] px-4 pb-16 md:px-8 md:pb-24">
+      ${sectionHead('Por onde começar','Categorias')}
+      <div data-reveal>
+        ${CATEGORIAS.map((c,i)=>{
+          const lista = PRODUTOS.filter(p=>p.categoria===c);
+          const cover = lista[0];
+          return `<a class="cat-row" href="#/catalogo?cat=${encodeURIComponent(c)}">
+            <span class="cat-n">${pad(i+1)}</span>
+            <span class="cat-name">${c}</span>
+            <span class="cat-thumb leaf">${cover?photo(cover.fotos[0],cover):''}</span>
+            <span class="text-right text-sm font-semibold">${lista.length} ${lista.length===1?'peça':'peças'} <span aria-hidden="true">→</span></span>
+          </a>`; }).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- LOJAS -->
+  <section id="lojas" class="bg-wall">
+    <div class="mx-auto max-w-[1280px] px-4 py-16 md:px-8 md:py-24">
+      ${sectionHead('Venha provar','Nossas <em>lojas</em>')}
+      <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+        ${CONFIG.lojas.map((l,i)=>`
+        <article class="${i===0?'bg-leaf text-cream leaf-lg':'bg-mango text-ink leaf-flip lg:mt-16'} relative overflow-hidden p-7 md:p-10" style="--r:clamp(56px,12vw,110px)" data-reveal>
+          <span aria-hidden="true" class="font-display absolute -right-2 -top-6 select-none text-[11rem] italic leading-none opacity-[.14]">${i+1}</span>
+          <p class="eyebrow">${l.bairro}</p>
+          <h3 class="h-display mt-2 text-[clamp(2.4rem,6vw,4rem)]">${l.nome}</h3>
+          <p class="mt-6 text-[18px] leading-snug">${l.endereco}</p>
+          <p class="mt-2 text-[15px] opacity-85">${horarioTxt(l)}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn ${i===0?'btn-mango':'btn-ink'}" href="${mapsDir(l.endereco)}" target="_blank" rel="noopener">Como chegar<i class="v" aria-hidden="true">v</i></a>
+            <a class="btn btn-line" href="${wa('Oi! Vi no site e queria saber da '+l.nome+' ('+l.curto+').')}" target="_blank" rel="noopener">Falar com a loja</a>
+          </div>
+        </article>`).join('')}
+      </div>
+      <p class="mt-10 max-w-xl font-display text-[clamp(1.4rem,3.4vw,2rem)] italic" data-reveal>Sem tempo de passar na loja? A gente entrega na sua casa. Combine tudo pelo WhatsApp.</p>
+    </div>
+  </section>
+
+  <!-- GOOGLE + INSTAGRAM -->
+  <section class="grid lg:grid-cols-2">
+    <div class="px-4 py-16 md:px-8 md:py-24 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]" data-reveal>
+      <p class="eyebrow">Avaliações no Google</p>
+      <div class="mt-2 flex items-end gap-4">
+        <span class="h-display text-[clamp(7rem,30vw,15rem)] leading-[.8]">5,0</span>
+        <div class="pb-2">
+          <div class="flex gap-1" role="img" aria-label="5 de 5 estrelas">${'<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F0B52F" stroke="#151515" stroke-width="1.5" d="m12 2.6 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6L2.5 9.5l6.6-.8z"/></svg>'.repeat(5)}</div>
+          <p class="mt-1 text-lg font-semibold">347 avaliações</p>
+        </div>
+      </div>
+      <p class="mt-5 max-w-sm text-[17px]">Nota máxima entre as clientes que passaram pelas nossas lojas.</p>
+      <div class="mt-7"><a class="btn btn-ink" href="${CONFIG.googleAvaliacoes}" target="_blank" rel="noopener">Ler avaliações no Google<i class="v" aria-hidden="true">v</i></a></div>
+    </div>
+    <div class="relative overflow-hidden bg-ink px-4 py-16 text-cream on-dark md:px-8 md:py-24 lg:pr-[max(2rem,calc((100vw-1280px)/2+2rem))]" data-reveal>
+      <div class="gridpanel absolute -right-10 -top-8 h-48 w-48 border-cream/30 opacity-30" style="background-image:linear-gradient(#F6F2EA 1.5px,transparent 1.5px),linear-gradient(90deg,#F6F2EA 1.5px,transparent 1.5px)" aria-hidden="true"></div>
+      <p class="eyebrow text-mango">Instagram</p>
+      <h2 class="h-display mt-2 text-[clamp(2.2rem,5.5vw,4rem)]">62 mil <em>seguidoras</em></h2>
+      <p class="mt-4 max-w-sm text-[17px] opacity-90">Os looks do dia, os pacotes abrindo e os lançamentos continuam no @${CONFIG.instagram}.</p>
+      <div class="mt-7"><a class="btn btn-mango" href="https://instagram.com/${CONFIG.instagram}" target="_blank" rel="noopener">Seguir no Instagram<i class="v" aria-hidden="true">v</i></a></div>
+    </div>
+  </section>`;
+
+  $('#home-search').addEventListener('submit', e=>{
+    e.preventDefault();
+    const q = new FormData(e.target).get('q').trim();
+    location.hash = '#/catalogo' + (q ? '?q='+encodeURIComponent(q) : '');
+  });
+}
+
+/* ============================================================
+   CATÁLOGO
+   ============================================================ */
+let F = { cat:'', tam:'', cor:'', q:'' };
+function filtrar(){
+  return PRODUTOS.filter(p =>
+    (!F.cat || p.categoria===F.cat) &&
+    (!F.tam || p.tamanhos.includes(F.tam)) &&
+    (!F.cor || p.cores.includes(F.cor)) &&
+    (!F.q || norm(p.nome+' '+p.categoria+' '+p.cores.join(' ')).includes(norm(F.q)))
+  );
+}
+function syncHash(){
+  const u = new URLSearchParams();
+  Object.entries(F).forEach(([k,v])=>{ if(v) u.set(k,v); });
+  const s = u.toString();
+  history.replaceState(null,'', '#/catalogo' + (s?'?'+s:''));
+}
+function renderCatalog(params){
+  F = { cat:params.get('cat')||'', tam:params.get('tam')||'', cor:params.get('cor')||'', q:params.get('q')||'' };
+  $('#main').innerHTML = `
+  <section class="mx-auto max-w-[1280px] px-4 pb-24 pt-8 md:px-8 md:pt-12">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">Catálogo</p>
+        <h1 class="h-display mt-2 text-[clamp(3rem,10vw,7rem)]">Todas as <em>peças</em></h1>
+      </div>
+      <p class="pb-2 font-display text-xl italic" id="cat-count" aria-live="polite"></p>
+    </div>
+    <form class="mt-6 flex gap-2 lg:max-w-xl" role="search" id="cat-search">
+      <label class="sr-only" for="cq">Buscar pelo nome da peça</label>
+      <input id="cq" type="search" class="field" placeholder="Buscar pelo nome da peça" autocomplete="off" value="${esc(F.q)}">
+    </form>
+    <div id="filters" class="mt-6 space-y-5"></div>
+    <div id="grid" class="mt-10"></div>
+    <p class="mt-12 text-sm opacity-60">Preços e fotos de exemplo para o protótipo.</p>
+  </section>`;
+  $('#cat-search').addEventListener('submit', e=>e.preventDefault());
+  $('#cq').addEventListener('input', e=>{ F.q = e.target.value; syncHash(); catParts(); });
+  catParts();
+}
+function catParts(){
+  const todasCores = [...new Set(PRODUTOS.flatMap(p=>p.cores))];
+  const chip = (act, v, label, on) => `<button class="chip" data-act="${act}" data-v="${esc(v)}" aria-pressed="${on}">${label}</button>`;
+  $('#filters').innerHTML = `
+    <div class="hide-scroll -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0" role="group" aria-label="Categoria">
+      ${chip('f-cat','','Todas',!F.cat)}${CATEGORIAS.map(c=>chip('f-cat',c,c,F.cat===c)).join('')}
+    </div>
+    <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
+      <div class="flex items-center gap-2" role="group" aria-label="Tamanho">
+        <span class="eyebrow mr-1">Tamanho</span>
+        ${['P','M','G','GG'].map(t=>chip('f-tam',t,t,F.tam===t)).join('')}
+      </div>
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Cor">
+        <span class="eyebrow mr-1">Cor</span>
+        ${todasCores.map(c=>`<button class="swatch" data-act="f-cor" data-v="${esc(c)}" aria-pressed="${F.cor===c}" aria-label="${c}" title="${c}" style="background:${CORES[c]}"></button>`).join('')}
+      </div>
+      ${(F.cat||F.tam||F.cor||F.q)?`<button class="font-semibold underline decoration-mango decoration-[3px] underline-offset-[6px]" data-act="f-clear">Limpar filtros</button>`:''}
+    </div>`;
+  const lista = filtrar();
+  $('#cat-count').textContent = lista.length + (lista.length===1?' peça':' peças');
+  $('#grid').innerHTML = lista.length
+    ? `<div class="stagger grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4">${lista.map((p,i)=>card(p,i)).join('')}</div>`
+    : `<div class="leaf leaf-lg bg-wall px-6 py-14 text-center md:px-16">
+         <p class="h-display text-[clamp(2rem,6vw,3.6rem)]">Essa a gente <em>não achou aqui.</em></p>
+         <p class="mx-auto mt-4 max-w-md text-[17px]">Pode ser que chegou hoje e ainda não subiu no site. Pergunta pra gente.</p>
+         <div class="mt-7 flex flex-wrap justify-center gap-3">
+           <a class="btn btn-wa" target="_blank" rel="noopener" href="${wa('Oi! Procurei no site'+(F.q?' por "'+F.q+'"':'')+(F.tam?' no tamanho '+F.tam:'')+(F.cor?' na cor '+F.cor:'')+' e não achei. Vocês têm?')}">Perguntar no WhatsApp</a>
+           <button class="btn btn-line" data-act="f-clear">Limpar filtros</button>
+         </div>
+       </div>`;
+  $$('#grid [data-reveal]').forEach(el=>el.classList.add('in'));
+}
+
+/* ============================================================
+   PÁGINA DO PRODUTO
+   ============================================================ */
+let SEL = null;
+function pedidoMsg(p){
+  return `Oi! Vi no site e tenho interesse na peça ${p.nome}, tamanho ${SEL.tam||'[escolher]'}, cor ${SEL.cor}. Ainda tem disponível?\nForma de entrega: ${entrega(SEL.ent).msg}`;
+}
+function renderProduct(id, keepScroll){
+  const p = byId(id);
+  if(!p){ $('#main').innerHTML = `<section class="mx-auto max-w-xl px-4 py-24 text-center"><h1 class="h-display text-5xl">Peça não encontrada</h1><p class="mt-4">${vBtn('Voltar ao catálogo','#/catalogo','btn-ink')}</p></section>`; return; }
+  if(!SEL || SEL.id!==id){
+    SEL = { id, tam: p.tamanhos.length===1 ? p.tamanhos[0] : '', cor:p.cores[0], ent:'casa', foto:0 };
+  }
+  const y = scrollY;
+  const msg = pedidoMsg(p);
+  const relacionados = PRODUTOS.filter(x=>x.categoria===p.categoria && x.id!==p.id).concat(PRODUTOS.filter(x=>x.categoria!==p.categoria && x.id!==p.id)).slice(0,4);
+  document.title = p.nome + ' · Manga Verde';
+  document.body.classList.add('has-bar');
+
+  $('#main').innerHTML = `
+  <section class="mx-auto max-w-[1280px] px-4 pb-24 pt-5 md:px-8 md:pt-8">
+    <nav class="text-sm" aria-label="Você está em"><a class="underline underline-offset-4" href="#/catalogo">Catálogo</a> <span class="opacity-50">/</span> <a class="underline underline-offset-4" href="#/catalogo?cat=${encodeURIComponent(p.categoria)}">${p.categoria}</a></nav>
+    <div class="mt-5 grid gap-8 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-6">
+        <div class="lg:sticky lg:top-24">
+          <div class="relative aspect-[3/4] overflow-hidden bg-wall leaf leaf-lg">
+            ${photo(p.fotos[SEL.foto]||p.fotos[0], p, SEL.cor)}
+            ${p.novo?'<span class="stamp !text-[12px]">Novo</span>':''}
+          </div>
+          ${p.fotos.length>1?`<div class="mt-3 flex gap-3">${p.fotos.map((f,i)=>`
+            <button data-act="foto" data-v="${i}" aria-label="Foto ${i+1}" aria-pressed="${SEL.foto===i}" class="leaf leaf-sm h-24 w-[72px] overflow-hidden border-2 ${SEL.foto===i?'border-ink':'border-transparent opacity-70'} bg-wall" style="--r:16px">${photo(f,p,SEL.cor)}</button>`).join('')}</div>`:''}
+        </div>
+      </div>
+
+      <div class="lg:col-span-6">
+        <p class="eyebrow">${p.categoria} · Nº ${pad(p.num)}</p>
+        <h1 class="h-display mt-2 text-[clamp(2.6rem,7vw,5rem)]">${esc(p.nome)}</h1>
+        <p class="mt-4 flex items-baseline gap-3"><span class="text-3xl font-semibold">${brl(p.preco)}</span><span class="text-sm opacity-60">preço de exemplo</span></p>
+        <p class="mt-4 max-w-md text-[17px] leading-snug">${esc(p.descricao)}</p>
+
+        <div class="mt-8">
+          <p class="eyebrow">Cor <span class="ml-2 font-semibold normal-case tracking-normal">${SEL.cor}</span></p>
+          <div class="mt-3 flex flex-wrap gap-3" role="group" aria-label="Cor">
+            ${p.cores.map(c=>`<button class="swatch" data-act="cor" data-v="${esc(c)}" aria-pressed="${SEL.cor===c}" aria-label="${c}" title="${c}" style="background:${CORES[c]}"></button>`).join('')}
+          </div>
+        </div>
+
+        <div class="mt-8" id="tam-box">
+          <p class="eyebrow">Tamanho</p>
+          <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label="Tamanho">
+            ${p.tamanhos.map(t=>`<button class="chip !min-w-[58px]" data-act="tam" data-v="${t}" aria-pressed="${SEL.tam===t}">${t}</button>`).join('')}
+          </div>
+          <p id="tam-erro" class="mt-2 hidden font-semibold text-berry" role="alert">Escolha um tamanho para continuar.</p>
+        </div>
+
+        <fieldset class="mt-8">
+          <legend class="eyebrow">Como você quer receber?</legend>
+          <div class="mt-3 grid gap-2">
+            ${ENTREGAS.map(e=>`
+              <button class="flex items-start gap-3 border-[1.5px] border-ink px-4 py-3 text-left transition-colors ${SEL.ent===e.id?'bg-ink text-cream':'hover:bg-wall'} ${e.id==='casa'?'leaf-flip':'leaf'}" style="--r:18px" data-act="ent" data-v="${e.id}" aria-pressed="${SEL.ent===e.id}">
+                <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full border-2 border-current">${SEL.ent===e.id?'<i class="block h-2.5 w-2.5 rounded-full bg-mango"></i>':''}</span>
+                <span><span class="block font-semibold">${e.label}</span><span class="block text-sm opacity-75">${e.detalhe}</span></span>
+              </button>`).join('')}
+          </div>
+        </fieldset>
+
+        <div class="mt-8 hidden flex-wrap gap-3 lg:flex">
+          <a id="pedir" data-act="pedir" class="btn btn-wa btn-block !text-[18px] sm:!w-auto sm:flex-1" href="${wa(msg)}" target="_blank" rel="noopener">${waIcon()} Pedir pelo WhatsApp</a>
+          <button class="btn btn-line" data-act="add-bag">Adicionar à sacola</button>
+        </div>
+        <div class="mt-8 lg:hidden"><button class="btn btn-line btn-block" data-act="add-bag">Adicionar à sacola</button></div>
+
+        <div class="mt-8 border-l-[3px] border-mango bg-wall px-4 py-3">
+          <p class="eyebrow">Mensagem que vai no WhatsApp</p>
+          <p class="mt-2 whitespace-pre-line text-[15px] leading-snug" id="msg-prev">${esc(msg)}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-20">
+      ${sectionHead('Veja também','Combina <em>com ela</em>')}
+      <div class="stagger cols4 grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 lg:grid-cols-4">${relacionados.map((r,i)=>card(r,i)).join('')}</div>
+    </div>
+  </section>
+
+  <div class="pbar">
+    <div class="min-w-0 flex-none"><p class="font-semibold leading-none">${brl(p.preco)}</p><p class="mt-1 max-w-[110px] truncate text-xs opacity-60">${SEL.tam?SEL.tam+' · ':''}${SEL.cor}</p></div>
+    <a class="btn btn-wa flex-1 !px-3" data-act="pedir" href="${wa(msg)}" target="_blank" rel="noopener">${waIcon()} Pedir pelo WhatsApp</a>
+  </div>`;
+  $$('#main [data-reveal]').forEach(el=>el.classList.add('in'));
+  if(keepScroll) scrollTo(0,y);
+}
+const waIcon = () => `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.4A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.18-3.1.82.83-3.02-.2-.31A8.1 8.1 0 0 1 12.04 3.8zm-3.3 4.1c-.2 0-.5.07-.76.35-.26.28-1 .98-1 2.4s1.03 2.78 1.17 2.97c.15.2 2 3.2 4.95 4.37 2.45.97 2.95.78 3.48.73.53-.05 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.57-.35-.3-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.3-.77.95-.94 1.15-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57z"/></svg>`;
+
+/* ============================================================
+   SACOLA
+   ============================================================ */
+let BAG = store.get('mv-bag', []);
+let BAGINFO = store.get('mv-baginfo', { ent:'casa', nome:'' });
+const saveBag = () => { store.set('mv-bag', BAG); store.set('mv-baginfo', BAGINFO); updateBadge(); };
+const bagKey = i => `${i.id}|${i.tam}|${i.cor}`;
+const bagQty = () => BAG.reduce((s,i)=>s+i.qtd,0);
+function updateBadge(){ const el=$('#bagcount'); if(el) el.textContent = bagQty(); }
+function addToBag(id,tam,cor){
+  const k = `${id}|${tam}|${cor}`;
+  const ex = BAG.find(i=>bagKey(i)===k);
+  if(ex) ex.qtd++; else BAG.push({id,tam,cor,qtd:1});
+  saveBag();
+}
+function sacolaMsg(){
+  const linhas = BAG.map((i,n)=>{ const p=byId(i.id); return `${n+1}) ${p.nome} · tam. ${i.tam} · cor ${i.cor} (${i.qtd} ${i.qtd>1?'un.':'un.'})`; });
+  return `Oi! Montei minha sacola no site da Manga Verde:\n\n${linhas.join('\n')}\n\nForma de entrega: ${entrega(BAGINFO.ent).msg}${BAGINFO.nome?`\nMeu nome: ${BAGINFO.nome}`:''}\n\nPode me confirmar se está tudo disponível?`;
+}
+function renderBag(){
+  document.title = 'Sacola · Manga Verde';
+  if(!BAG.length){
+    $('#main').innerHTML = `
+    <section class="mx-auto max-w-[1280px] px-4 py-20 md:px-8 md:py-28">
+      <div class="leaf leaf-lg bg-wall px-6 py-16 md:px-16">
+        <p class="eyebrow">Sacola</p>
+        <h1 class="h-display mt-2 text-[clamp(2.8rem,9vw,6rem)]">Sua sacola está <em>vazia.</em></h1>
+        <p class="mt-4 max-w-md text-[17px]">Junte as peças que você gostou e mande tudo numa mensagem só pelo WhatsApp.</p>
+        <div class="mt-8">${vBtn('Ver novidades','#/novidades','btn-ink')}</div>
+      </div>
+    </section>`;
+    return;
+  }
+  const total = BAG.reduce((s,i)=>s+byId(i.id).preco*i.qtd,0);
+  $('#main').innerHTML = `
+  <section class="mx-auto max-w-[1280px] px-4 pb-24 pt-8 md:px-8 md:pt-12">
+    <p class="eyebrow">Sacola</p>
+    <h1 class="h-display mt-2 text-[clamp(3rem,10vw,7rem)]">Suas <em>peças</em></h1>
+    <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+      <ul class="lg:col-span-7">
+        ${BAG.map((i,n)=>{ const p=byId(i.id); const k=esc(bagKey(i)); return `
+        <li class="grid grid-cols-[88px_1fr] gap-4 border-t-[1.5px] border-ink py-5 ${n===BAG.length-1?'border-b-[1.5px]':''}">
+          <a href="#/produto/${p.id}" class="leaf leaf-sm block aspect-[3/4] overflow-hidden bg-wall" style="--r:22px">${photo(p.fotos[0],p,i.cor)}</a>
+          <div class="flex flex-col">
+            <a href="#/produto/${p.id}" class="font-display text-[22px] font-semibold leading-tight">${esc(p.nome)}</a>
+            <p class="mt-1 flex items-center gap-2 text-[15px]"><i class="dot" style="background:${CORES[i.cor]}"></i>${i.cor} · tamanho ${i.tam}</p>
+            <p class="mt-1 text-[15px] font-semibold">${brl(p.preco)}</p>
+            <div class="mt-auto flex items-center justify-between pt-3">
+              <div class="flex items-center border-[1.5px] border-ink leaf" style="--r:12px">
+                <button class="h-11 w-11 text-xl" data-act="bag-dec" data-k="${k}" aria-label="Diminuir">−</button>
+                <span class="w-8 text-center font-semibold" aria-live="polite">${i.qtd}</span>
+                <button class="h-11 w-11 text-xl" data-act="bag-inc" data-k="${k}" aria-label="Aumentar">+</button>
+              </div>
+              <button class="min-h-11 px-2 text-sm font-semibold underline underline-offset-4" data-act="bag-del" data-k="${k}">Remover</button>
+            </div>
+          </div>
+        </li>`; }).join('')}
+      </ul>
+
+      <div class="lg:col-span-5">
+        <div class="bg-wall p-5 leaf leaf-lg md:p-8" style="--r:clamp(40px,8vw,72px)">
+          <fieldset>
+            <legend class="eyebrow">Como você quer receber?</legend>
+            <div class="mt-3 grid gap-2">
+              ${ENTREGAS.map(e=>`
+                <button class="flex items-start gap-3 border-[1.5px] border-ink px-4 py-3 text-left transition-colors ${BAGINFO.ent===e.id?'bg-ink text-cream':'bg-cream hover:bg-white'} ${e.id==='casa'?'leaf-flip':'leaf'}" style="--r:18px" data-act="bag-ent" data-v="${e.id}" aria-pressed="${BAGINFO.ent===e.id}">
+                  <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full border-2 border-current">${BAGINFO.ent===e.id?'<i class="block h-2.5 w-2.5 rounded-full bg-mango"></i>':''}</span>
+                  <span><span class="block font-semibold">${e.label}</span><span class="block text-sm opacity-75">${e.detalhe}</span></span>
+                </button>`).join('')}
+            </div>
+          </fieldset>
+          <label class="mt-6 block"><span class="eyebrow">Seu nome (opcional)</span>
+            <input id="bag-nome" type="text" class="field mt-2" placeholder="Como podemos te chamar?" value="${esc(BAGINFO.nome)}" autocomplete="given-name"></label>
+          <div class="mt-6 flex items-baseline justify-between border-t-[1.5px] border-ink pt-4">
+            <span class="font-semibold">${bagQty()} ${bagQty()>1?'peças':'peça'}</span>
+            <span><span class="text-2xl font-semibold">${brl(total)}</span><span class="ml-1 text-xs opacity-60">estimado, sem frete</span></span>
+          </div>
+          <a id="bag-send" class="btn btn-wa btn-block mt-5 !text-[18px]" href="${wa(sacolaMsg())}" target="_blank" rel="noopener">${waIcon()} Enviar sacola pelo WhatsApp</a>
+          <p class="mt-3 text-sm opacity-70">Você não paga nada aqui. A gente confirma estoque, valor e frete pelo WhatsApp.</p>
+        </div>
+        <div class="mt-5 border-l-[3px] border-mango px-4 py-2">
+          <p class="eyebrow">Mensagem que vai no WhatsApp</p>
+          <p class="mt-2 whitespace-pre-line text-[15px] leading-snug" id="bag-prev">${esc(sacolaMsg())}</p>
+        </div>
+      </div>
+    </div>
+  </section>`;
+  $('#bag-nome').addEventListener('input', e=>{
+    BAGINFO.nome = e.target.value.trim(); saveBag();
+    $('#bag-send').href = wa(sacolaMsg()); $('#bag-prev').textContent = sacolaMsg();
+  });
+}
+
+/* ============================================================
+   EVENTOS
+   ============================================================ */
+let toastT;
+function toast(html){
+  const t = $('#toast'); t.innerHTML = html; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+document.addEventListener('click', e=>{
+  const t = e.target.closest('[data-act]'); if(!t) return;
+  const a = t.dataset.act, v = t.dataset.v;
+  switch(a){
+    case 'f-cat': F.cat = v; syncHash(); catParts(); break;
+    case 'f-tam': F.tam = F.tam===v ? '' : v; syncHash(); catParts(); break;
+    case 'f-cor': F.cor = F.cor===v ? '' : v; syncHash(); catParts(); break;
+    case 'f-clear': F = {cat:'',tam:'',cor:'',q:''}; const q=$('#cq'); if(q) q.value=''; syncHash(); catParts(); break;
+    case 'tam': SEL.tam = v; renderProduct(SEL.id,true); break;
+    case 'cor': SEL.cor = v; renderProduct(SEL.id,true); break;
+    case 'ent': SEL.ent = v; renderProduct(SEL.id,true); break;
+    case 'foto': SEL.foto = +v; renderProduct(SEL.id,true); break;
+    case 'pedir':
+      if(!SEL.tam){ e.preventDefault(); needSize(); }
+      break;
+    case 'add-bag':
+      if(!SEL.tam){ needSize(); break; }
+      addToBag(SEL.id, SEL.tam, SEL.cor);
+      toast(`Adicionada à sacola <a href="#/sacola">Ver sacola</a>`);
+      break;
+    case 'bag-inc': { const i=BAG.find(x=>bagKey(x)===t.dataset.k); if(i){ i.qtd++; saveBag(); renderBag(); } break; }
+    case 'bag-dec': { const i=BAG.find(x=>bagKey(x)===t.dataset.k); if(i){ i.qtd=Math.max(1,i.qtd-1); saveBag(); renderBag(); } break; }
+    case 'bag-del': BAG = BAG.filter(x=>bagKey(x)!==t.dataset.k); saveBag(); renderBag(); break;
+    case 'bag-ent': BAGINFO.ent = v; saveBag(); { const y=scrollY; renderBag(); scrollTo(0,y);} break;
+  }
+});
+function needSize(){
+  const box = $('#tam-box'); $('#tam-erro').classList.remove('hidden');
+  box.classList.remove('shake'); void box.offsetWidth; box.classList.add('shake');
+  box.scrollIntoView({block:'center'});
+}
+
+/* ============================================================
+   ROTAS  (#/ · #/catalogo · #/produto/ID · #/sacola)
+   ============================================================ */
+const ro = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); ro.unobserve(en.target); } }),{threshold:.08, rootMargin:'0px 0px -6% 0px'}) : null;
+function observe(){ $$('[data-reveal]:not(.in)').forEach(el=> ro ? ro.observe(el) : el.classList.add('in')); }
+
+function route(){
+  const h = location.hash.slice(1) || '/';
+  const [path, qs=''] = h.split('?');
+  const params = new URLSearchParams(qs);
+  document.body.classList.remove('has-bar');
+  document.title = 'Manga Verde Moda Feminina · Limeira/SP';
+  let m;
+  if(path==='/' || path==='/novidades' || path==='/lojas'){
+    renderHome();
+    const sec = path.slice(1);
+    if(sec) requestAnimationFrame(()=>document.getElementById(sec)?.scrollIntoView()); else scrollTo(0,0);
+  } else if(path==='/catalogo'){
+    document.title = 'Catálogo · Manga Verde'; renderCatalog(params); scrollTo(0,0);
+  } else if((m = path.match(/^\/produto\/(.+)$/))){
+    renderProduct(decodeURIComponent(m[1])); scrollTo(0,0);
+  } else if(path==='/sacola'){
+    renderBag(); scrollTo(0,0);
+  } else { location.hash = '#/'; return; }
+  observe();
+}
+window.addEventListener('hashchange', route);
+
+// links do WhatsApp fixos (rodapé e botão flutuante)
+$('#wa-float').href = wa('Oi! Estou no site da Manga Verde e queria ajuda para escolher uma peça.');
+$('#f-wa').href = wa('Oi! Vim pelo site da Manga Verde.');
+updateBadge();
+route();
+</script>
+</body>
+</html>
