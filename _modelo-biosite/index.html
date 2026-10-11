@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{NOME}} · {{CIDADE}}</title>
+<meta name="description" content="{{TAGLINE}}">
+<meta name="theme-color" content="{{COR}}">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>:root{--c:{{COR}}} a:focus-visible{outline:3px solid var(--c);outline-offset:2px}</style>
+</head>
+<body class="bg-neutral-50 text-neutral-900 antialiased">
+<main class="mx-auto max-w-[440px] px-4 py-8">
+
+  <header class="text-center">
+    <!-- REMOVER se não houver logo: <img src="logo.jpg" alt="Logo {{NOME}}" class="mx-auto h-24 w-24 rounded-full object-cover"> -->
+    <h1 class="mt-4 text-2xl font-semibold">{{NOME}}</h1>
+    <p class="mt-1 text-sm text-neutral-600">{{TAGLINE}}</p>
+    <p class="mt-1 text-xs text-neutral-500">{{CIDADE}}</p>
+  </header>
+
+  <a href="https://wa.me/55{{WHATSAPP}}?text={{MSG_PRINCIPAL_ENCODED}}"
+     class="mt-6 flex min-h-[52px] items-center justify-center rounded-xl px-4 font-medium text-white shadow"
+     style="background:var(--c)">Falar no WhatsApp</a>
+
+  <section class="mt-8" aria-labelledby="cat">
+    <h2 id="cat" class="text-sm font-semibold uppercase tracking-wide text-neutral-500">{{TITULO_CATALOGO}}</h2>
+    <ul class="mt-3 space-y-3">
+      <!-- Repetir por item. Só itens reais informados pelo cliente. -->
+      <li>
+        <a href="https://wa.me/55{{WHATSAPP}}?text={{MSG_ITEM_ENCODED}}"
+           class="flex min-h-[56px] items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3">
+          <span><span class="block font-medium">{{ITEM_NOME}}</span><span class="block text-xs text-neutral-500">{{ITEM_DETALHE}}</span></span>
+          <span class="text-sm" style="color:var(--c)">Pedir</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="mt-8 rounded-xl border border-neutral-200 bg-white p-4 text-sm" aria-labelledby="loc">
+    <h2 id="loc" class="font-semibold">Onde estamos</h2>
+    <p class="mt-1 text-neutral-600">{{ENDERECO}}</p>
+    <p class="mt-1 text-neutral-600">{{HORARIO}}</p>
+    <a class="mt-3 inline-flex min-h-[44px] items-center underline" href="{{LINK_MAPS}}">Abrir no Google Maps</a>
+  </section>
+
+  <footer class="mt-8 text-center text-sm">
+    <a class="inline-flex min-h-[44px] items-center underline" href="https://instagram.com/{{INSTAGRAM}}">@{{INSTAGRAM}}</a>
+  </footer>
+</main>
+</body>
+</html>
