@@ -101,7 +101,7 @@ def page(r):
     <p class="mt-1 text-neutral-600">{esc(r["hor"])}</p>
   </section>
 
-  <p class="mt-8 text-center text-xs text-neutral-500">Biosite de exemplo · ezf.tech</p>
+  <p class="mt-8 text-center text-xs text-neutral-500">Biosite de exemplo · <a class="inline-flex min-h-[44px] items-center underline" href="https://ezf-tech.com">ezf.tech</a></p>
 </main>
 
 <div id="toast" role="status" aria-live="polite"
