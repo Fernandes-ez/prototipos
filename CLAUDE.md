@@ -17,5 +17,7 @@ Repositório de protótipos e biosites para pequenos negócios locais (boutiques
 9. Publicação: protótipos em `demo.ezf-tech.com/<slug>/` (GitHub Pages, com `noindex`). Entrega paga em `link.ezf-tech.com/<slug>` (Cloudflare Pages), sem `noindex`.
 
 ## Prospecção
+Modelos por ramo: `modelo-<ramo>/` (gerados por `_modelo-biosite/gerar-modelos.py`; índice em `index.html`).
+
 Tudo em `prospeccao/`: playbook, prompt mestre, scripts de DM e planilha `leads.csv`.
 Regra de ouro: nunca inventar dados de contato. Dado não encontrado = campo vazio.

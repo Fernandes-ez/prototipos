@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistência Técnica Modelo · Exemplo de biosite</title>
+<meta name="description" content="Exemplo de biosite: Conserto de celular, notebook e eletrônicos. Peça seu orçamento.">
+<meta name="theme-color" content="#1D4ED8">
+<meta name="robots" content="noindex">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>:root{--c:#1D4ED8} a:focus-visible,button:focus-visible{outline:3px solid var(--c);outline-offset:2px}</style>
+</head>
+<body class="bg-neutral-50 text-neutral-900 antialiased">
+<main class="mx-auto max-w-[440px] px-4 py-6">
+
+  <p class="rounded-lg bg-amber-50 px-3 py-2 text-center text-xs text-amber-900">
+    Modelo de demonstração. Os itens e dados abaixo são exemplos. No seu biosite entram seus serviços, seu endereço e o WhatsApp do seu negócio.
+  </p>
+
+  <header class="mt-6 text-center">
+    <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full text-3xl font-semibold text-white" style="background:var(--c)" aria-hidden="true">AT</div>
+    <h1 class="mt-4 text-2xl font-semibold">Assistência Técnica Modelo</h1>
+    <p class="mt-1 text-sm text-neutral-600">Conserto de celular, notebook e eletrônicos. Peça seu orçamento.</p>
+    <p class="mt-1 text-xs text-neutral-500">Sua cidade</p>
+  </header>
+
+  <a href="#" data-msg="Oi! Vi o seu link e quero um orçamento."
+     class="demo-link mt-6 flex min-h-[52px] items-center justify-center rounded-xl px-4 font-medium text-white shadow"
+     style="background:var(--c)">Pedir orçamento</a>
+
+  <section class="mt-8" aria-labelledby="cat">
+    <h2 id="cat" class="text-sm font-semibold uppercase tracking-wide text-neutral-500">O que consertamos</h2>
+    <ul class="mt-3 space-y-3">
+      <li><a href="#" data-msg="Oi! Vi o seu link e quero um orçamento para celular."
+             class="demo-link flex min-h-[56px] items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3">
+        <span><span class="block font-medium">Celular</span><span class="block text-xs text-neutral-500">Tela, bateria e mais</span></span>
+        <span class="text-sm font-medium" style="color:var(--c)">Orçamento</span></a></li>
+      <li><a href="#" data-msg="Oi! Vi o seu link e quero um orçamento para notebook."
+             class="demo-link flex min-h-[56px] items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3">
+        <span><span class="block font-medium">Notebook</span><span class="block text-xs text-neutral-500">Formatação e conserto</span></span>
+        <span class="text-sm font-medium" style="color:var(--c)">Orçamento</span></a></li>
+      <li><a href="#" data-msg="Oi! Vi o seu link e quero um orçamento para troca de tela."
+             class="demo-link flex min-h-[56px] items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3">
+        <span><span class="block font-medium">Troca de tela</span><span class="block text-xs text-neutral-500">Consulte o modelo</span></span>
+        <span class="text-sm font-medium" style="color:var(--c)">Orçamento</span></a></li>
+      <li><a href="#" data-msg="Oi! Vi o seu link e quero um orçamento para outros eletrônicos."
+             class="demo-link flex min-h-[56px] items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3">
+        <span><span class="block font-medium">Outros eletrônicos</span><span class="block text-xs text-neutral-500">Envie o modelo</span></span>
+        <span class="text-sm font-medium" style="color:var(--c)">Orçamento</span></a></li>
+    </ul>
+  </section>
+
+  <section class="mt-8 rounded-xl border border-neutral-200 bg-white p-4 text-sm" aria-labelledby="loc">
+    <h2 id="loc" class="font-semibold">Onde estamos</h2>
+    <p class="mt-1 text-neutral-600">Seu endereço aparece aqui, com botão para o Google Maps.</p>
+    <p class="mt-1 text-neutral-600">Seu horário de atendimento aparece aqui.</p>
+  </section>
+
+  <p class="mt-8 text-center text-xs text-neutral-500">Biosite de exemplo · ezf.tech</p>
+</main>
+
+<div id="toast" role="status" aria-live="polite"
+     class="pointer-events-none fixed inset-x-4 bottom-4 mx-auto hidden max-w-[408px] rounded-xl bg-neutral-900 px-4 py-3 text-sm text-white shadow-lg"></div>
+
+<script>
+  var toast = document.getElementById('toast'), timer;
+  document.querySelectorAll('.demo-link').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      toast.textContent = 'No seu biosite, isto abre o WhatsApp do negócio com a mensagem pronta: "' + a.dataset.msg + '"';
+      toast.classList.remove('hidden');
+      clearTimeout(timer);
+      timer = setTimeout(function () { toast.classList.add('hidden'); }, 5000);
+    });
+  });
+</script>
+</body>
+</html>
