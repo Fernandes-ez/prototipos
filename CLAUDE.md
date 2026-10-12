@@ -14,7 +14,7 @@ Repositório de protótipos e biosites para pequenos negócios locais (boutiques
 6. Cores: 1 cor de destaque tirada do perfil do cliente. Contraste mínimo AA.
 7. Acessibilidade: `lang="pt-BR"`, `alt` nas imagens, foco visível, alvos de toque ≥ 44px.
 8. Sem travessão em textos. Texto direto, sem jargão.
-9. Publicação: pasta própria, deploy estático (GitHub Pages ou Vercel).
+9. Publicação: protótipos em `demo.ezf-tech.com/<slug>/` (GitHub Pages, com `noindex`). Entrega paga em `link.ezf-tech.com/<slug>` (Cloudflare Pages), sem `noindex`.
 
 ## Prospecção
 Tudo em `prospeccao/`: playbook, prompt mestre, scripts de DM e planilha `leads.csv`.
