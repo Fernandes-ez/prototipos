@@ -65,10 +65,48 @@
               "name": "limite",
               "value": 30,
               "type": "number"
+            },
+            {
+              "id": "p8",
+              "name": "planilha_id",
+              "value": "COLE_AQUI_O_ID_DA_PLANILHA",
+              "type": "string"
             }
           ]
         },
         "options": {}
+      }
+    },
+    {
+      "id": "n7",
+      "name": "Ler planilha",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        0
+      ],
+      "alwaysOutputData": true,
+      "parameters": {
+        "resource": "sheet",
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Parâmetros').first().json.planilha_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "leads"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets"
+        }
       }
     },
     {
@@ -77,7 +115,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        440,
+        660,
         0
       ],
       "parameters": {
@@ -91,7 +129,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        660,
+        880,
         0
       ],
       "parameters": {
@@ -126,12 +164,49 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        880,
+        1100,
         0
       ],
       "parameters": {
         "mode": "runOnceForAllItems",
-        "jsCode": "const p = $('Parâmetros').first().json;\nconst FRACOS = ['instagram.com','linktr.ee','linktree.com','wa.me','api.whatsapp.com','whatsapp.com','facebook.com','fb.com','beacons.ai','bio.link','lnk.bio','taplink.cc','campsite.bio'];\nconst REDE = /franquia|franchis|\\brede\\b|\\bunidade\\b|\\bfilial\\b|shopping/i;\nconst OBJ = {\n  'boutique': 'catálogo, endereço e botão de WhatsApp',\n  'barbearia': 'serviços, endereço e botão de agendar',\n  'salao': 'serviços, endereço e botão de agendar',\n  'clinica-odontologica': 'atendimentos, endereço e botão de agendar',\n  'estetica': 'procedimentos, endereço e botão de agendar',\n  'petshop': 'serviços, endereço e botão de agendar',\n  'assistencia-tecnica': 'o que consertam, endereço e botão de orçamento',\n  'restaurante': 'cardápio, área de entrega e botão de pedido',\n  'personal-academia': 'planos, endereço e botão de aula experimental'\n};\nconst obj = OBJ[p.modelo] || 'serviços, endereço e botão de WhatsApp';\nconst hostOf = u => { try { return new URL(u).hostname.replace(/^www\\./, '').toLowerCase(); } catch (e) { return ''; } };\nconst hoje = new Date().toISOString().slice(0, 10);\nconst vistos = new Set();\nconst lista = [];\n\nfor (const item of $input.all()) {\n  for (const l of (item.json.places || [])) {\n    if (!l.id || vistos.has(l.id)) continue;\n    vistos.add(l.id);\n    const nome = l.displayName && l.displayName.text ? l.displayName.text : '';\n    if (!nome || REDE.test(nome)) continue;\n    if (l.businessStatus && l.businessStatus !== 'OPERATIONAL') continue;\n    const n = l.userRatingCount || 0;\n    if (n < p.min_avaliacoes || n > p.max_avaliacoes) continue;\n\n    const host = hostOf(l.websiteUri || '');\n    let statusSite;\n    if (!host) statusSite = 'sem site';\n    else if (FRACOS.some(f => host === f || host.endsWith('.' + f))) statusSite = 'link fraco (' + host + ')';\n    else continue; // site próprio: fora do perfil\n\n    let instagram = '';\n    if (host === 'instagram.com') {\n      const seg = new URL(l.websiteUri).pathname.split('/').filter(Boolean)[0];\n      if (seg) instagram = '@' + seg;\n    }\n\n    let msg = `Oi! Vi a ${nome} no Google. Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria?`;\n    if (msg.length > 200) msg = `Oi! Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria pra vocês?`;\n    const msgOk = msg.length >= 100 && msg.length <= 200;\n\n    lista.push({\n      data: hoje, nome, instagram, whatsapp: '', cidade: p.cidade, nicho: p.ramo,\n      servico_alvo: 'biosite', mensagem_enviada: '', respondeu: '', interesse: '', viu_exemplo: '',\n      fechou: '', valor: '', motivo_perda: '', observacoes: msgOk ? '' : 'mensagem fora de 100-200 caracteres',\n      telefone_maps: l.nationalPhoneNumber || '',\n      mensagem_sugerida: msg,\n      link_exemplo: `https://demo.ezf-tech.com/modelo-${p.modelo}/`,\n      link_maps: l.googleMapsUri || '',\n      avaliacao: l.rating || '',\n      qtd_avaliacoes: n,\n      status_site: statusSite\n    });\n  }\n}\nlista.sort((a, b) => b.qtd_avaliacoes - a.qtd_avaliacoes);\nreturn lista.slice(0, p.limite).map(j => ({ json: j }));"
+        "jsCode": "const p = $('Parâmetros').first().json;\nconst FRACOS = ['instagram.com','linktr.ee','linktree.com','wa.me','api.whatsapp.com','whatsapp.com','facebook.com','fb.com','beacons.ai','bio.link','lnk.bio','taplink.cc','campsite.bio'];\nconst REDE = /franquia|franchis|\\brede\\b|\\bunidade\\b|\\bfilial\\b|shopping/i;\nconst OBJ = {\n  'boutique': 'catálogo, endereço e botão de WhatsApp',\n  'barbearia': 'serviços, endereço e botão de agendar',\n  'salao': 'serviços, endereço e botão de agendar',\n  'clinica-odontologica': 'atendimentos, endereço e botão de agendar',\n  'estetica': 'procedimentos, endereço e botão de agendar',\n  'petshop': 'serviços, endereço e botão de agendar',\n  'assistencia-tecnica': 'o que consertam, endereço e botão de orçamento',\n  'restaurante': 'cardápio, área de entrega e botão de pedido',\n  'personal-academia': 'planos, endereço e botão de aula experimental'\n};\nconst obj = OBJ[p.modelo] || 'serviços, endereço e botão de WhatsApp';\nconst hostOf = u => { try { return new URL(u).hostname.replace(/^www\\./, '').toLowerCase(); } catch (e) { return ''; } };\nconst hoje = new Date().toISOString().slice(0, 10);\nconst jaRegistrados = new Set($('Ler planilha').all().map(i => String(i.json.place_id || '').trim()).filter(Boolean));\nconst vistos = new Set();\nconst lista = [];\n\nfor (const item of $input.all()) {\n  for (const l of (item.json.places || [])) {\n    if (!l.id || vistos.has(l.id) || jaRegistrados.has(l.id)) continue;\n    vistos.add(l.id);\n    const nome = l.displayName && l.displayName.text ? l.displayName.text : '';\n    if (!nome || REDE.test(nome)) continue;\n    if (l.businessStatus && l.businessStatus !== 'OPERATIONAL') continue;\n    const n = l.userRatingCount || 0;\n    if (n < p.min_avaliacoes || n > p.max_avaliacoes) continue;\n\n    const host = hostOf(l.websiteUri || '');\n    let statusSite;\n    if (!host) statusSite = 'sem site';\n    else if (FRACOS.some(f => host === f || host.endsWith('.' + f))) statusSite = 'link fraco (' + host + ')';\n    else continue; // site próprio: fora do perfil\n\n    let instagram = '';\n    if (host === 'instagram.com') {\n      const seg = new URL(l.websiteUri).pathname.split('/').filter(Boolean)[0];\n      if (seg) instagram = '@' + seg;\n    }\n\n    let msg = `Oi! Vi a ${nome} no Google. Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria?`;\n    if (msg.length > 200) msg = `Oi! Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria pra vocês?`;\n    const msgOk = msg.length >= 100 && msg.length <= 200;\n\n    lista.push({\n      data: hoje, nome, instagram, whatsapp: '', cidade: p.cidade, nicho: p.ramo,\n      servico_alvo: 'biosite', mensagem_enviada: '', respondeu: '', interesse: '', viu_exemplo: '',\n      fechou: '', valor: '', motivo_perda: '', observacoes: msgOk ? '' : 'mensagem fora de 100-200 caracteres',\n      telefone_maps: l.nationalPhoneNumber || '',\n      mensagem_sugerida: msg,\n      link_exemplo: `https://demo.ezf-tech.com/modelo-${p.modelo}/`,\n      link_maps: l.googleMapsUri || '',\n      avaliacao: l.rating || '',\n      qtd_avaliacoes: n,\n      status_site: statusSite,\n      place_id: l.id\n    });\n  }\n}\nlista.sort((a, b) => b.qtd_avaliacoes - a.qtd_avaliacoes);\nreturn lista.slice(0, p.limite).map(j => ({ json: j }));"
+      }
+    },
+    {
+      "id": "n8",
+      "name": "Registrar na planilha",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1320,
+        -120
+      ],
+      "parameters": {
+        "resource": "sheet",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Parâmetros').first().json.planilha_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "leads"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": null,
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets"
+        }
       }
     },
     {
@@ -140,8 +215,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        1100,
-        0
+        1320,
+        120
       ],
       "parameters": {
         "operation": "csv",
@@ -164,6 +239,17 @@
       ]
     },
     "Parâmetros": {
+      "main": [
+        [
+          {
+            "node": "Ler planilha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler planilha": {
       "main": [
         [
           {
@@ -199,6 +285,11 @@
     "Filtrar e montar mensagem": {
       "main": [
         [
+          {
+            "node": "Registrar na planilha",
+            "type": "main",
+            "index": 0
+          },
           {
             "node": "Gerar CSV",
             "type": "main",

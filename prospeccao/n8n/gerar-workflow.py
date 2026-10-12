@@ -28,12 +28,13 @@ const OBJ = {
 const obj = OBJ[p.modelo] || 'serviços, endereço e botão de WhatsApp';
 const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; } };
 const hoje = new Date().toISOString().slice(0, 10);
+const jaRegistrados = new Set($('Ler planilha').all().map(i => String(i.json.place_id || '').trim()).filter(Boolean));
 const vistos = new Set();
 const lista = [];
 
 for (const item of $input.all()) {
   for (const l of (item.json.places || [])) {
-    if (!l.id || vistos.has(l.id)) continue;
+    if (!l.id || vistos.has(l.id) || jaRegistrados.has(l.id)) continue;
     vistos.add(l.id);
     const nome = l.displayName && l.displayName.text ? l.displayName.text : '';
     if (!nome || REDE.test(nome)) continue;
@@ -67,7 +68,8 @@ for (const item of $input.all()) {
       link_maps: l.googleMapsUri || '',
       avaliacao: l.rating || '',
       qtd_avaliacoes: n,
-      status_site: statusSite
+      status_site: statusSite,
+      place_id: l.id
     });
   }
 }
@@ -90,10 +92,17 @@ wf = {
      campo(4, "bairros", "Centro, Jardim Sumaré, Campos Elíseos, Vila Seixas"),
      campo(5, "min_avaliacoes", 10, "number"),
      campo(6, "max_avaliacoes", 300, "number"),
-     campo(7, "limite", 30, "number")]}, "options": {}}},
-  {"id": "n3", "name": "Gerar buscas", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [440, 0],
+     campo(7, "limite", 30, "number"),
+     campo(8, "planilha_id", "COLE_AQUI_O_ID_DA_PLANILHA")]}, "options": {}}},
+  {"id": "n7", "name": "Ler planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [440, 0],
+   "alwaysOutputData": True,
+   "parameters": {"resource": "sheet", "operation": "read",
+     "documentId": {"__rl": True, "mode": "id", "value": "={{ $('Parâmetros').first().json.planilha_id }}"},
+     "sheetName": {"__rl": True, "mode": "name", "value": "leads"}, "options": {}},
+   "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets"}}},
+  {"id": "n3", "name": "Gerar buscas", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [660, 0],
    "parameters": {"mode": "runOnceForAllItems", "jsCode": CODE_BUSCAS}},
-  {"id": "n4", "name": "Google Places", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [660, 0],
+  {"id": "n4", "name": "Google Places", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [880, 0],
    "parameters": {"method": "POST", "url": "https://places.googleapis.com/v1/places:searchText",
      "authentication": "genericCredentialType", "genericAuthType": "httpHeaderAuth",
      "sendHeaders": True, "headerParameters": {"parameters": [{"name": "X-Goog-FieldMask",
@@ -102,21 +111,31 @@ wf = {
      "jsonBody": "={{ JSON.stringify({ textQuery: $json.query, languageCode: 'pt-BR', regionCode: 'BR', pageSize: 20 }) }}",
      "options": {}},
    "credentials": {"httpHeaderAuth": {"id": "", "name": "Google Places API Key"}}},
-  {"id": "n5", "name": "Filtrar e montar mensagem", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [880, 0],
+  {"id": "n5", "name": "Filtrar e montar mensagem", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1100, 0],
    "parameters": {"mode": "runOnceForAllItems", "jsCode": CODE_FILTRO}},
-  {"id": "n6", "name": "Gerar CSV", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1.1, "position": [1100, 0],
+  {"id": "n8", "name": "Registrar na planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [1320, -120],
+   "parameters": {"resource": "sheet", "operation": "append",
+     "documentId": {"__rl": True, "mode": "id", "value": "={{ $('Parâmetros').first().json.planilha_id }}"},
+     "sheetName": {"__rl": True, "mode": "name", "value": "leads"},
+     "columns": {"mappingMode": "autoMapInputData", "value": None, "matchingColumns": [], "schema": []}, "options": {}},
+   "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets"}}},
+  {"id": "n6", "name": "Gerar CSV", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1.1, "position": [1320, 120],
    "parameters": {"operation": "csv", "options": {"fileName": "leads.csv"}}},
  ],
  "connections": {
   "Iniciar": {"main": [[{"node": "Parâmetros", "type": "main", "index": 0}]]},
-  "Parâmetros": {"main": [[{"node": "Gerar buscas", "type": "main", "index": 0}]]},
+  "Parâmetros": {"main": [[{"node": "Ler planilha", "type": "main", "index": 0}]]},
+  "Ler planilha": {"main": [[{"node": "Gerar buscas", "type": "main", "index": 0}]]},
   "Gerar buscas": {"main": [[{"node": "Google Places", "type": "main", "index": 0}]]},
   "Google Places": {"main": [[{"node": "Filtrar e montar mensagem", "type": "main", "index": 0}]]},
-  "Filtrar e montar mensagem": {"main": [[{"node": "Gerar CSV", "type": "main", "index": 0}]]}},
+  "Filtrar e montar mensagem": {"main": [[{"node": "Registrar na planilha", "type": "main", "index": 0}, {"node": "Gerar CSV", "type": "main", "index": 0}]]}},
  "settings": {"executionOrder": "v1"}
 }
 
 aqui = os.path.dirname(os.path.abspath(__file__))
+COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id"]
+with open(os.path.join(aqui, "planilha-modelo.csv"), "w", encoding="utf-8") as f:
+    f.write(",".join(COLUNAS) + "\n")
 with open(os.path.join(aqui, "buscar-leads.workflow.json"), "w", encoding="utf-8") as f:
     json.dump(wf, f, ensure_ascii=False, indent=2)
 print("ok")
