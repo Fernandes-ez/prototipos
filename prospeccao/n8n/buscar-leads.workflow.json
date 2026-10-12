@@ -1,0 +1,214 @@
+{
+  "name": "Buscar leads (Google Places)",
+  "nodes": [
+    {
+      "id": "n1",
+      "name": "Iniciar",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "n2",
+      "name": "Parâmetros",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p1",
+              "name": "cidade",
+              "value": "Ribeirão Preto, SP",
+              "type": "string"
+            },
+            {
+              "id": "p2",
+              "name": "ramo",
+              "value": "barbearia",
+              "type": "string"
+            },
+            {
+              "id": "p3",
+              "name": "modelo",
+              "value": "barbearia",
+              "type": "string"
+            },
+            {
+              "id": "p4",
+              "name": "bairros",
+              "value": "Centro, Jardim Sumaré, Campos Elíseos, Vila Seixas",
+              "type": "string"
+            },
+            {
+              "id": "p5",
+              "name": "min_avaliacoes",
+              "value": 10,
+              "type": "number"
+            },
+            {
+              "id": "p6",
+              "name": "max_avaliacoes",
+              "value": 300,
+              "type": "number"
+            },
+            {
+              "id": "p7",
+              "name": "limite",
+              "value": 30,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "n3",
+      "name": "Gerar buscas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const p = $('Parâmetros').first().json;\nconst bairros = String(p.bairros || '').split(',').map(s => s.trim()).filter(Boolean);\nconst queries = [`${p.ramo} em ${p.cidade}`, ...bairros.map(b => `${p.ramo} ${b} ${p.cidade}`)];\nreturn queries.map(q => ({ json: { query: q } }));"
+      }
+    },
+    {
+      "id": "n4",
+      "name": "Google Places",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://places.googleapis.com/v1/places:searchText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Goog-FieldMask",
+              "value": "places.id,places.displayName,places.nationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount,places.googleMapsUri,places.businessStatus"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ textQuery: $json.query, languageCode: 'pt-BR', regionCode: 'BR', pageSize: 20 }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Google Places API Key"
+        }
+      }
+    },
+    {
+      "id": "n5",
+      "name": "Filtrar e montar mensagem",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const p = $('Parâmetros').first().json;\nconst FRACOS = ['instagram.com','linktr.ee','linktree.com','wa.me','api.whatsapp.com','whatsapp.com','facebook.com','fb.com','beacons.ai','bio.link','lnk.bio','taplink.cc','campsite.bio'];\nconst REDE = /franquia|franchis|\\brede\\b|\\bunidade\\b|\\bfilial\\b|shopping/i;\nconst OBJ = {\n  'boutique': 'catálogo, endereço e botão de WhatsApp',\n  'barbearia': 'serviços, endereço e botão de agendar',\n  'salao': 'serviços, endereço e botão de agendar',\n  'clinica-odontologica': 'atendimentos, endereço e botão de agendar',\n  'estetica': 'procedimentos, endereço e botão de agendar',\n  'petshop': 'serviços, endereço e botão de agendar',\n  'assistencia-tecnica': 'o que consertam, endereço e botão de orçamento',\n  'restaurante': 'cardápio, área de entrega e botão de pedido',\n  'personal-academia': 'planos, endereço e botão de aula experimental'\n};\nconst obj = OBJ[p.modelo] || 'serviços, endereço e botão de WhatsApp';\nconst hostOf = u => { try { return new URL(u).hostname.replace(/^www\\./, '').toLowerCase(); } catch (e) { return ''; } };\nconst hoje = new Date().toISOString().slice(0, 10);\nconst vistos = new Set();\nconst lista = [];\n\nfor (const item of $input.all()) {\n  for (const l of (item.json.places || [])) {\n    if (!l.id || vistos.has(l.id)) continue;\n    vistos.add(l.id);\n    const nome = l.displayName && l.displayName.text ? l.displayName.text : '';\n    if (!nome || REDE.test(nome)) continue;\n    if (l.businessStatus && l.businessStatus !== 'OPERATIONAL') continue;\n    const n = l.userRatingCount || 0;\n    if (n < p.min_avaliacoes || n > p.max_avaliacoes) continue;\n\n    const host = hostOf(l.websiteUri || '');\n    let statusSite;\n    if (!host) statusSite = 'sem site';\n    else if (FRACOS.some(f => host === f || host.endsWith('.' + f))) statusSite = 'link fraco (' + host + ')';\n    else continue; // site próprio: fora do perfil\n\n    let instagram = '';\n    if (host === 'instagram.com') {\n      const seg = new URL(l.websiteUri).pathname.split('/').filter(Boolean)[0];\n      if (seg) instagram = '@' + seg;\n    }\n\n    let msg = `Oi! Vi a ${nome} no Google. Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria?`;\n    if (msg.length > 200) msg = `Oi! Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria pra vocês?`;\n    const msgOk = msg.length >= 100 && msg.length <= 200;\n\n    lista.push({\n      data: hoje, nome, instagram, whatsapp: '', cidade: p.cidade, nicho: p.ramo,\n      servico_alvo: 'biosite', mensagem_enviada: '', respondeu: '', interesse: '', viu_exemplo: '',\n      fechou: '', valor: '', motivo_perda: '', observacoes: msgOk ? '' : 'mensagem fora de 100-200 caracteres',\n      telefone_maps: l.nationalPhoneNumber || '',\n      mensagem_sugerida: msg,\n      link_exemplo: `https://demo.ezf-tech.com/modelo-${p.modelo}/`,\n      link_maps: l.googleMapsUri || '',\n      avaliacao: l.rating || '',\n      qtd_avaliacoes: n,\n      status_site: statusSite\n    });\n  }\n}\nlista.sort((a, b) => b.qtd_avaliacoes - a.qtd_avaliacoes);\nreturn lista.slice(0, p.limite).map(j => ({ json: j }));"
+      }
+    },
+    {
+      "id": "n6",
+      "name": "Gerar CSV",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "operation": "csv",
+        "options": {
+          "fileName": "leads.csv"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Iniciar": {
+      "main": [
+        [
+          {
+            "node": "Parâmetros",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parâmetros": {
+      "main": [
+        [
+          {
+            "node": "Gerar buscas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerar buscas": {
+      "main": [
+        [
+          {
+            "node": "Google Places",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Places": {
+      "main": [
+        [
+          {
+            "node": "Filtrar e montar mensagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar e montar mensagem": {
+      "main": [
+        [
+          {
+            "node": "Gerar CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
