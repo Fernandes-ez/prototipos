@@ -10,6 +10,7 @@ Filtro aplicado:
 - Campo `website` vazio ou só Instagram, Linktree, `wa.me`, Facebook, Beacons e similares → **aprovado**. Site próprio → descartado.
 - Pula os negócios cujo `place_id` já está na planilha (assim cada execução traz só leads novos).
 - Sem duplicados, ordenado por nº de avaliações, limitado a `limite` leads.
+- Mensagem em tom de conversa, sem a cara de vendedor: 3 saudações por perfil (barbearia e afins, salão e afins, clínica e afins) × 3 jeitos de abordar (pergunta, "tô montando uns links", "dei uma olhada"). A escolha é fixa por negócio (derivada do `place_id`). A variante usada fica em `observacoes` (V1, V2 ou V3) para você comparar a resposta de cada uma. O nome do Google é encurtado (sem emoji, sem o que vem depois de " - ", maiúsculas corrigidas).
 - Mensagem de 100 a 200 caracteres. Se sair fora, a coluna `observacoes` avisa.
 
 ## Configuração (uma vez)

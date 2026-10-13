@@ -14,18 +14,44 @@ CODE_FILTRO = r"""
 const p = $('Parâmetros').first().json;
 const FRACOS = ['instagram.com','linktr.ee','linktree.com','wa.me','api.whatsapp.com','whatsapp.com','facebook.com','fb.com','beacons.ai','bio.link','lnk.bio','taplink.cc','campsite.bio'];
 const REDE = /franquia|franchis|\brede\b|\bunidade\b|\bfilial\b|shopping/i;
-const OBJ = {
-  'boutique': 'catálogo, endereço e botão de WhatsApp',
-  'barbearia': 'serviços, endereço e botão de agendar',
-  'salao': 'serviços, endereço e botão de agendar',
-  'clinica-odontologica': 'atendimentos, endereço e botão de agendar',
-  'estetica': 'procedimentos, endereço e botão de agendar',
-  'petshop': 'serviços, endereço e botão de agendar',
-  'assistencia-tecnica': 'o que consertam, endereço e botão de orçamento',
-  'restaurante': 'cardápio, área de entrega e botão de pedido',
-  'personal-academia': 'planos, endereço e botão de aula experimental'
+const PERFIS = {
+  'barbearia':            { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'marcar horário', pl: 'barbearias' },
+  'personal-academia':    { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'marcar aula', pl: 'academias e studios' },
+  'assistencia-tecnica':  { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'pedir orçamento', pl: 'assistências técnicas' },
+  'salao':                { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'marcar horário', pl: 'salões' },
+  'estetica':             { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'marcar horário', pl: 'espaços de estética' },
+  'boutique':             { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'ver as peças e pedir', pl: 'lojas de roupa' },
+  'clinica-odontologica': { sauda: ['Olá, tudo bem?', 'Oi, tudo bem?', 'Bom dia!'], acao: 'agendar consulta', pl: 'clínicas' },
+  'petshop':              { sauda: ['Oi, tudo bem?', 'Olá, tudo bem?', 'Oii!'], acao: 'marcar banho e tosa', pl: 'pet shops' },
+  'restaurante':          { sauda: ['Oi, tudo bem?', 'Olá, tudo bem?', 'Boa tarde!'], acao: 'fazer pedido', pl: 'hamburguerias e delivery' }
 };
-const obj = OBJ[p.modelo] || 'serviços, endereço e botão de WhatsApp';
+const perfil = PERFIS[p.modelo] || PERFIS['salao'];
+const MAIUSC = /^[^a-zà-ú]*$/;
+const curto = n => {
+  let t = n.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').split(/\s[-–|•·]\s|\(|,/)[0].replace(/\s+/g, ' ').trim();
+  if (MAIUSC.test(t)) {
+    const liga = ['e', 'de', 'da', 'do', 'dos', 'das', 'a', 'o'];
+    t = t.split(' ').map((w, i) => {
+      const m = w.toLowerCase();
+      if (i > 0 && liga.includes(m)) return m;
+      if (w.length <= 3) return w;
+      return m.charAt(0).toUpperCase() + m.slice(1);
+    }).join(' ');
+  }
+  return t;
+};
+const soma = str => Array.from(String(str)).reduce((a, c) => a + c.charCodeAt(0), 0);
+const montarMsg = (nomeCurto, id) => {
+  const h = soma(id);
+  const sauda = perfil.sauda[h % perfil.sauda.length];
+  const v = Math.floor(h / 3) % 3;
+  const textos = [
+    `${sauda} Vi a ${nomeCurto} aqui no Google e curti. Hoje o pessoal costuma ${perfil.acao} por onde, direct ou WhatsApp?`,
+    `${sauda} Tô montando uns links pra bio do Insta de ${perfil.pl} aqui da região, onde o cliente já cai pra ${perfil.acao}. Posso te mandar um exemplo?`,
+    `${sauda} Dei uma olhada na ${nomeCurto} e achei que a bio do Insta podia facilitar mais pro cliente ${perfil.acao}. Posso te mandar uma ideia rápida?`
+  ];
+  return { texto: textos[v], variante: 'V' + (v + 1) };
+};
 const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; } };
 const hoje = new Date().toISOString().slice(0, 10);
 const jaRegistrados = new Set($('Ler planilha').all().map(i => String(i.json.place_id || '').trim()).filter(Boolean));
@@ -54,8 +80,9 @@ for (const item of $input.all()) {
       if (seg) instagram = '@' + seg;
     }
 
-    let msg = `Oi! Vi a ${nome} no Google. Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria?`;
-    if (msg.length > 200) msg = `Oi! Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria pra vocês?`;
+    const nomeCurto = curto(nome);
+    const gerado = montarMsg(nomeCurto, l.id);
+    let msg = gerado.texto;
     const msgOk = msg.length >= 100 && msg.length <= 200;
     const dig = String(l.nationalPhoneNumber || '').replace(/\D/g, '');
     const linkWa = /^\d{2}9\d{8}$/.test(dig) ? `https://wa.me/55${dig}?text=${encodeURIComponent(msg)}` : '';
@@ -63,7 +90,7 @@ for (const item of $input.all()) {
     lista.push({
       data: hoje, nome, instagram, whatsapp: '', cidade: p.cidade, nicho: p.ramo,
       servico_alvo: 'biosite', mensagem_enviada: '', respondeu: '', interesse: '', viu_exemplo: '',
-      fechou: '', valor: '', motivo_perda: '', observacoes: msgOk ? '' : 'mensagem fora de 100-200 caracteres',
+      fechou: '', valor: '', motivo_perda: '', observacoes: ('variante ' + gerado.variante + (msgOk ? '' : ' | mensagem fora de 100-200 caracteres')),
       telefone_maps: l.nationalPhoneNumber || '',
       mensagem_sugerida: msg,
       link_exemplo: `https://demo.ezf-tech.com/modelo-${p.modelo}/`,
