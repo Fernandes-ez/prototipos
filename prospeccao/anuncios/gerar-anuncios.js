@@ -63,7 +63,8 @@ h1 em{font-style:normal;color:#8a14b8}
 .ln{position:absolute;height:2px;background:#1c1026}
 .pt{position:absolute;width:12px;height:12px;border-radius:50%;background:#1c1026}
 .pt.y{width:22px;height:22px;background:#f2b134;border:2px solid #1c1026}
-.cl{position:absolute;left:700px;font-family:'JetBrains Mono',monospace;font-size:26px;color:#1c1026}
+.cl{position:absolute;left:700px;font-family:'JetBrains Mono',monospace;font-size:24px;color:#1c1026}
+.chip{position:absolute;left:700px;top:1112px;font-family:'JetBrains Mono',monospace;font-size:22px;line-height:30px;color:#1c1026;background:#f2b134;padding:10px 18px}
 `;
 
 const darkPage = ({ label, h1, btn, contact, tag, list }) => `<!doctype html><meta charset="utf-8">${FONTS}<style>${BASE}${DARK}</style><body>
@@ -76,7 +77,7 @@ ${list ? `<div class="list" style="top:700px">${list.map(t => `<div><b>→</b> $
 <div class="tl"></div><div class="dot"></div><div class="tag">${tag}</div>
 <div class="logo"><s>{</s>ezf.<u>tech</u><s>}</s></div><div class="handle">@ezf.tech</div></body>`;
 
-const lightPage = ({ label, h1, url, heroTitle, heroSub, heroBtn, rowText, callouts }) => `<!doctype html><meta charset="utf-8">${FONTS}<style>${BASE}${LIGHT}</style><body>
+const lightPage = ({ label, h1, url, heroTitle, heroSub, heroBtn, rowText, callouts, chip }) => `<!doctype html><meta charset="utf-8">${FONTS}<style>${BASE}${LIGHT}</style><body>
 <div class="label"><i></i>${label}</div>
 <h1>${h1}</h1>
 <div class="arch"><div class="win">
@@ -86,6 +87,7 @@ const lightPage = ({ label, h1, url, heroTitle, heroSub, heroBtn, rowText, callo
   <div class="row"><div><div class="in">${rowText[0]}</div><div class="in">${rowText[1]}</div></div><div class="blk"></div></div>
 </div></div>
 ${callouts.map(c => `<div class="ln" style="left:${c.x}px;top:${c.y}px;width:${680 - c.x}px"></div><div class="pt y" style="left:${c.x - 11}px;top:${c.y - 10}px"></div><div class="pt" style="left:674px;top:${c.y - 5}px"></div><div class="cl" style="top:${c.y - 17}px">${c.t}</div>`).join('')}
+${chip ? `<div class="chip">${chip}</div>` : ''}
 <div class="logo"><s>{</s>ezf.<u>tech</u><s>}</s></div><div class="handle">@ezf.tech</div></body>`;
 
 const pecas = [
@@ -96,28 +98,64 @@ const pecas = [
     label: 'Google Meu Negócio', h1: 'Seu negócio é <span style="color:#8a14b8">{</span>achado<span style="color:#8a14b8">}</span><br>quando o cliente busca?',
     url: 'seu negócio no mapa', heroTitle: 'Seu<br>Negócio', heroSub: 'categoria · horário · endereço', heroBtn: 'Ligar',
     rowText: ['link do site', 'descrição'],
-    callouts: [{ x: 300, y: 827, t: 'categorias certas' }, { x: 460, y: 954, t: 'fotos organizadas' }, { x: 350, y: 1073, t: 'link para o site' }] })],
+    callouts: [{ x: 585, y: 827, t: 'categorias certas' }, { x: 460, y: 954, t: 'fotos organizadas' }, { x: 350, y: 1073, t: 'link para o site' }] })],
   ['anuncio-3-prompts', lightPage({
     label: 'Guia de prompts', h1: 'Posts prontos<br>com <span style="color:#8a14b8">{</span>um prompt<span style="color:#8a14b8">}</span>.',
     url: 'seu assistente de IA', heroTitle: 'Legenda da<br>promoção', heroSub: 'no seu jeito de falar', heroBtn: 'Gerar',
     rowText: ['cole o prompt aqui', 'ajuste e poste'],
-    callouts: [{ x: 300, y: 827, t: 'prompt pronto' }, { x: 460, y: 954, t: 'opções de legenda' }, { x: 350, y: 1073, t: 'você ajusta e posta' }] })],
+    callouts: [{ x: 585, y: 827, t: 'prompt pronto' }, { x: 460, y: 954, t: 'opções de legenda' }, { x: 350, y: 1073, t: 'você ajusta e posta' }] })],
   ['anuncio-4-pacote', darkPage({
     label: 'Kit presença digital', h1: 'Sua presença<br>digital <em>{</em><span>pronta</span><em>}</em><br>em um dia.',
     btn: 'Chamar no WhatsApp', contact: [WHATS, 'demo.ezf-tech.com'], tag: 'sem mensalidade',
     list: ['página para a bio', 'Google Meu Negócio ajustado', 'guia de prompts de IA'] })],
 ];
 
+const em = t => `<span style="color:#8a14b8">{</span>${t}<span style="color:#8a14b8">}</span>`;
+const pecasSite = [
+  ['site-1-pagina', darkPage({ label: 'Página', h1: 'Sua empresa<br>em <em>{</em><span>uma página</span><em>}</em><br>só.',
+    btn: 'Quero a Página', contact: [WHATS, 'ezf-tech.com'], tag: 'a partir de R$ 790',
+    list: ['seus serviços, fotos e mapa', 'botão de WhatsApp', 'domínio no seu nome'] })],
+  ['site-2-site', lightPage({ label: 'Site', h1: 'Sua empresa encontrada<br>' + em('fora do Instagram') + '.',
+    url: 'seunegocio.com.br', heroTitle: 'Sua<br>Empresa', heroSub: 'início · coleções · contato', heroBtn: 'WhatsApp',
+    rowText: ['mapa e horário', 'contato'], chip: 'a partir de R$ 1.490',
+    callouts: [{ x: 585, y: 827, t: 'WhatsApp em cada item' }, { x: 460, y: 954, t: 'até 20 destaques' }, { x: 350, y: 1073, t: 'contato e mapa' }] })],
+  ['site-3-catalogo', darkPage({ label: 'Catálogo', h1: 'Muito produto,<br>você <em>{</em><span>atualiza</span><em>}</em><br>sozinho.',
+    btn: 'Quero o Catálogo', contact: [WHATS, 'ezf-tech.com'], tag: 'a partir de R$ 2.490',
+    list: ['itens ilimitados, com filtros', 'painel no celular', 'página própria para cada item'] })],
+  ['site-4-automacao-simples', lightPage({ label: 'Automação simples', h1: 'Tire uma tarefa repetida<br>do seu ' + em('dia') + '.',
+    url: 'lembrete automático', heroTitle: 'Lembrete<br>do horário', heroSub: 'enviado pelo WhatsApp', heroBtn: 'Enviar',
+    rowText: ['nome do cliente', 'data e horário'], chip: 'a partir de R$ 690',
+    callouts: [{ x: 585, y: 827, t: 'aviso no WhatsApp' }, { x: 460, y: 954, t: 'formulário na planilha' }, { x: 350, y: 1073, t: 'sem ninguém digitar' }] })],
+  ['site-5-automacao-completa', darkPage({ label: 'Automação completa', h1: 'Vários sistemas<br><em>{</em><span>conversando</span><em>}</em><br>entre si.',
+    btn: 'Conversar sobre o meu caso', contact: [WHATS, 'ezf-tech.com'], tag: 'a partir de R$ 1.690',
+    list: ['três ou mais integrações', 'levantamento do processo antes', 'entrega por etapas'] })],
+  ['site-6-atendimento-ia', darkPage({ label: 'Atendimento com IA no WhatsApp', h1: 'Nenhum cliente<br><em>{</em><span>esperando</span><em>}</em><br>resposta.',
+    btn: 'Testar 14 dias grátis', contact: [WHATS, 'ezf-tech.com'], tag: 'R$ 197/mês',
+    list: ['IA com as regras do seu negócio', 'passa para a pessoa certa', 'painel com leads e histórico'] })],
+  ['site-7-agendamento', lightPage({ label: 'Agendamento online', h1: 'Seu cliente marca<br>horário ' + em('sozinho') + '.',
+    url: 'agende seu horário', heroTitle: 'Escolha<br>seu horário', heroSub: 'serviço · dia · horário', heroBtn: 'Agendar',
+    rowText: ['seu nome', 'seu WhatsApp'], chip: 'a partir de R$ 790<br>+ R$ 79/mês',
+    callouts: [{ x: 585, y: 827, t: 'a cara da sua marca' }, { x: 460, y: 954, t: 'agenda do dia' }, { x: 350, y: 1073, t: 'confirma no WhatsApp' }] })],
+  ['site-8-sistema', darkPage({ label: 'Sistema sob medida', h1: 'Sua operação<br>fora da<br><em>{</em><span>planilha</span><em>}</em>.',
+    btn: 'Conversar sobre o meu sistema', contact: [WHATS, 'ezf-tech.com'], tag: 'a partir de R$ 3.900',
+    list: ['levantamento antes do orçamento', 'painel, cadastros e relatórios', 'entrega por etapas'] })],
+];
+
 (async () => {
+  const fs = require('fs');
+  fs.mkdirSync(path.join(__dirname, 'site'), { recursive: true });
   const b = await chromium.launch();
-  for (const [nome, html] of pecas) {
-    const pg = await b.newPage({ viewport: { width: 1080, height: 1350 } });
-    await pg.setContent(html, { waitUntil: 'networkidle' });
-    await pg.evaluate(() => document.fonts.ready);
-    await pg.waitForTimeout(500);
-    await pg.screenshot({ path: path.join(__dirname, nome + '.png') });
-    await pg.close();
-    console.log('ok', nome);
+  const grupos = [['', pecas], ['site/', pecasSite]];
+  for (const [pasta, lista] of grupos) {
+    for (const [nome, html] of lista) {
+      const pg = await b.newPage({ viewport: { width: 1080, height: 1350 } });
+      await pg.setContent(html, { waitUntil: 'networkidle' });
+      await pg.evaluate(() => document.fonts.ready);
+      await pg.waitForTimeout(400);
+      await pg.screenshot({ path: path.join(__dirname, pasta, pasta ? nome.replace(/^site-/, '') : nome) + '.png' });
+      await pg.close();
+      console.log('ok', pasta + nome);
+    }
   }
   await b.close();
 })();
