@@ -38,6 +38,9 @@ O gatilho é um **Form Trigger** do n8n: uma página web com Cidade, Ramo (lista
 Cada busca devolve no máximo 20 negócios. Repetir a mesma cidade, ramo e bairros devolve quase os mesmos negócios, e os que já estão na planilha são pulados. Depois ainda caem redes, fechados, fora da faixa de avaliações e quem tem site próprio. O nó **Resumo do funil** (saída "false" do **É lead?**) mostra a conta: encontrados, repetidos, já na planilha, rede, fechados, fora da faixa, com site próprio, aprovados e entregues.
 Para trazer mais leads novos: use mais bairros, marque **Busca ampla = Sim** (usa sinônimos do ramo, mais requisições), troque de cidade, ou alargue a faixa de avaliações.
 
+## Se um lead "sem site" tem site no Maps
+O Google às vezes devolve o site sem `http://`. O fluxo já trata isso (esses negócios são descartados como "site próprio"). Se ainda aparecer um lead assim, abra o nó **Google Places** e procure o negócio na saída: se `websiteUri` não vier, o Google não entregou o dado pela API (só aparece no Maps). Nesse caso o `google_sem_campo_site` do **Resumo do funil** mostra quantos negócios vieram sem o campo, e a conferência manual do perfil é necessária.
+
 ## Limites
 - A aba precisa se chamar `leads` e ter o cabeçalho de `planilha-modelo.csv`, com a coluna `place_id`. Sem o cabeçalho, a leitura falha.
 - Não apague a coluna `place_id`: é com ela que o fluxo evita repetir negócios.

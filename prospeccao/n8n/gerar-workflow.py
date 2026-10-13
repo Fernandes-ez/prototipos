@@ -77,12 +77,17 @@ const montarMsg = (nomeCurto, id, rating, avaliacoes, link) => {
   const trechos = variantes[v];
   return { trechos, texto: trechos.join('\n'), semLink: trechos.join(' ').replace(link, '').trim(), variante: 'V' + (v + 1) };
 };
-const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; } };
+const hostOf = u => {
+  const t = String(u || '').trim();
+  if (!t) return '';
+  try { return new URL(/^[a-z][a-z0-9+.-]*:\/\//i.test(t) ? t : 'http://' + t).hostname.replace(/^www\./, '').toLowerCase() || 'desconhecido'; }
+  catch (e) { return 'desconhecido'; }
+};
 const hoje = new Date().toISOString().slice(0, 10);
 const jaRegistrados = new Set($('Ler planilha').all().map(i => String(i.json.place_id || '').trim()).filter(Boolean));
 const vistos = new Set();
 const lista = [];
-const c = { buscas: $input.all().length, encontrados: 0, repetidos_na_busca: 0, ja_na_planilha: 0, rede_ou_sem_nome: 0, fechados: 0, fora_da_faixa_de_avaliacoes: 0, com_site_proprio: 0 };
+const c = { buscas: $input.all().length, encontrados: 0, repetidos_na_busca: 0, ja_na_planilha: 0, rede_ou_sem_nome: 0, fechados: 0, fora_da_faixa_de_avaliacoes: 0, com_site_proprio: 0, google_sem_campo_site: 0 };
 
 for (const item of $input.all()) {
   for (const l of (item.json.places || [])) {
@@ -98,6 +103,7 @@ for (const item of $input.all()) {
     if (n < p.min_avaliacoes || n > p.max_avaliacoes) { c.fora_da_faixa_de_avaliacoes++; continue; }
 
     const host = hostOf(l.websiteUri || '');
+    if (!l.websiteUri) c.google_sem_campo_site++;
     let statusSite;
     if (!host) statusSite = 'sem site';
     else if (FRACOS.some(f => host === f || host.endsWith('.' + f))) statusSite = 'link fraco (' + host + ')';
@@ -105,8 +111,11 @@ for (const item of $input.all()) {
 
     let instagram = '';
     if (host === 'instagram.com') {
-      const seg = new URL(l.websiteUri).pathname.split('/').filter(Boolean)[0];
-      if (seg) instagram = '@' + seg;
+      try {
+        const u = /^https?:\/\//i.test(l.websiteUri) ? l.websiteUri : 'http://' + l.websiteUri;
+        const seg = new URL(u).pathname.split('/').filter(Boolean)[0];
+        if (seg) instagram = '@' + seg;
+      } catch (e) {}
     }
 
     const nomeCurto = curto(nome);
