@@ -82,22 +82,47 @@ return lista.slice(0, p.limite).map(j => ({ json: j }));
 
 COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id","link_whatsapp"]
 
+RAMOS = [
+ ("Barbearia", "barbearia", "barbearia"),
+ ("Salão de beleza", "salão de beleza", "salao"),
+ ("Clínica odontológica", "clínica odontológica", "clinica-odontologica"),
+ ("Estética e sobrancelha", "estética e design de sobrancelha", "estetica"),
+ ("Pet shop", "pet shop", "petshop"),
+ ("Assistência técnica", "assistência técnica celular", "assistencia-tecnica"),
+ ("Restaurante e hamburgueria", "hamburgueria", "restaurante"),
+ ("Academia e personal", "academia", "personal-academia"),
+ ("Boutique e loja de roupas", "boutique feminina", "boutique")]
+RAMOS_FORM = [r[0] for r in RAMOS]
+MAPA_JS = "{" + ", ".join("'%s': ['%s', '%s']" % r for r in RAMOS) + "}"
+
 def campo(i, nome, valor, tipo="string"):
     return {"id": f"p{i}", "name": nome, "value": valor, "type": tipo}
 
 wf = {
  "name": "Buscar leads (Google Places)",
  "nodes": [
-  {"id": "n1", "name": "Iniciar", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [0, 0], "parameters": {}},
+  {"id": "n1", "name": "Formulário", "type": "n8n-nodes-base.formTrigger", "typeVersion": 2.2, "position": [0, 0],
+   "webhookId": "5b0c2f6e-9a41-4d7b-8c3e-7e1f2a6d9b10",
+   "parameters": {"authentication": "basicAuth", "formTitle": "Buscar leads",
+     "formDescription": "Escolha o ramo e a cidade. Os leads novos entram na planilha.",
+     "formFields": {"values": [
+       {"fieldLabel": "Cidade", "placeholder": "Ribeirão Preto, SP", "requiredField": True},
+       {"fieldLabel": "Ramo", "fieldType": "dropdown", "requiredField": True, "fieldOptions": {"values": [{"option": o} for o in RAMOS_FORM]}},
+       {"fieldLabel": "Bairros", "placeholder": "Centro, Jardim Sumaré (opcional, separados por vírgula)"},
+       {"fieldLabel": "Mínimo de avaliações", "fieldType": "number", "placeholder": "10"},
+       {"fieldLabel": "Máximo de avaliações", "fieldType": "number", "placeholder": "300"},
+       {"fieldLabel": "Quantidade de leads", "fieldType": "number", "placeholder": "30"}]},
+     "options": {}},
+   "credentials": {"httpBasicAuth": {"id": "", "name": "Acesso ao formulário"}}},
   {"id": "n2", "name": "Parâmetros", "type": "n8n-nodes-base.set", "typeVersion": 3.4, "position": [220, 0],
    "parameters": {"assignments": {"assignments": [
-     campo(1, "cidade", "Ribeirão Preto, SP"),
-     campo(2, "ramo", "barbearia"),
-     campo(3, "modelo", "barbearia"),
-     campo(4, "bairros", "Centro, Jardim Sumaré, Campos Elíseos, Vila Seixas"),
-     campo(5, "min_avaliacoes", 10, "number"),
-     campo(6, "max_avaliacoes", 300, "number"),
-     campo(7, "limite", 30, "number"),
+     campo(1, "cidade", "={{ $json.Cidade }}"),
+     campo(2, "ramo", "={{ (" + MAPA_JS + ")[$json.Ramo][0] }}"),
+     campo(3, "modelo", "={{ (" + MAPA_JS + ")[$json.Ramo][1] }}"),
+     campo(4, "bairros", "={{ $json.Bairros || '' }}"),
+     campo(5, "min_avaliacoes", "={{ Number($json['Mínimo de avaliações']) || 10 }}", "number"),
+     campo(6, "max_avaliacoes", "={{ Number($json['Máximo de avaliações']) || 300 }}", "number"),
+     campo(7, "limite", "={{ Number($json['Quantidade de leads']) || 30 }}", "number"),
      campo(8, "planilha_id", "COLE_AQUI_O_ID_DA_PLANILHA")]}, "options": {}}},
   {"id": "n7", "name": "Ler planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [440, 0],
    "alwaysOutputData": True,
@@ -132,7 +157,7 @@ wf = {
    "parameters": {"operation": "csv", "options": {"fileName": "leads.csv"}}},
  ],
  "connections": {
-  "Iniciar": {"main": [[{"node": "Parâmetros", "type": "main", "index": 0}]]},
+  "Formulário": {"main": [[{"node": "Parâmetros", "type": "main", "index": 0}]]},
   "Parâmetros": {"main": [[{"node": "Ler planilha", "type": "main", "index": 0}]]},
   "Ler planilha": {"main": [[{"node": "Gerar buscas", "type": "main", "index": 0}]]},
   "Gerar buscas": {"main": [[{"node": "Google Places", "type": "main", "index": 0}]]},

@@ -3,7 +3,7 @@
 Gera uma lista de negócios reais de uma cidade e ramo, já filtrada e com a mensagem de DM sugerida. O envio da DM continua manual.
 
 ## Como funciona
-Iniciar → **Parâmetros** → **Ler planilha** (ids já registrados) → Gerar buscas (cidade + cada bairro) → **Google Places** (Text Search) → **Filtrar e montar mensagem** → **Registrar na planilha** (e, em paralelo, Gerar CSV).
+**Formulário** (página web do n8n) → **Parâmetros** → **Ler planilha** (ids já registrados) → Gerar buscas (cidade + cada bairro) → **Google Places** (Text Search) → **Filtrar e montar mensagem** → **Registrar na planilha** (e, em paralelo, Gerar CSV).
 
 Filtro aplicado:
 - Só negócios em operação, com 10 a 300 avaliações (ajustável), sem "franquia", "rede", "unidade", "filial" ou "shopping" no nome.
@@ -18,6 +18,13 @@ Filtro aplicado:
 3. **Planilha**: crie uma planilha no Google Sheets com uma aba chamada `leads`. Importe `planilha-modelo.csv` (Arquivo → Importar → Substituir planilha) para criar a linha de cabeçalho. Copie o **ID da planilha** (o trecho entre `/d/` e `/edit` na URL).
 4. **Credencial do Google Sheets**: no n8n, Credentials → New → **Google Sheets OAuth2 API** e siga o assistente para autorizar sua conta.
 5. **Importar**: Workflows → Import from File → `buscar-leads.workflow.json`. Abra os nós **Google Places** (credencial Header Auth) e **Ler planilha** e **Registrar na planilha** (credencial Google Sheets) e selecione as credenciais.
+
+## Formulário (front)
+O gatilho é um **Form Trigger** do n8n: uma página web com Cidade, Ramo (lista), Bairros, mínimo e máximo de avaliações e quantidade de leads. O ramo escolhido define sozinho o termo de busca e o modelo de biosite.
+- Proteja com senha: crie uma credencial **Basic Auth** (usuário e senha) e selecione-a no nó. Sem isso, qualquer pessoa com o link gasta a sua cota do Google.
+- Ative o fluxo (botão **Active**) para usar o endereço de produção do formulário. O endereço aparece no nó, em **Production URL**.
+- `planilha_id` continua fixo no nó **Parâmetros** (preencha uma vez).
+- Para adicionar um ramo: edite `RAMOS` em `gerar-workflow.py` e gere o fluxo de novo, ou ajuste as opções do formulário e o mapa nos campos `ramo` e `modelo` do nó **Parâmetros**.
 
 ## Uso
 1. Edite o nó **Parâmetros**: `planilha_id` (o ID copiado), `cidade`, `ramo` (termo de busca), `modelo` (barbearia, salao, boutique, clinica-odontologica, estetica, petshop, assistencia-tecnica, restaurante, personal-academia), `bairros` (separados por vírgula), faixa de avaliações e `limite`.

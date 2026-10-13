@@ -3,14 +3,90 @@
   "nodes": [
     {
       "id": "n1",
-      "name": "Iniciar",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
+      "name": "Formulário",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
       "position": [
         0,
         0
       ],
-      "parameters": {}
+      "webhookId": "5b0c2f6e-9a41-4d7b-8c3e-7e1f2a6d9b10",
+      "parameters": {
+        "authentication": "basicAuth",
+        "formTitle": "Buscar leads",
+        "formDescription": "Escolha o ramo e a cidade. Os leads novos entram na planilha.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Cidade",
+              "placeholder": "Ribeirão Preto, SP",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Ramo",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Barbearia"
+                  },
+                  {
+                    "option": "Salão de beleza"
+                  },
+                  {
+                    "option": "Clínica odontológica"
+                  },
+                  {
+                    "option": "Estética e sobrancelha"
+                  },
+                  {
+                    "option": "Pet shop"
+                  },
+                  {
+                    "option": "Assistência técnica"
+                  },
+                  {
+                    "option": "Restaurante e hamburgueria"
+                  },
+                  {
+                    "option": "Academia e personal"
+                  },
+                  {
+                    "option": "Boutique e loja de roupas"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Bairros",
+              "placeholder": "Centro, Jardim Sumaré (opcional, separados por vírgula)"
+            },
+            {
+              "fieldLabel": "Mínimo de avaliações",
+              "fieldType": "number",
+              "placeholder": "10"
+            },
+            {
+              "fieldLabel": "Máximo de avaliações",
+              "fieldType": "number",
+              "placeholder": "300"
+            },
+            {
+              "fieldLabel": "Quantidade de leads",
+              "fieldType": "number",
+              "placeholder": "30"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "",
+          "name": "Acesso ao formulário"
+        }
+      }
     },
     {
       "id": "n2",
@@ -27,43 +103,43 @@
             {
               "id": "p1",
               "name": "cidade",
-              "value": "Ribeirão Preto, SP",
+              "value": "={{ $json.Cidade }}",
               "type": "string"
             },
             {
               "id": "p2",
               "name": "ramo",
-              "value": "barbearia",
+              "value": "={{ ({'Barbearia': ['barbearia', 'barbearia'], 'Salão de beleza': ['salão de beleza', 'salao'], 'Clínica odontológica': ['clínica odontológica', 'clinica-odontologica'], 'Estética e sobrancelha': ['estética e design de sobrancelha', 'estetica'], 'Pet shop': ['pet shop', 'petshop'], 'Assistência técnica': ['assistência técnica celular', 'assistencia-tecnica'], 'Restaurante e hamburgueria': ['hamburgueria', 'restaurante'], 'Academia e personal': ['academia', 'personal-academia'], 'Boutique e loja de roupas': ['boutique feminina', 'boutique']})[$json.Ramo][0] }}",
               "type": "string"
             },
             {
               "id": "p3",
               "name": "modelo",
-              "value": "barbearia",
+              "value": "={{ ({'Barbearia': ['barbearia', 'barbearia'], 'Salão de beleza': ['salão de beleza', 'salao'], 'Clínica odontológica': ['clínica odontológica', 'clinica-odontologica'], 'Estética e sobrancelha': ['estética e design de sobrancelha', 'estetica'], 'Pet shop': ['pet shop', 'petshop'], 'Assistência técnica': ['assistência técnica celular', 'assistencia-tecnica'], 'Restaurante e hamburgueria': ['hamburgueria', 'restaurante'], 'Academia e personal': ['academia', 'personal-academia'], 'Boutique e loja de roupas': ['boutique feminina', 'boutique']})[$json.Ramo][1] }}",
               "type": "string"
             },
             {
               "id": "p4",
               "name": "bairros",
-              "value": "Centro, Jardim Sumaré, Campos Elíseos, Vila Seixas",
+              "value": "={{ $json.Bairros || '' }}",
               "type": "string"
             },
             {
               "id": "p5",
               "name": "min_avaliacoes",
-              "value": 10,
+              "value": "={{ Number($json['Mínimo de avaliações']) || 10 }}",
               "type": "number"
             },
             {
               "id": "p6",
               "name": "max_avaliacoes",
-              "value": 300,
+              "value": "={{ Number($json['Máximo de avaliações']) || 300 }}",
               "type": "number"
             },
             {
               "id": "p7",
               "name": "limite",
-              "value": 30,
+              "value": "={{ Number($json['Quantidade de leads']) || 30 }}",
               "type": "number"
             },
             {
@@ -469,7 +545,7 @@
     }
   ],
   "connections": {
-    "Iniciar": {
+    "Formulário": {
       "main": [
         [
           {
