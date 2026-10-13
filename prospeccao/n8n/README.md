@@ -34,6 +34,10 @@ O gatilho é um **Form Trigger** do n8n: uma página web com Cidade, Ramo (lista
 3. A planilha do Google substitui o `leads.csv` do repositório para o controle diário. As 15 primeiras colunas seguem a mesma ordem.
 4. Para cada lead: abra o `link_maps` ou o Instagram, **confira a bio**, envie a DM com `mensagem_sugerida` e, quando responder, mande o `link_exemplo`.
 
+## Por que "pedi 50 e vieram 6"
+Cada busca devolve no máximo 20 negócios. Repetir a mesma cidade, ramo e bairros devolve quase os mesmos negócios, e os que já estão na planilha são pulados. Depois ainda caem redes, fechados, fora da faixa de avaliações e quem tem site próprio. O nó **Resumo do funil** (saída "false" do **É lead?**) mostra a conta: encontrados, repetidos, já na planilha, rede, fechados, fora da faixa, com site próprio, aprovados e entregues.
+Para trazer mais leads novos: use mais bairros, marque **Busca ampla = Sim** (usa sinônimos do ramo, mais requisições), troque de cidade, ou alargue a faixa de avaliações.
+
 ## Limites
 - A aba precisa se chamar `leads` e ter o cabeçalho de `planilha-modelo.csv`, com a coluna `place_id`. Sem o cabeçalho, a leitura falha.
 - Não apague a coluna `place_id`: é com ela que o fluxo evita repetir negócios.

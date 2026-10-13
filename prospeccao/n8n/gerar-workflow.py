@@ -5,8 +5,22 @@ import json, os
 
 CODE_BUSCAS = r"""
 const p = $('Parâmetros').first().json;
+const SIN = {
+  'barbearia': ['barbearia', 'barbershop', 'barbeiro'],
+  'salao': ['salão de beleza', 'cabeleireira', 'studio de beleza'],
+  'estetica': ['estética', 'design de sobrancelha', 'depilação', 'lash designer'],
+  'clinica-odontologica': ['clínica odontológica', 'dentista', 'ortodontia'],
+  'petshop': ['pet shop', 'banho e tosa', 'petshop'],
+  'assistencia-tecnica': ['assistência técnica celular', 'conserto de celular', 'assistência técnica notebook'],
+  'restaurante': ['hamburgueria', 'lanchonete', 'delivery'],
+  'personal-academia': ['academia', 'personal trainer', 'studio de treino'],
+  'boutique': ['boutique feminina', 'loja de roupas femininas', 'moda feminina']
+};
+const termos = (p.ampla && SIN[p.modelo]) ? SIN[p.modelo] : [p.ramo];
 const bairros = String(p.bairros || '').split(',').map(s => s.trim()).filter(Boolean);
-const queries = [`${p.ramo} em ${p.cidade}`, ...bairros.map(b => `${p.ramo} ${b} ${p.cidade}`)];
+const locais = [p.cidade, ...bairros.map(b => `${b} ${p.cidade}`)];
+const queries = [];
+for (const t of termos) for (const l of locais) queries.push(`${t} em ${l}`);
 return queries.map(q => ({ json: { query: q } }));
 """.strip()
 
@@ -68,22 +82,26 @@ const hoje = new Date().toISOString().slice(0, 10);
 const jaRegistrados = new Set($('Ler planilha').all().map(i => String(i.json.place_id || '').trim()).filter(Boolean));
 const vistos = new Set();
 const lista = [];
+const c = { buscas: $input.all().length, encontrados: 0, repetidos_na_busca: 0, ja_na_planilha: 0, rede_ou_sem_nome: 0, fechados: 0, fora_da_faixa_de_avaliacoes: 0, com_site_proprio: 0 };
 
 for (const item of $input.all()) {
   for (const l of (item.json.places || [])) {
-    if (!l.id || vistos.has(l.id) || jaRegistrados.has(l.id)) continue;
+    c.encontrados++;
+    if (!l.id) continue;
+    if (vistos.has(l.id)) { c.repetidos_na_busca++; continue; }
     vistos.add(l.id);
+    if (jaRegistrados.has(l.id)) { c.ja_na_planilha++; continue; }
     const nome = l.displayName && l.displayName.text ? l.displayName.text : '';
-    if (!nome || REDE.test(nome)) continue;
-    if (l.businessStatus && l.businessStatus !== 'OPERATIONAL') continue;
+    if (!nome || REDE.test(nome)) { c.rede_ou_sem_nome++; continue; }
+    if (l.businessStatus && l.businessStatus !== 'OPERATIONAL') { c.fechados++; continue; }
     const n = l.userRatingCount || 0;
-    if (n < p.min_avaliacoes || n > p.max_avaliacoes) continue;
+    if (n < p.min_avaliacoes || n > p.max_avaliacoes) { c.fora_da_faixa_de_avaliacoes++; continue; }
 
     const host = hostOf(l.websiteUri || '');
     let statusSite;
     if (!host) statusSite = 'sem site';
     else if (FRACOS.some(f => host === f || host.endsWith('.' + f))) statusSite = 'link fraco (' + host + ')';
-    else continue; // site próprio: fora do perfil
+    else { c.com_site_proprio++; continue; } // site próprio: fora do perfil
 
     let instagram = '';
     if (host === 'instagram.com') {
@@ -116,7 +134,10 @@ for (const item of $input.all()) {
   }
 }
 lista.sort((a, b) => b.qtd_avaliacoes - a.qtd_avaliacoes);
-return lista.slice(0, p.limite).map(j => ({ json: j }));
+const entregues = lista.slice(0, p.limite);
+const resumo = { nome: '__RESUMO__', pedidos: p.limite, ...c, aprovados: lista.length, entregues: entregues.length,
+  dica: entregues.length < p.limite ? 'Poucos leads novos. Aumente a busca: mais bairros, busca ampla (Sim) ou outra cidade. Veja quantos já estavam na planilha e quantos foram descartados.' : 'Meta atingida.' };
+return [...entregues.map(j => ({ json: j })), { json: resumo }];
 """.strip()
 
 COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id","link_whatsapp"]
@@ -143,14 +164,15 @@ wf = {
   {"id": "n1", "name": "Formulário", "type": "n8n-nodes-base.formTrigger", "typeVersion": 2.2, "position": [0, 0],
    "webhookId": "5b0c2f6e-9a41-4d7b-8c3e-7e1f2a6d9b10",
    "parameters": {"authentication": "basicAuth", "formTitle": "Buscar leads",
-     "formDescription": "Escolha o ramo e a cidade. Os leads novos entram na planilha.",
+     "formDescription": "Escolha o ramo e a cidade. Cada busca gasta 1 requisição do Google (cidade + cada bairro, e mais por sinônimo se a busca ampla for Sim). Os leads novos entram na planilha.",
      "formFields": {"values": [
        {"fieldLabel": "Cidade", "placeholder": "Ribeirão Preto, SP", "requiredField": True},
        {"fieldLabel": "Ramo", "fieldType": "dropdown", "requiredField": True, "fieldOptions": {"values": [{"option": o} for o in RAMOS_FORM]}},
        {"fieldLabel": "Bairros", "placeholder": "Centro, Jardim Sumaré (opcional, separados por vírgula)"},
        {"fieldLabel": "Mínimo de avaliações", "fieldType": "number", "placeholder": "10"},
        {"fieldLabel": "Máximo de avaliações", "fieldType": "number", "placeholder": "300"},
-       {"fieldLabel": "Quantidade de leads", "fieldType": "number", "placeholder": "30"}]},
+       {"fieldLabel": "Quantidade de leads", "fieldType": "number", "placeholder": "30"},
+       {"fieldLabel": "Busca ampla", "fieldType": "dropdown", "fieldOptions": {"values": [{"option": "Não"}, {"option": "Sim"}]}}]},
      "options": {}},
    "credentials": {"httpBasicAuth": {"id": "", "name": "Acesso ao formulário"}}},
   {"id": "n2", "name": "Parâmetros", "type": "n8n-nodes-base.set", "typeVersion": 3.4, "position": [220, 0],
@@ -162,7 +184,8 @@ wf = {
      campo(5, "min_avaliacoes", "={{ Number($json['Mínimo de avaliações']) || 10 }}", "number"),
      campo(6, "max_avaliacoes", "={{ Number($json['Máximo de avaliações']) || 300 }}", "number"),
      campo(7, "limite", "={{ Number($json['Quantidade de leads']) || 30 }}", "number"),
-     campo(8, "planilha_id", "COLE_AQUI_O_ID_DA_PLANILHA")]}, "options": {}}},
+     campo(8, "planilha_id", "COLE_AQUI_O_ID_DA_PLANILHA"),
+     campo(9, "ampla", "={{ $json['Busca ampla'] === 'Sim' }}", "boolean")]}, "options": {}}},
   {"id": "n7", "name": "Ler planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [440, 0],
    "alwaysOutputData": True,
    "parameters": {"resource": "sheet", "operation": "read",
@@ -182,7 +205,12 @@ wf = {
    "credentials": {"httpHeaderAuth": {"id": "", "name": "Google Places API Key"}}},
   {"id": "n5", "name": "Filtrar e montar mensagem", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1100, 0],
    "parameters": {"mode": "runOnceForAllItems", "jsCode": CODE_FILTRO}},
-  {"id": "n8", "name": "Registrar na planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [1320, -120],
+  {"id": "n9", "name": "É lead?", "type": "n8n-nodes-base.if", "typeVersion": 2.2, "position": [1320, 0],
+   "parameters": {"conditions": {"options": {"caseSensitive": True, "leftValue": "", "typeValidation": "strict", "version": 2},
+     "conditions": [{"id": "c1", "leftValue": "={{ $json.nome }}", "rightValue": "__RESUMO__",
+       "operator": {"type": "string", "operation": "notEquals"}}], "combinator": "and"}, "options": {}}},
+  {"id": "n10", "name": "Resumo do funil", "type": "n8n-nodes-base.noOp", "typeVersion": 1, "position": [1540, 260], "parameters": {}},
+  {"id": "n8", "name": "Registrar na planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [1540, -120],
    "parameters": {"resource": "sheet", "operation": "append",
      "documentId": {"__rl": True, "mode": "id", "value": "={{ $('Parâmetros').first().json.planilha_id }}"},
      "sheetName": {"__rl": True, "mode": "name", "value": "leads"},
@@ -192,7 +220,7 @@ wf = {
        "schema": [{"id": c, "displayName": c, "required": False, "defaultMatch": False, "display": True, "type": "string", "canBeUsedToMatch": True} for c in COLUNAS]},
      "options": {}},
    "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets"}}},
-  {"id": "n6", "name": "Gerar CSV", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1.1, "position": [1320, 120],
+  {"id": "n6", "name": "Gerar CSV", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1.1, "position": [1540, 60],
    "parameters": {"operation": "csv", "options": {"fileName": "leads.csv"}}},
  ],
  "connections": {
@@ -201,7 +229,8 @@ wf = {
   "Ler planilha": {"main": [[{"node": "Gerar buscas", "type": "main", "index": 0}]]},
   "Gerar buscas": {"main": [[{"node": "Google Places", "type": "main", "index": 0}]]},
   "Google Places": {"main": [[{"node": "Filtrar e montar mensagem", "type": "main", "index": 0}]]},
-  "Filtrar e montar mensagem": {"main": [[{"node": "Registrar na planilha", "type": "main", "index": 0}, {"node": "Gerar CSV", "type": "main", "index": 0}]]}},
+  "Filtrar e montar mensagem": {"main": [[{"node": "É lead?", "type": "main", "index": 0}]]},
+  "É lead?": {"main": [[{"node": "Registrar na planilha", "type": "main", "index": 0}, {"node": "Gerar CSV", "type": "main", "index": 0}], [{"node": "Resumo do funil", "type": "main", "index": 0}]]}},
  "settings": {"executionOrder": "v1"}
 }
 
