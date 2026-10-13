@@ -164,6 +164,23 @@ RAMOS = [
 RAMOS_FORM = [r[0] for r in RAMOS]
 MAPA_JS = "{" + ", ".join("'%s': ['%s', '%s']" % r for r in RAMOS) + "}"
 
+CODE_TOPO = r"""
+const p = $('Parâmetros').first().json;
+const COLS = __COLS__;
+const letra = n => { let s = ''; while (n > 0) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; };
+const leads = $input.all().map(i => i.json);
+const n = leads.length;
+if (n === 0) return [];
+const gid = Number(p.aba_gid) || 0;
+const valores = leads.map(l => COLS.map(c => (l[c] === undefined || l[c] === null) ? '' : l[c]));
+return [{ json: {
+  n, planilha_id: p.planilha_id,
+  range: `leads!A2:${letra(COLS.length)}${n + 1}`,
+  insert: { requests: [{ insertDimension: { range: { sheetId: gid, dimension: 'ROWS', startIndex: 1, endIndex: 1 + n }, inheritFromBefore: false } }] },
+  valores
+} }];
+""".strip().replace("__COLS__", json.dumps(COLUNAS, ensure_ascii=False))
+
 def campo(i, nome, valor, tipo="string"):
     return {"id": f"p{i}", "name": nome, "value": valor, "type": tipo}
 
@@ -194,7 +211,8 @@ wf = {
      campo(6, "max_avaliacoes", "={{ Number($json['Máximo de avaliações']) || 300 }}", "number"),
      campo(7, "limite", "={{ Number($json['Quantidade de leads']) || 30 }}", "number"),
      campo(8, "planilha_id", "COLE_AQUI_O_ID_DA_PLANILHA"),
-     campo(9, "ampla", "={{ $json['Busca ampla'] === 'Sim' }}", "boolean")]}, "options": {}}},
+     campo(9, "ampla", "={{ $json['Busca ampla'] === 'Sim' }}", "boolean"),
+     campo(10, "aba_gid", "0")]}, "options": {}}},
   {"id": "n7", "name": "Ler planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [440, 0],
    "alwaysOutputData": True,
    "parameters": {"resource": "sheet", "operation": "read",
@@ -219,16 +237,21 @@ wf = {
      "conditions": [{"id": "c1", "leftValue": "={{ $json.nome }}", "rightValue": "__RESUMO__",
        "operator": {"type": "string", "operation": "notEquals"}}], "combinator": "and"}, "options": {}}},
   {"id": "n10", "name": "Resumo do funil", "type": "n8n-nodes-base.noOp", "typeVersion": 1, "position": [1540, 260], "parameters": {}},
-  {"id": "n8", "name": "Registrar na planilha", "type": "n8n-nodes-base.googleSheets", "typeVersion": 4.5, "position": [1540, -120],
-   "parameters": {"resource": "sheet", "operation": "append",
-     "documentId": {"__rl": True, "mode": "id", "value": "={{ $('Parâmetros').first().json.planilha_id }}"},
-     "sheetName": {"__rl": True, "mode": "name", "value": "leads"},
-     "columns": {"mappingMode": "defineBelow",
-       "value": {c: "={{ $json." + c + " }}" for c in COLUNAS},
-       "matchingColumns": [],
-       "schema": [{"id": c, "displayName": c, "required": False, "defaultMatch": False, "display": True, "type": "string", "canBeUsedToMatch": True} for c in COLUNAS]},
-     "options": {}},
-   "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets"}}},
+  {"id": "n11", "name": "Preparar inserção no topo", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1540, -260],
+   "parameters": {"mode": "runOnceForAllItems", "jsCode": CODE_TOPO}},
+  {"id": "n12", "name": "Abrir linhas no topo", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [1760, -260],
+   "parameters": {"method": "POST",
+     "url": "={{ 'https://sheets.googleapis.com/v4/spreadsheets/' + $json.planilha_id + ':batchUpdate' }}",
+     "authentication": "predefinedCredentialType", "nodeCredentialType": "googleSheetsOAuth2Api",
+     "sendBody": True, "specifyBody": "json", "jsonBody": "={{ JSON.stringify($json.insert) }}", "options": {}},
+   "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets account"}}},
+  {"id": "n13", "name": "Gravar leads no topo", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [1980, -260],
+   "parameters": {"method": "PUT",
+     "url": "={{ 'https://sheets.googleapis.com/v4/spreadsheets/' + $('Preparar inserção no topo').first().json.planilha_id + '/values/' + encodeURIComponent($('Preparar inserção no topo').first().json.range) + '?valueInputOption=RAW' }}",
+     "authentication": "predefinedCredentialType", "nodeCredentialType": "googleSheetsOAuth2Api",
+     "sendBody": True, "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ range: $('Preparar inserção no topo').first().json.range, majorDimension: 'ROWS', values: $('Preparar inserção no topo').first().json.valores }) }}", "options": {}},
+   "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets account"}}},
   {"id": "n6", "name": "Gerar CSV", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1.1, "position": [1540, 60],
    "parameters": {"operation": "csv", "options": {"fileName": "leads.csv"}}},
  ],
@@ -239,7 +262,9 @@ wf = {
   "Gerar buscas": {"main": [[{"node": "Google Places", "type": "main", "index": 0}]]},
   "Google Places": {"main": [[{"node": "Filtrar e montar mensagem", "type": "main", "index": 0}]]},
   "Filtrar e montar mensagem": {"main": [[{"node": "É lead?", "type": "main", "index": 0}]]},
-  "É lead?": {"main": [[{"node": "Registrar na planilha", "type": "main", "index": 0}, {"node": "Gerar CSV", "type": "main", "index": 0}], [{"node": "Resumo do funil", "type": "main", "index": 0}]]}},
+  "É lead?": {"main": [[{"node": "Preparar inserção no topo", "type": "main", "index": 0}, {"node": "Gerar CSV", "type": "main", "index": 0}], [{"node": "Resumo do funil", "type": "main", "index": 0}]]},
+  "Preparar inserção no topo": {"main": [[{"node": "Abrir linhas no topo", "type": "main", "index": 0}]]},
+  "Abrir linhas no topo": {"main": [[{"node": "Gravar leads no topo", "type": "main", "index": 0}]]}},
  "settings": {"executionOrder": "v1"}
 }
 
