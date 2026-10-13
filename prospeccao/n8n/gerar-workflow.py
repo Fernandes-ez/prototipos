@@ -77,6 +77,8 @@ lista.sort((a, b) => b.qtd_avaliacoes - a.qtd_avaliacoes);
 return lista.slice(0, p.limite).map(j => ({ json: j }));
 """.strip()
 
+COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id"]
+
 def campo(i, nome, valor, tipo="string"):
     return {"id": f"p{i}", "name": nome, "value": valor, "type": tipo}
 
@@ -117,7 +119,11 @@ wf = {
    "parameters": {"resource": "sheet", "operation": "append",
      "documentId": {"__rl": True, "mode": "id", "value": "={{ $('Parâmetros').first().json.planilha_id }}"},
      "sheetName": {"__rl": True, "mode": "name", "value": "leads"},
-     "columns": {"mappingMode": "autoMapInputData", "value": None, "matchingColumns": [], "schema": []}, "options": {}},
+     "columns": {"mappingMode": "defineBelow",
+       "value": {c: "={{ $json." + c + " }}" for c in COLUNAS},
+       "matchingColumns": [],
+       "schema": [{"id": c, "displayName": c, "required": False, "defaultMatch": False, "display": True, "type": "string", "canBeUsedToMatch": True} for c in COLUNAS]},
+     "options": {}},
    "credentials": {"googleSheetsOAuth2Api": {"id": "", "name": "Google Sheets"}}},
   {"id": "n6", "name": "Gerar CSV", "type": "n8n-nodes-base.convertToFile", "typeVersion": 1.1, "position": [1320, 120],
    "parameters": {"operation": "csv", "options": {"fileName": "leads.csv"}}},
@@ -133,7 +139,6 @@ wf = {
 }
 
 aqui = os.path.dirname(os.path.abspath(__file__))
-COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id"]
 with open(os.path.join(aqui, "planilha-modelo.csv"), "w", encoding="utf-8") as f:
     f.write(",".join(COLUNAS) + "\n")
 with open(os.path.join(aqui, "buscar-leads.workflow.json"), "w", encoding="utf-8") as f:
