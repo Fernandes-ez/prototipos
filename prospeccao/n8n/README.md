@@ -29,7 +29,7 @@ Filtro aplicado:
 - A aba precisa se chamar `leads` e ter o cabeçalho de `planilha-modelo.csv`, com a coluna `place_id`. Sem o cabeçalho, a leitura falha.
 - Não apague a coluna `place_id`: é com ela que o fluxo evita repetir negócios.
 - Cada busca devolve até 20 resultados. Para mais leads, acrescente bairros.
-- O telefone do Maps (`telefone_maps`) pode não ser WhatsApp. Confirme antes de usar.
+- O telefone do Maps (`telefone_maps`) pode não ser WhatsApp. A coluna `link_whatsapp` só é preenchida para celulares (DDD + 9 dígitos começando com 9) e abre a conversa com a mensagem pronta. Fixos ficam em branco. Confirme que o número é WhatsApp antes de insistir.
 - O Instagram só aparece quando o negócio o cadastrou como site no Google.
 - Para rodar todo dia: troque o nó **Iniciar** por um **Schedule Trigger**.
 - Se mudar o fluxo, edite `gerar-workflow.py` e rode `python3 prospeccao/n8n/gerar-workflow.py`.

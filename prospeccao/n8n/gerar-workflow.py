@@ -57,6 +57,8 @@ for (const item of $input.all()) {
     let msg = `Oi! Vi a ${nome} no Google. Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria?`;
     if (msg.length > 200) msg = `Oi! Criei um modelo de página pra bio do Insta, com ${obj}. Quer ver como ficaria pra vocês?`;
     const msgOk = msg.length >= 100 && msg.length <= 200;
+    const dig = String(l.nationalPhoneNumber || '').replace(/\D/g, '');
+    const linkWa = /^\d{2}9\d{8}$/.test(dig) ? `https://wa.me/55${dig}?text=${encodeURIComponent(msg)}` : '';
 
     lista.push({
       data: hoje, nome, instagram, whatsapp: '', cidade: p.cidade, nicho: p.ramo,
@@ -69,7 +71,8 @@ for (const item of $input.all()) {
       avaliacao: l.rating || '',
       qtd_avaliacoes: n,
       status_site: statusSite,
-      place_id: l.id
+      place_id: l.id,
+      link_whatsapp: linkWa
     });
   }
 }
@@ -77,7 +80,7 @@ lista.sort((a, b) => b.qtd_avaliacoes - a.qtd_avaliacoes);
 return lista.slice(0, p.limite).map(j => ({ json: j }));
 """.strip()
 
-COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id"]
+COLUNAS = ["data","nome","instagram","whatsapp","cidade","nicho","servico_alvo","mensagem_enviada","respondeu","interesse","viu_exemplo","fechou","valor","motivo_perda","observacoes","telefone_maps","mensagem_sugerida","link_exemplo","link_maps","avaliacao","qtd_avaliacoes","status_site","place_id","link_whatsapp"]
 
 def campo(i, nome, valor, tipo="string"):
     return {"id": f"p{i}", "name": nome, "value": valor, "type": tipo}
