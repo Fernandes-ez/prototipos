@@ -10,7 +10,8 @@ Filtro aplicado:
 - Campo `website` vazio ou só Instagram, Linktree, `wa.me`, Facebook, Beacons e similares → **aprovado**. Site próprio → descartado.
 - Pula os negócios cujo `place_id` já está na planilha (assim cada execução traz só leads novos).
 - Sem duplicados, ordenado por nº de avaliações, limitado a `limite` leads.
-- Mensagem em tom de conversa, sem a cara de vendedor: 3 saudações por perfil (barbearia e afins, salão e afins, clínica e afins) × 3 jeitos de abordar (pergunta, "tô montando uns links", "dei uma olhada"). A escolha é fixa por negócio (derivada do `place_id`). A variante usada fica em `observacoes` (V1, V2 ou V3) para você comparar a resposta de cada uma. O nome do Google é encurtado (sem emoji, sem o que vem depois de " - ", maiúsculas corrigidas).
+- Mensagem em tom de conversa, no estilo de 3 a 4 trechos curtos (um por linha), com o link do modelo do ramo e uma pergunta no fim para puxar resposta. Cada negócio recebe uma de 3 abordagens (V1 elogio e exemplo, V2 pergunta e exemplo, V3 bio como primeira impressão), com saudação própria do ramo. A escolha é fixa por negócio (derivada do `place_id`) e a variante usada fica em `observacoes`, para você comparar as respostas. O elogio com nota só aparece quando a nota é 4,5 ou mais com 20 avaliações ou mais. O nome do Google é encurtado (sem emoji, sem o que vem depois de " - ", maiúsculas corrigidas).
+- `link_whatsapp` abre a conversa com todos os trechos em uma mensagem só. Para mandar em mensagens separadas (mais natural), copie linha por linha da coluna `mensagem_sugerida`.
 - Mensagem de 100 a 200 caracteres. Se sair fora, a coluna `observacoes` avisa.
 
 ## Configuração (uma vez)

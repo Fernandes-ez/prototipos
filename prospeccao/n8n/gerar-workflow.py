@@ -15,15 +15,15 @@ const p = $('Parâmetros').first().json;
 const FRACOS = ['instagram.com','linktr.ee','linktree.com','wa.me','api.whatsapp.com','whatsapp.com','facebook.com','fb.com','beacons.ai','bio.link','lnk.bio','taplink.cc','campsite.bio'];
 const REDE = /franquia|franchis|\brede\b|\bunidade\b|\bfilial\b|shopping/i;
 const PERFIS = {
-  'barbearia':            { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'marcar horário', pl: 'barbearias' },
-  'personal-academia':    { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'marcar aula', pl: 'academias e studios' },
-  'assistencia-tecnica':  { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'pedir orçamento', pl: 'assistências técnicas' },
-  'salao':                { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'marcar horário', pl: 'salões' },
-  'estetica':             { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'marcar horário', pl: 'espaços de estética' },
-  'boutique':             { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'ver as peças e pedir', pl: 'lojas de roupa' },
-  'clinica-odontologica': { sauda: ['Olá, tudo bem?', 'Oi, tudo bem?', 'Bom dia!'], acao: 'agendar consulta', pl: 'clínicas' },
-  'petshop':              { sauda: ['Oi, tudo bem?', 'Olá, tudo bem?', 'Oii!'], acao: 'marcar banho e tosa', pl: 'pet shops' },
-  'restaurante':          { sauda: ['Oi, tudo bem?', 'Olá, tudo bem?', 'Boa tarde!'], acao: 'fazer pedido', pl: 'hamburguerias e delivery' }
+  'barbearia':            { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'marcar horário', pl: 'barbearias', um: 'barbearia' },
+  'personal-academia':    { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'marcar aula', pl: 'academias e studios', um: 'academia' },
+  'assistencia-tecnica':  { sauda: ['Fala!', 'E aí!', 'Opa, tudo bem?'], acao: 'pedir orçamento', pl: 'assistências técnicas', um: 'assistência técnica' },
+  'salao':                { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'marcar horário', pl: 'salões', um: 'salão' },
+  'estetica':             { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'marcar horário', pl: 'espaços de estética', um: 'estética' },
+  'boutique':             { sauda: ['Oi, tudo bem?', 'Oii!', 'Olá, tudo bem?'], acao: 'ver as peças e pedir', pl: 'lojas de roupa', um: 'loja de roupa' },
+  'clinica-odontologica': { sauda: ['Olá, tudo bem?', 'Oi, tudo bem?', 'Bom dia!'], acao: 'agendar consulta', pl: 'clínicas', um: 'clínica' },
+  'petshop':              { sauda: ['Oi, tudo bem?', 'Olá, tudo bem?', 'Oii!'], acao: 'marcar banho e tosa', pl: 'pet shops', um: 'pet shop' },
+  'restaurante':          { sauda: ['Oi, tudo bem?', 'Olá, tudo bem?', 'Boa tarde!'], acao: 'fazer pedido', pl: 'hamburguerias e delivery', um: 'hamburgueria' }
 };
 const perfil = PERFIS[p.modelo] || PERFIS['salao'];
 const MAIUSC = /^[^a-zà-ú]*$/;
@@ -41,16 +41,27 @@ const curto = n => {
   return t;
 };
 const soma = str => Array.from(String(str)).reduce((a, c) => a + c.charCodeAt(0), 0);
-const montarMsg = (nomeCurto, id) => {
+const montarMsg = (nomeCurto, id, rating, avaliacoes, link) => {
   const h = soma(id);
   const sauda = perfil.sauda[h % perfil.sauda.length];
   const v = Math.floor(h / 3) % 3;
-  const textos = [
-    `${sauda} Vi a ${nomeCurto} aqui no Google e curti. Hoje o pessoal costuma ${perfil.acao} por onde, direct ou WhatsApp?`,
-    `${sauda} Tô montando uns links pra bio do Insta de ${perfil.pl} aqui da região, onde o cliente já cai pra ${perfil.acao}. Posso te mandar um exemplo?`,
-    `${sauda} Dei uma olhada na ${nomeCurto} e achei que a bio do Insta podia facilitar mais pro cliente ${perfil.acao}. Posso te mandar uma ideia rápida?`
+  const elogio = (rating >= 4.5 && avaliacoes >= 20) ? `, nota ${String(rating).replace('.', ',')} com ${avaliacoes} avaliações` : '';
+  const variantes = [
+    [`${sauda} Vi a ${nomeCurto} aqui no Google${elogio}. Parabéns pelo trabalho.`,
+     `Eu faço páginas pra bio do Insta de ${perfil.pl}, onde o cliente já cai pra ${perfil.acao} direto no WhatsApp.`,
+     `Montei um exemplo de ${perfil.um}, dá uma olhada: ${link}`,
+     `Me conta o que achou?`],
+    [`${sauda} Vi a ${nomeCurto} aqui no Google.`,
+     `Hoje o pessoal costuma ${perfil.acao} por onde, direct ou WhatsApp?`,
+     `Pergunto porque tenho um exemplo de página de ${perfil.um} que resolve isso: ${link}`,
+     `Se curtir, eu adapto pra vocês.`],
+    [`${sauda} Achei a ${nomeCurto} aqui no Google.`,
+     `A bio do Insta é o primeiro lugar que o cliente vê, e dá pra ela já levar direto pra ${perfil.acao}.`,
+     `Fiz um exemplo de ${perfil.um}, sem compromisso: ${link}`,
+     `O que achou?`]
   ];
-  return { texto: textos[v], variante: 'V' + (v + 1) };
+  const trechos = variantes[v];
+  return { trechos, texto: trechos.join('\n'), semLink: trechos.join(' ').replace(link, '').trim(), variante: 'V' + (v + 1) };
 };
 const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; } };
 const hoje = new Date().toISOString().slice(0, 10);
@@ -81,19 +92,20 @@ for (const item of $input.all()) {
     }
 
     const nomeCurto = curto(nome);
-    const gerado = montarMsg(nomeCurto, l.id);
+    const linkExemplo = `https://demo.ezf-tech.com/modelo-${p.modelo}/`;
+    const gerado = montarMsg(nomeCurto, l.id, l.rating, l.userRatingCount, linkExemplo);
     let msg = gerado.texto;
-    const msgOk = msg.length >= 100 && msg.length <= 200;
+    const msgOk = gerado.semLink.length >= 100 && gerado.semLink.length <= 300;
     const dig = String(l.nationalPhoneNumber || '').replace(/\D/g, '');
     const linkWa = /^\d{2}9\d{8}$/.test(dig) ? `https://wa.me/55${dig}?text=${encodeURIComponent(msg)}` : '';
 
     lista.push({
       data: hoje, nome, instagram, whatsapp: '', cidade: p.cidade, nicho: p.ramo,
       servico_alvo: 'biosite', mensagem_enviada: '', respondeu: '', interesse: '', viu_exemplo: '',
-      fechou: '', valor: '', motivo_perda: '', observacoes: ('variante ' + gerado.variante + (msgOk ? '' : ' | mensagem fora de 100-200 caracteres')),
+      fechou: '', valor: '', motivo_perda: '', observacoes: ('variante ' + gerado.variante + (msgOk ? '' : ' | mensagem fora do tamanho')),
       telefone_maps: l.nationalPhoneNumber || '',
       mensagem_sugerida: msg,
-      link_exemplo: `https://demo.ezf-tech.com/modelo-${p.modelo}/`,
+      link_exemplo: linkExemplo,
       link_maps: l.googleMapsUri || '',
       avaliacao: l.rating || '',
       qtd_avaliacoes: n,
