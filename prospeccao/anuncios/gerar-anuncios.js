@@ -134,7 +134,7 @@ const pecasSite = [
     list: ['IA com as regras do seu negócio', 'passa para a pessoa certa', 'painel com leads e histórico'] })],
   ['site-7-agendamento', lightPage({ label: 'Agendamento online', h1: 'Seu cliente marca<br>horário ' + em('sozinho') + '.',
     url: 'agende seu horário', heroTitle: 'Escolha<br>seu horário', heroSub: 'serviço · dia · horário', heroBtn: 'Agendar',
-    rowText: ['seu nome', 'seu WhatsApp'], chip: 'a partir de R$ 790<br>+ R$ 79/mês',
+    rowText: ['seu nome', 'seu WhatsApp'], chip: 'R$ 99/mês<br>sem implantação',
     callouts: [{ x: 585, y: 827, t: 'a cara da sua marca' }, { x: 460, y: 954, t: 'agenda do dia' }, { x: 350, y: 1073, t: 'confirma no WhatsApp' }] })],
   ['site-8-sistema', darkPage({ label: 'Sistema sob medida', h1: 'Sua operação<br>fora da<br><em>{</em><span>planilha</span><em>}</em>.',
     btn: 'Conversar sobre o meu sistema', contact: [WHATS, 'ezf-tech.com'], tag: 'a partir de R$ 3.900',

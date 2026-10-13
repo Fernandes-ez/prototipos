@@ -1,0 +1,24 @@
+--- a/src/data/precos.ts	2026-10-13 20:38:34.964253254 +0000
++++ b/src/data/precos.ts	2026-10-13 20:38:34.978812209 +0000
+@@ -17,7 +17,7 @@
+ export const aPartirDe = {
+   site: 'a partir de R$ 790',
+   automacao: 'a partir de R$ 690',
+-  sistema: 'a partir de R$ 790',
++  sistema: 'a partir de R$ 99/mês',
+ }
+ 
+ export const pacotesSites: Pacote[] = [
+@@ -120,9 +120,9 @@
+   {
+     nome: 'Agendamento online',
+     descricao: 'Seus clientes marcam horário sozinhos, e você acompanha tudo num painel.',
+-    preco: 'R$ 790',
+-    aPartirDe: true,
+-    condicoes: '+ R$ 79/mês',
++    preco: 'R$ 99/mês',
++    aPartirDe: false,
++    condicoes: 'sem implantação',
+     itens: [
+       'Página de agendamento com a cara da sua marca',
+       'Painel com a agenda do dia e os cadastros dos clientes',

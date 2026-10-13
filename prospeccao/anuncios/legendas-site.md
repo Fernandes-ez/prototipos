@@ -116,13 +116,13 @@ Arte: `site/7-agendamento.png`
 
 Seu cliente marca horário sozinho, e você acompanha tudo num painel: agenda do dia, cadastro dos clientes e confirmação do horário no WhatsApp. A página de agendamento fica com a cara da sua marca.
 
-A partir de R$ 790, mais R$ 79/mês.
+R$ 99/mês, sem implantação.
 
 Me chama no WhatsApp: https://wa.me/5511991084238?text=Oi%2C%20Enzo%21%20Tenho%20interesse%20no%20pacote%20Agendamento%20online.
 
 **Curta (para grupos)**
 
-Página de agendamento com a sua marca, painel com a agenda do dia e confirmação no WhatsApp. A partir de R$ 790 + R$ 79/mês. https://wa.me/5511991084238?text=Oi%2C%20Enzo%21%20Tenho%20interesse%20no%20pacote%20Agendamento%20online.
+Página de agendamento com a sua marca, painel com a agenda do dia e confirmação no WhatsApp. R$ 99/mês, sem implantação. https://wa.me/5511991084238?text=Oi%2C%20Enzo%21%20Tenho%20interesse%20no%20pacote%20Agendamento%20online.
 
 ---
 
