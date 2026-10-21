@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #080808;
+    background-color: #FFFDF5;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-brand {
+    font-family: 'Outfit', 'Fredoka', sans-serif;
+  }
+}
+
+@layer utilities {
+  .uau-bang {
+    display: inline-block;
+    transform: rotate(9deg);
+    transform-origin: bottom center;
+  }
+}
