@@ -5,10 +5,10 @@ import {
   Clock,
   ShieldCheck,
   Heart,
-  Stethoscope,
   Scissors,
-  Truck,
-  Smile,
+  ShoppingBag,
+  Pill,
+  Bone,
   Star,
   MapPin,
   Phone,
@@ -19,8 +19,6 @@ import {
   ArrowUpRight,
   PawPrint,
   Droplets,
-  Music,
-  Camera,
   Gift,
   Menu,
   X,
@@ -35,161 +33,192 @@ import {
   PopSparkle
 } from './components/BrandIcons'
 
+const WHATSAPP_NUMBER = '551122806929'
+const WHATSAPP_DISPLAY = '(11) 2280-6929'
+const INSTAGRAM_URL = 'https://www.instagram.com/petuauoficial/'
+const MAPS_URL =
+  'https://www.google.com/maps/search/?api=1&query=Rua+Piraquara+36+Jardim+Nordeste+Sao+Paulo'
+
+function getWhatsAppUrl(message) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+}
+
 const MARQUEE_ITEMS = [
   { text: 'BANHO & TOSA', color: 'text-[#F9D957]' },
-  { text: 'VETERINÁRIO', color: 'text-[#64BDD1]' },
-  { text: 'DAYCARE', color: 'text-[#F9D957]' },
-  { text: 'BOUTIQUE PET', color: 'text-[#64BDD1]' },
-  { text: 'ESTÉTICA ANIMAL', color: 'text-[#F9D957]' },
-  { text: 'TÁXI PET SEGURO', color: 'text-[#64BDD1]' },
+  { text: 'RAÇÕES & PETISCOS', color: 'text-[#64BDD1]' },
+  { text: 'PERFUMARIA PET', color: 'text-[#F9D957]' },
+  { text: 'FARMÁCIA', color: 'text-[#64BDD1]' },
+  { text: 'ACESSÓRIOS', color: 'text-[#F9D957]' },
 ]
 
 const SERVICES_BENTO = [
   {
     id: 'banho',
     span: 'lg:col-span-7',
-    badge: 'MAIS PEDIDO!',
+    badge: 'CARINHO & CAPRICHO!',
     badgeBg: 'bg-[#64BDD1]',
     hoverBg: 'hover:bg-[#F9D957]',
     defaultBg: 'bg-[#FFFDF5]',
     accentPill: 'bg-[#64BDD1]',
     icon: Scissors,
-    title: 'banho & tosa relaxante',
-    subtitle: 'Spa completo com água morna ozonizada, cromoterapia, toalhas aquecidas e zero gaiolas de espera.',
-    highlights: ['Shampoo Vegano Hipoalergênico', 'Secagem Silenciosa', 'Bandana Exclusiva Pet Uau!'],
-    priceHint: 'A partir de R$ 65',
-    duration: '45–90 min',
-    petImage: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=700&q=80',
-    petAlt: 'Golden Retriever sorrindo após banho'
+    title: 'banho & tosa',
+    subtitle:
+      'Banho quentinho com produtos de qualidade, secagem cuidadosa, tosa higiênica, tosa na máquina ou tesoura e aquele cheirinho que todo tutor ama.',
+    highlights: [
+      'Banho & Secagem Cuidadosa',
+      'Tosa Higiênica e Completa',
+      'Corte de Unhas & Limpeza de Ouvidos',
+    ],
+    ctaLabel: 'Agendar Banho e Tosa',
+    whatsappText:
+      'Olá Pet Uau! Vim pelo site e gostaria de agendar um horário de Banho e Tosa.',
+    petImage:
+      'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=700&q=80',
+    petAlt: 'Cachorro feliz após banho e tosa'
   },
   {
-    id: 'vet',
+    id: 'racoes',
     span: 'lg:col-span-5',
-    badge: 'CLÍNICA FEAR-FREE',
+    badge: 'NUTRIÇÃO & SABOR',
     badgeBg: 'bg-[#F9D957]',
     hoverBg: 'hover:bg-[#64BDD1]',
     defaultBg: 'bg-[#FFFDF5]',
     accentPill: 'bg-[#F9D957]',
-    icon: Stethoscope,
-    title: 'consultório vet',
-    subtitle: 'Consultas sem pressa, vacinas importadas, check-up preventivo e salas separadas para cães e gatos.',
-    highlights: ['Consultório Cat-Friendly', 'Vacinas Importadas V10/V5', 'Prontuário Digital no App'],
-    priceHint: 'Consulta + Check-up',
-    duration: 'Atendimento humanizado',
-    petImage: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80',
-    petAlt: 'Gato curioso sendo examinado com carinho'
+    icon: Bone,
+    title: 'rações & petiscos',
+    subtitle:
+      'Variedade de rações para cães e gatos de todos os portes e idades, além de sachês, bifinhos, ossinhos e petiscos irresistíveis.',
+    highlights: [
+      'Rações Secas & Úmidas',
+      'Petiscos, Bifinhos & Sachês',
+      'Opções Filhotes, Adultos e Sênior',
+    ],
+    ctaLabel: 'Consultar Rações no WhatsApp',
+    whatsappText:
+      'Olá Pet Uau! Vim pelo site e quero consultar opções de ração e petiscos.',
+    petImage:
+      'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=600&q=80',
+    petAlt: 'Cachorrinho esperando petisco'
   },
   {
-    id: 'daycare',
+    id: 'perfumaria',
     span: 'lg:col-span-5',
-    badge: 'ENERGIA BOA!',
+    badge: 'ESTILO & CHEIRINHO!',
     badgeBg: 'bg-[#F9D957]',
     hoverBg: 'hover:bg-[#64BDD1]',
     defaultBg: 'bg-[#FFFDF5]',
     accentPill: 'bg-[#F9D957]',
-    icon: Smile,
-    title: 'creche & diversão (daycare)',
-    subtitle: 'Pátio gramado, enriquecimento ambiental, festinhas temáticas, hora da soneca com música clássica e fotos no WhatsApp.',
-    highlights: ['Câmeras Ao Vivo', 'Monitores Comportamentais', 'Boletim Diário do Tutor'],
-    priceHint: 'Diária ou Passaporte',
-    duration: '07h30 às 19h30',
-    petImage: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80',
-    petAlt: 'Dois cães brincando felizes'
+    icon: ShoppingBag,
+    title: 'perfumaria & acessórios',
+    subtitle:
+      'Colônias deliciosas, shampoos, hidratantes, coleiras, guias, peitorais, caminhas, comedouros, brinquedos e roupinhas cheias de personalidade.',
+    highlights: [
+      'Colônias & Linha de Higiene',
+      'Coleiras, Guias e Caminhas',
+      'Brinquedos & Acessórios',
+    ],
+    ctaLabel: 'Ver Perfumaria e Acessórios',
+    whatsappText:
+      'Olá Pet Uau! Vim pelo site e gostaria de ver opções de perfumaria e acessórios.',
+    petImage:
+      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80',
+    petAlt: 'Gatinho estiloso'
   },
   {
-    id: 'delivery',
+    id: 'farmacia',
     span: 'lg:col-span-7',
-    badge: 'ENTREGA EM 45 MIN!',
+    badge: 'PROTEÇÃO EM DIA!',
     badgeBg: 'bg-[#64BDD1]',
     hoverBg: 'hover:bg-[#F9D957]',
     defaultBg: 'bg-[#FFFDF5]',
     accentPill: 'bg-[#64BDD1]',
-    icon: Truck,
-    title: 'delivery express de ração & mimos',
-    subtitle: 'Acabou o sachê ou o antipulgas? Pediu pelo WhatsApp, chegou voando na sua porta com um biscoito artesanal de brinde!',
-    highlights: ['Rações Super Premium & Naturais', 'Farmácia Vet Completa', 'Frete Grátis no Bairro'],
-    priceHint: 'Entrega Flash 45min',
-    duration: 'Seg a Sáb • 8h às 20h',
-    petImage: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=700&q=80',
-    petAlt: 'Cachorrinho fofo esperando petisco'
+    icon: Pill,
+    title: 'farmácia pet',
+    subtitle:
+      'Antipulgas e carrapatos, vermífugos, vitaminas, suplementos e produtos de cuidado essencial para manter seu melhor amigo sempre protegido.',
+    highlights: [
+      'Antipulgas & Carrapatos',
+      'Vermífugos & Vitaminas',
+      'Higiene Bucal e Auricular',
+    ],
+    ctaLabel: 'Pedir Item da Farmácia',
+    whatsappText:
+      'Olá Pet Uau! Vim pelo site e preciso de um produto da farmácia pet.',
+    petImage:
+      'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=700&q=80',
+    petAlt: 'Cães saudáveis e protegidos'
   }
 ]
 
-const ESPACO_ZONES = [
+const STORE_HIGHLIGHTS = [
   {
-    id: 'visor',
-    tag: '100% Transparente',
-    title: 'vitrine panorâmica uau!',
-    desc: 'Aqui não tem porta fechada! Nosso centro de estética tem parede de vidro do chão ao teto e câmeras HD para você assistir ao banho tomando um café.',
-    stat: 'Zero Gaiolas',
+    id: 'banho-tosa',
+    tag: 'Destaque #1',
+    title: 'estética banho & tosa!',
+    desc: 'Seu pet tratado com paciência, produtos cheirosos, secagem na temperatura certa e acabamento caprichado com lacinho ou gravatinha.',
+    stat: 'Com Hora Marcada',
     bg: 'bg-[#F9D957]',
     img: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=80'
   },
   {
-    id: 'cat',
-    tag: 'Exclusivo Felinos',
-    title: 'suíte cat-friendly com feromônios',
-    desc: 'Gatos odeiam barulho de secador alto e latidos. Criamos uma ala 100% isolada acusticamente com difusor Feliway, prateleiras verticais e veterinários especialistas em felinos.',
-    stat: 'Silêncio 35dB',
+    id: 'racoes-petiscos',
+    tag: 'Destaque #2',
+    title: 'ração, sachês & petiscos!',
+    desc: 'Trabalhamos com as marcas que seu cão ou gato mais gosta. Não sabe qual escolher? Nossa equipe ajuda a indicar a ideal para a idade e porte dele!',
+    stat: 'Nutrição Completa',
     bg: 'bg-[#64BDD1]',
-    img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80'
+    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80'
   },
   {
-    id: 'jardim',
-    tag: 'Ar Livre & Solzinho',
-    title: 'arena recreativa & splash pad',
-    desc: 'Piso drenante antiderrapante, brinquedos cognitivos, chafariz refrescante para os dias quentes e separação rigorosa por porte e energia.',
-    stat: '320m² de Diversão',
+    id: 'perfumaria-acessorios',
+    tag: 'Destaque #3',
+    title: 'perfumaria, farmácia & mimos!',
+    desc: 'De antipulgas e vermífugos até colônias irresistíveis, brinquedos resistentes, guias e caminhas fofinhas na nossa loja no Jardim Nordeste.',
+    stat: 'Loja Completa',
     bg: 'bg-[#F9D957]',
-    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80'
+    img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80'
   }
 ]
 
 const CLUB_PLANS = [
   {
-    name: 'clube cheiroso!',
-    frequency: '2 banhos por mês (Quinzenal)',
-    price: 'R$ 139',
-    period: '/mês',
+    name: 'pacote quinzenal!',
+    frequency: '2 banhos por mês',
     color: 'bg-[#FFFDF5]',
-    badge: 'IDEAL PARA PELO CURTO',
+    badge: 'SEMPRE CHEIROSO',
     badgeBg: 'bg-[#64BDD1]',
     perks: [
-      '2 Banhos Relaxantes com Ozônio',
-      '1 Tosa Higiênica + Corte de Unhas/mês',
-      '10% OFF em toda a Boutique & Rações',
-      '1 Dia de Daycare Grátis no aniversário'
+      '2 Banhos Caprichados no mês',
+      'Corte de Unhas + Limpeza de Ouvidos',
+      'Finalização com Perfume & Lacinho/Bandana',
+      'Horários fixos garantidos na agenda'
     ]
   },
   {
-    name: 'clube super uau!',
-    frequency: '4 banhos por mês (Semanal)',
-    price: 'R$ 239',
-    period: '/mês',
+    name: 'pacote semanal uau!',
+    frequency: '4 banhos por mês (1 por semana)',
     color: 'bg-[#F9D957]',
     featured: true,
-    badge: 'CAMPEÃO DE ASSINATURAS ★',
+    badge: 'O MAIS ESCOLHIDO ★',
     badgeBg: 'bg-[#64BDD1]',
     perks: [
-      '4 Banhos Relaxantes + Escovação de Dentes',
-      'Hidratação Profunda de Aveia & Mel inclusa',
-      '1 Consulta Veterinária Preventiva/semestre',
-      'Táxi Pet com 50% OFF + Mimos surpresa todo mês'
+      '4 Banhos Completos no mês',
+      '1 Tosa Higiênica inclusa no pacote',
+      'Hidratação especial para pelagem macia',
+      'Corte de Unhas, Limpeza de Ouvidos & Perfume'
     ]
   },
   {
-    name: 'clube vip vet & spa!',
-    frequency: 'Cuidado integral + Daycare',
-    price: 'R$ 389',
-    period: '/mês',
+    name: 'combo banho & tosa!',
+    frequency: 'Estética completa sob medida',
     color: 'bg-[#FFFDF5]',
-    badge: 'TUDO INCLUSO',
+    badge: 'VISUAL RENOVADO',
     badgeBg: 'bg-[#F9D957]',
     perks: [
-      '4 Banhos + 1 Tosa na Tesoura ou Máquina',
-      '4 Diárias de Creche (Daycare) por mês',
-      'Consultas Vet Ilimitadas em horário comercial',
-      'Delivery Express Grátis ilimitado'
+      'Banho Completo + Desembolo cuidadoso',
+      'Tosa na Máquina ou na Tesoura',
+      'Tosa Higiênica + Acabamento de patinhas',
+      'Perfumaria Pet Uau! de longa duração'
     ]
   }
 ]
@@ -198,63 +227,52 @@ const TESTIMONIALS = [
   {
     id: 1,
     petName: 'Paçoca',
-    petBreed: 'Vira-lata Caramelo • 3 anos',
-    tutorName: 'Mariana Costa',
-    quote: 'O Paçoca tremia só de passar na calçada de outros petshops. Na pet uau! ele entra puxando a guia pra ganhar biscoito e sai cheirando a talco de bebê feliz da vida!',
-    tag: 'Banho & Tosa Semanal',
+    petBreed: 'Cachorro • Cliente de Banho e Tosa',
+    tutorName: 'Cliente Jardim Nordeste',
+    quote: 'Levo meu doguinho toda semana e ele volta sempre super cheiroso, com o pelo macio e gravatinha linda. Atendimento nota mil da equipe!',
+    tag: 'Banho & Tosa',
     bubbleBg: 'bg-[#FFFDF5]',
     avatar: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80'
   },
   {
     id: 2,
-    petName: 'Mingau & Bento',
-    petBreed: 'Gatos SRD • 2 e 5 anos',
-    tutorName: 'Lucas Andrade',
-    quote: 'A sala exclusiva de gatos é surreal! Levei o Mingau pra vacinar e fazer banho a seco e ele literalmente ronronou no colo da Dra. Bia. Atendimento nota mil!',
-    tag: 'Consultório Cat-Friendly',
+    petName: 'Mingau',
+    petBreed: 'Gato • Ração e Farmácia',
+    tutorName: 'Tutora do Bairro',
+    quote: 'Encontro tudo o que preciso na Rua Piraquara! Ração, sachê, antipulgas e acessórios com ótimo atendimento e muita simpatia.',
+    tag: 'Rações & Farmácia',
     bubbleBg: 'bg-[#F9D957]',
     avatar: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=300&q=80'
   },
   {
     id: 3,
-    petName: 'Margot',
-    petBreed: 'Bulldog Francês • 4 anos',
-    tutorName: 'Fernanda Ribeiro',
-    quote: 'A calculadora do site acertou em cheio o tempo do banho! Recebi foto dela de roupão amarelo no WhatsApp e quando busquei já estava pronta e super calma.',
-    tag: 'Clube Super Uau!',
+    petName: 'Mel',
+    petBreed: 'Shih-tzu • Banho & Tosa',
+    tutorName: 'Cliente Fiel Pet Uau!',
+    quote: 'A tosa da Mel fica impecável! Dá pra ver o cuidado e o carinho que eles têm com os bichinhos desde a hora que a gente chega na loja.',
+    tag: 'Tosa Caprichada',
     bubbleBg: 'bg-[#FFFDF5]',
     avatar: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80'
   }
 ]
 
 export default function App() {
-  // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Interactive Calculator State
   const [petType, setPetType] = useState('dog') // 'dog' | 'cat'
   const [petSize, setPetSize] = useState('medio') // 'pequeno' | 'medio' | 'grande'
   const [coatType, setCoatType] = useState('medio') // 'curto' | 'medio' | 'longo'
-  const [selectedAddons, setSelectedAddons] = useState(['hidratacao'])
+  const [selectedAddons, setSelectedAddons] = useState(['higienica'])
 
-  // Interactive Espaço Uau tab
-  const [activeZone, setActiveZone] = useState('visor')
-
-  // Interactive Booking Modal state
-  const [bookingModal, setBookingModal] = useState({
-    open: false,
-    presetSummary: '',
-    petName: '',
-    tutorPhone: '',
-    preferredTime: 'Hoje à tarde (14h–17h)',
-    submitted: false
-  })
+  // Active highlight tab
+  const [activeZone, setActiveZone] = useState('banho-tosa')
 
   const ADDONS = [
-    { id: 'hidratacao', label: 'Hidratação de Aveia', minutes: 15, price: 25 },
-    { id: 'higienica', label: 'Tosa Higiênica', minutes: 20, price: 30 },
-    { id: 'unhas', label: 'Unhas + Limpeza Ouvidos', minutes: 10, price: 18 },
-    { id: 'taxipet', label: 'Táxi Pet Uau!', minutes: 0, price: 22 }
+    { id: 'higienica', label: 'Tosa Higiênica', minutes: 20 },
+    { id: 'hidratacao', label: 'Hidratação nos Pelos', minutes: 15 },
+    { id: 'tosa', label: 'Tosa Geral (Máquina/Tesoura)', minutes: 35 },
+    { id: 'unhas', label: 'Corte de Unhas + Ouvidos', minutes: 10 },
   ]
 
   const toggleAddon = (id) => {
@@ -263,7 +281,6 @@ export default function App() {
     )
   }
 
-  // Real-time Bath Estimate Calculation
   const calculation = useMemo(() => {
     const baseMinutesMap = {
       dog: { pequeno: 40, medio: 55, grande: 75 },
@@ -274,25 +291,14 @@ export default function App() {
       medio: 15,
       longo: 30
     }
-    const basePriceMap = {
-      dog: { pequeno: 65, medio: 85, grande: 115 },
-      cat: { pequeno: 75, medio: 90, grande: 110 }
-    }
-    const coatPriceMap = {
-      curto: 0,
-      medio: 15,
-      longo: 30
-    }
 
     let totalMinutes =
       baseMinutesMap[petType][petSize] + coatMinutesMap[coatType]
-    let totalPrice = basePriceMap[petType][petSize] + coatPriceMap[coatType]
 
     selectedAddons.forEach((addonId) => {
       const found = ADDONS.find((a) => a.id === addonId)
       if (found) {
         totalMinutes += found.minutes
-        totalPrice += found.price
       }
     })
 
@@ -309,29 +315,23 @@ export default function App() {
     }[coatType]
 
     const petLabel = petType === 'dog' ? 'Cachorro' : 'Gato'
+    const addonsNames = ADDONS.filter((a) => selectedAddons.includes(a.id)).map(
+      (a) => a.label
+    )
+
+    const whatsappMessage = `Olá Pet Uau! Simulei na Calculadora do site:\n• Pet: ${petLabel}\n• Porte: ${sizeLabel}\n• Pelagem: ${coatLabel}${
+      addonsNames.length ? `\n• Adicionais: ${addonsNames.join(', ')}` : ''
+    }\n• Tempo estimado: ~${totalMinutes} min\nGostaria de consultar valores e horários disponíveis!`
 
     return {
       totalMinutes,
-      totalPrice,
       petLabel,
       sizeLabel,
       coatLabel,
-      addonsNames: ADDONS.filter((a) => selectedAddons.includes(a.id)).map(
-        (a) => a.label
-      )
+      addonsNames,
+      whatsappMessage
     }
   }, [petType, petSize, coatType, selectedAddons])
-
-  const openBookingWithContext = (summaryText) => {
-    setBookingModal({
-      open: true,
-      presetSummary: summaryText,
-      petName: '',
-      tutorPhone: '',
-      preferredTime: 'Hoje à tarde (14h–17h)',
-      submitted: false
-    })
-  }
 
   return (
     <div className="min-h-screen bg-[#FFFDF5] text-[#080808] relative">
@@ -356,9 +356,9 @@ export default function App() {
           <div className="hidden md:flex items-center gap-1 lg:gap-2 font-brand font-bold text-base lowercase">
             {[
               { href: '#servicos', label: 'serviços' },
-              { href: '#calculadora', label: 'calculadora uau!' },
-              { href: '#espaco', label: 'espaço uau' },
-              { href: '#clube', label: 'clube de assinatura' },
+              { href: '#calculadora', label: 'calculadora' },
+              { href: '#espaco', label: 'nossa loja' },
+              { href: '#clube', label: 'pacotes de banho' },
               { href: '#avaliacoes', label: 'avaliações' },
             ].map((item) => (
               <a
@@ -373,17 +373,17 @@ export default function App() {
 
           {/* Botão CTA à direita */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() =>
-                openBookingWithContext(
-                  'Agendamento Rápido de Banho & Spa Pet Uau!'
-                )
-              }
+            <a
+              href={getWhatsAppUrl(
+                'Olá Pet Uau! Vim pelo site e quero agendar um Banho!'
+              )}
+              target="_blank"
+              rel="noreferrer"
               className="bg-[#64BDD1] text-[#080808] font-brand font-extrabold text-sm sm:text-base px-4 sm:px-6 py-2.5 rounded-full border-[2.5px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4 shrink-0" strokeWidth={2.5} />
               <span>Agendar Banho!</span>
-            </button>
+            </a>
 
             {/* Botão Menu Mobile */}
             <button
@@ -407,8 +407,8 @@ export default function App() {
               {[
                 { href: '#servicos', label: '🐾 serviços' },
                 { href: '#calculadora', label: '🛁 calculadora de banho' },
-                { href: '#espaco', label: '✨ espaço uau' },
-                { href: '#clube', label: '👑 clube de assinatura' },
+                { href: '#espaco', label: '🏪 nossa loja' },
+                { href: '#clube', label: '✨ pacotes de banho' },
                 { href: '#avaliacoes', label: '💬 avaliações' },
               ].map((item) => (
                 <a
@@ -432,7 +432,6 @@ export default function App() {
         id="topo"
         className="relative bg-[#F9D957] pt-32 pb-20 lg:pt-36 lg:pb-24 px-4 sm:px-6 lg:px-8 border-b-[3px] border-[#080808] overflow-hidden"
       >
-        {/* Padrão sutil Pop-Art no fundo */}
         <div
           className="absolute inset-0 opacity-[0.07] pointer-events-none"
           style={{
@@ -442,16 +441,16 @@ export default function App() {
         />
 
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Coluna Esquerda: Copywriting & CTAs */}
+          {/* Coluna Esquerda */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Badge estilo Sticker */}
             <div className="inline-flex items-center gap-2.5 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-4 py-2 shadow-[4px_4px_0px_0px_#080808] -rotate-1 hover:rotate-0 transition-transform mb-6">
               <span className="text-lg">🐾</span>
               <span className="font-brand font-extrabold text-sm sm:text-base tracking-tight">
-                O petshop mais feliz do bairro
+                O petshop mais feliz do Jardim Nordeste
               </span>
-              <span className="bg-[#64BDD1] border-2 border-[#080808] rounded-full px-2 py-0.5 text-xs font-black uppercase">
-                4.9 ★ Google
+              <span className="bg-[#64BDD1] border-2 border-[#080808] rounded-full px-2.5 py-0.5 text-xs font-black">
+                Rua Piraquara, 36
               </span>
             </div>
 
@@ -464,25 +463,25 @@ export default function App() {
               </span>
             </h1>
 
-            {/* Subtítulo Curto */}
+            {/* Subtítulo Curto com o que oferecem de verdade */}
             <p className="text-lg sm:text-xl font-semibold text-[#080808]/90 max-w-xl leading-relaxed mb-8">
-              Banho & spa sem gaiolas, clínica veterinária <strong className="font-extrabold underline decoration-[3px] decoration-[#64BDD1] underline-offset-4">fear-free</strong> e creche divertida onde seu melhor amigo abana o rabo desde a calçada!
+              <strong className="font-extrabold">Banho e Tosa</strong> cheio de carinho, <strong className="font-extrabold">Rações e Petiscos</strong>, <strong className="font-extrabold">Perfumaria</strong>, <strong className="font-extrabold">Farmácia</strong> e <strong className="font-extrabold">Acessórios</strong> para o seu pet sair abanando o rabo!
             </p>
 
-            {/* Dois Botões de Ação (CTA Principal WhatsApp + Secundário Serviços) */}
+            {/* Dois Botões de Ação */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-10">
-              <button
-                onClick={() =>
-                  openBookingWithContext(
-                    'Quero agendar pelo WhatsApp um horário Uau!'
-                  )
-                }
+              <a
+                href={getWhatsAppUrl(
+                  'Olá Pet Uau! Vim pelo site e gostaria de agendar um horário ou tirar uma dúvida!'
+                )}
+                target="_blank"
+                rel="noreferrer"
                 className="w-full sm:w-auto justify-center bg-[#64BDD1] text-[#080808] font-brand font-black text-lg px-7 py-4 rounded-full border-[3px] border-[#080808] shadow-[6px_6px_0px_0px_#080808] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0px_0px_#080808] transition-all flex items-center gap-3"
               >
                 <MessageCircle className="w-6 h-6" strokeWidth={2.5} />
-                <span>agendar no whatsapp!</span>
+                <span>chamar no whatsapp!</span>
                 <ArrowUpRight className="w-5 h-5" strokeWidth={2.5} />
-              </button>
+              </a>
 
               <a
                 href="#servicos"
@@ -493,12 +492,12 @@ export default function App() {
               </a>
             </div>
 
-            {/* Mini Pílulas de Destaque Rápido */}
+            {/* Mini Pílulas dos Pilares da Bio */}
             <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-xl">
               {[
-                { icon: ShieldCheck, value: '100% Visível', label: 'Banho sem segredos' },
-                { icon: Heart, value: '+4.800 Pets', label: 'Atendidos com amor' },
-                { icon: Clock, value: 'Hora Marcada', label: 'Zero espera em gaiola' },
+                { icon: Scissors, value: 'Banho & Tosa', label: 'Estética com carinho' },
+                { icon: Bone, value: 'Rações & Mimos', label: 'As melhores marcas' },
+                { icon: Pill, value: 'Farmácia & +', label: 'Perfumaria e acessórios' },
               ].map((stat, i) => (
                 <div
                   key={i}
@@ -518,11 +517,10 @@ export default function App() {
 
           {/* Coluna Direita: Duas Cápsulas Verticais Gigantes inspiradas no Ícone da Logo */}
           <div className="lg:col-span-5 relative flex items-center justify-center min-h-[450px] sm:min-h-[510px]">
-            {/* Elementos Gráficos Flutuantes (Estrelas, Patinhas, Bolhas em traço preto) */}
             <div className="absolute -top-4 left-2 sm:left-6 z-30 animate-float-slow">
               <div className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-3.5 py-1.5 shadow-[4px_4px_0px_0px_#080808] flex items-center gap-1.5 rotate-[-8deg]">
                 <Droplets className="w-4 h-4 text-[#64BDD1]" strokeWidth={2.5} />
-                <span className="font-brand font-black text-xs uppercase">Água Ozonizada!</span>
+                <span className="font-brand font-black text-xs uppercase">Cheirinho Uau!</span>
               </div>
             </div>
 
@@ -535,42 +533,37 @@ export default function App() {
               fill="#64BDD1"
             />
 
-            {/* Bolhas em traço preto */}
             <div className="w-7 h-7 rounded-full bg-[#64BDD1] border-[3px] border-[#080808] shadow-[2px_2px_0px_0px_#080808] absolute top-1/2 -left-2 z-30 animate-float-reverse" />
             <div className="w-4 h-4 rounded-full bg-[#FFFDF5] border-[2.5px] border-[#080808] absolute top-[44%] left-4 z-30" />
 
-            {/* Duas Cápsulas Verticais Gigantes (Cachorro Feliz + Gato) */}
+            {/* Duas Cápsulas Verticais Gigantes */}
             <div className="grid grid-cols-2 gap-4 sm:gap-6 items-center w-full max-w-md mx-auto">
-              {/* Cápsula 1: Cachorro Feliz em Pílula Azul #64BDD1 */}
+              {/* Cápsula 1: Cachorro Feliz */}
               <div className="relative group -mt-8">
                 <div className="relative h-[340px] sm:h-[400px] w-full rounded-full bg-[#64BDD1] border-[4px] border-[#080808] shadow-[8px_8px_0px_0px_#080808] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5">
-                  {/* Arco decorativo interno amarelo inspirado na logo */}
                   <div className="absolute -bottom-8 inset-x-0 h-44 bg-[#F9D957] border-t-[4px] border-[#080808] rounded-t-full" />
 
                   <img
                     src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=700&q=85"
-                    alt="Cachorro super feliz na cápsula Pet Uau"
+                    alt="Cachorro feliz na cápsula Pet Uau"
                     className="relative z-10 w-full h-full object-cover object-center scale-105 group-hover:scale-110 transition-transform duration-500"
                   />
 
-                  {/* Tag interna inferior */}
                   <div className="absolute bottom-5 inset-x-4 z-20 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full py-1.5 px-3 text-center shadow-[3px_3px_0px_0px_#080808]">
                     <span className="font-brand font-black text-xs sm:text-sm lowercase">
-                      🐶 banho uau!
+                      🐶 banho & tosa!
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Cápsula 2: Gato Feliz em Pílula Azul #64BDD1 */}
+              {/* Cápsula 2: Gato Feliz */}
               <div className="relative group mt-10">
-                {/* Selo flutuante de patinha no topo da segunda cápsula */}
                 <div className="absolute -top-6 -right-3 z-30 bg-[#FFFDF5] border-[3px] border-[#080808] w-14 h-14 rounded-full shadow-[4px_4px_0px_0px_#080808] flex items-center justify-center rotate-12 group-hover:rotate-0 transition-transform">
                   <PawPrint className="w-7 h-7 text-[#080808]" strokeWidth={2.5} />
                 </div>
 
                 <div className="relative h-[340px] sm:h-[400px] w-full rounded-full bg-[#64BDD1] border-[4px] border-[#080808] shadow-[8px_8px_0px_0px_#080808] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5">
-                  {/* Detalhe circular amarelo no topo */}
                   <div className="absolute top-5 right-5 w-16 h-16 rounded-full bg-[#F9D957] border-[3px] border-[#080808]" />
 
                   <img
@@ -579,17 +572,16 @@ export default function App() {
                     className="relative z-10 w-full h-full object-cover object-center scale-105 group-hover:scale-110 transition-transform duration-500"
                   />
 
-                  {/* Tag interna inferior */}
                   <div className="absolute bottom-5 inset-x-4 z-20 bg-[#F9D957] border-[2.5px] border-[#080808] rounded-full py-1.5 px-3 text-center shadow-[3px_3px_0px_0px_#080808]">
                     <span className="font-brand font-black text-xs sm:text-sm lowercase">
-                      🐱 clínica cat!
+                      🐱 rações & mimos!
                     </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Badge Flutuante da Logo Original embaixo das cápsulas */}
+            {/* Badge Flutuante da Logo Original */}
             <div className="absolute -bottom-4 right-4 sm:right-10 z-30 bg-[#FFFDF5] border-[3px] border-[#080808] rounded-full px-4 py-2 shadow-[4px_4px_0px_0px_#080808] flex items-center gap-2.5 rotate-[-2deg]">
               <img
                 src="./logo-original.png"
@@ -597,7 +589,7 @@ export default function App() {
                 className="w-8 h-8 rounded-full border-2 border-[#080808] object-cover"
               />
               <span className="font-brand font-black text-xs sm:text-sm lowercase">
-                estética & vet oficial!
+                @petuauoficial
               </span>
             </div>
           </div>
@@ -634,13 +626,12 @@ export default function App() {
         className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-[#FFFDF5] border-b-[3px] border-[#080808]"
       >
         <div className="max-w-7xl mx-auto">
-          {/* Cabeçalho da Seção */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
               <div className="inline-flex items-center gap-2 bg-[#64BDD1] border-[2.5px] border-[#080808] rounded-full px-4 py-1.5 shadow-[3px_3px_0px_0px_#080808] mb-4">
                 <Sparkles className="w-4 h-4" strokeWidth={2.5} />
                 <span className="font-brand font-extrabold text-sm uppercase tracking-wide">
-                  Tudo num lugar só
+                  Banho e Tosa • Rações • Perfumaria • Farmácia • Acessórios
                 </span>
               </div>
               <h2 className="font-brand font-black lowercase text-4xl sm:text-5xl lg:text-6xl tracking-tight">
@@ -652,11 +643,10 @@ export default function App() {
               </h2>
             </div>
             <p className="text-base sm:text-lg font-semibold text-[#080808]/80 max-w-md">
-              Passe o mouse nos cards para sentir a energia! Cada serviço foi desenhado com protocolos <strong className="font-extrabold">zero estresse</strong>.
+              Passe o mouse nos cards! Tudo o que o seu cão ou gato precisa na nossa loja na <strong className="font-extrabold">Rua Piraquara, 36</strong>.
             </p>
           </div>
 
-          {/* Bento Grid Assimétrico */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-7">
             {SERVICES_BENTO.map((service) => {
               const IconComponent = service.icon
@@ -666,7 +656,6 @@ export default function App() {
                   className={`${service.span} group relative ${service.defaultBg} ${service.hoverBg} border-[3px] border-[#080808] rounded-[36px] p-6 sm:p-8 shadow-[6px_6px_0px_0px_#080808] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0px_0px_#080808] transition-all duration-200 flex flex-col justify-between overflow-hidden`}
                 >
                   <div>
-                    {/* Topo do Card: Ícone + Badge + Preço/Tempo */}
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                       <div className="flex items-center gap-3">
                         <div className="w-14 h-14 rounded-full bg-[#FFFDF5] border-[3px] border-[#080808] shadow-[3px_3px_0px_0px_#080808] flex items-center justify-center group-hover:scale-105 transition-transform">
@@ -678,14 +667,8 @@ export default function App() {
                           {service.badge}
                         </span>
                       </div>
-
-                      <div className="bg-[#FFFDF5] border-2 border-[#080808] rounded-full px-3.5 py-1 text-xs font-extrabold flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5" strokeWidth={2.5} />
-                        <span>{service.duration}</span>
-                      </div>
                     </div>
 
-                    {/* Conteúdo Principal + Foto em Pílula */}
                     <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
                       <div className="sm:col-span-7">
                         <h3 className="font-brand font-black lowercase text-2xl sm:text-3xl mb-3 flex items-baseline gap-1">
@@ -696,7 +679,6 @@ export default function App() {
                           {service.subtitle}
                         </p>
 
-                        {/* Lista de diferenciais em pílulas */}
                         <div className="flex flex-wrap gap-2 mb-6">
                           {service.highlights.map((item, idx) => (
                             <span
@@ -710,7 +692,6 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* Moldura de Foto em Formato Pílula/Arco com Borda Preta */}
                       <div className="sm:col-span-5 flex justify-center">
                         <div
                           className={`w-44 h-56 sm:w-48 sm:h-60 rounded-full ${service.accentPill} group-hover:bg-[#FFFDF5] border-[3px] border-[#080808] shadow-[5px_5px_0px_0px_#080808] p-2 transition-colors overflow-hidden`}
@@ -725,20 +706,19 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Rodapé do Card */}
                   <div className="pt-5 mt-4 border-t-[2.5px] border-[#080808]/20 group-hover:border-[#080808] flex items-center justify-between gap-4">
-                    <span className="font-brand font-black text-base sm:text-lg">
-                      {service.priceHint}
+                    <span className="font-brand font-black text-sm sm:text-base">
+                      📍 Jardim Nordeste • {WHATSAPP_DISPLAY}
                     </span>
-                    <button
-                      onClick={() =>
-                        openBookingWithContext(`Serviço: ${service.title} (${service.priceHint})`)
-                      }
+                    <a
+                      href={getWhatsAppUrl(service.whatsappText)}
+                      target="_blank"
+                      rel="noreferrer"
                       className="bg-[#080808] text-[#FFFDF5] group-hover:bg-[#FFFDF5] group-hover:text-[#080808] font-brand font-extrabold text-sm px-5 py-2.5 rounded-full border-[2.5px] border-[#080808] shadow-[3px_3px_0px_0px_#080808] transition-all flex items-center gap-2"
                     >
-                      <span>quero agendar!</span>
+                      <span>{service.ctaLabel}</span>
                       <ArrowUpRight className="w-4 h-4" strokeWidth={2.5} />
-                    </button>
+                    </a>
                   </div>
                 </article>
               )
@@ -754,17 +734,15 @@ export default function App() {
         id="calculadora"
         className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-[#64BDD1] border-b-[3px] border-[#080808] relative overflow-hidden"
       >
-        {/* Estrelas Decorativas */}
         <PopSparkle className="w-12 h-12 absolute top-10 right-10 hidden lg:block" fill="#F9D957" />
         <PopSparkle className="w-9 h-9 absolute bottom-12 left-10 hidden lg:block" fill="#FFFDF5" />
 
         <div className="max-w-6xl mx-auto">
-          {/* Título da Calculadora */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-4 py-1.5 shadow-[4px_4px_0px_0px_#080808] mb-4">
               <Clock className="w-4 h-4" strokeWidth={2.5} />
               <span className="font-brand font-extrabold text-sm uppercase">
-                Simulador Instantâneo
+                Simulador de Tempo de Banho & Tosa
               </span>
             </div>
             <h2 className="font-brand font-black lowercase text-4xl sm:text-5xl lg:text-6xl text-[#080808] mb-4">
@@ -775,18 +753,16 @@ export default function App() {
               </span>
             </h2>
             <p className="text-base sm:text-lg font-bold text-[#080808]/90">
-              Selecione o perfil do seu pet e descubra na hora o tempo estimado de spa e o valor transparente do pacote!
+              Escolha se é cachorro ou gato, o porte e o tipo de pelo para ver na hora o tempo estimado e reservar direto no nosso WhatsApp!
             </p>
           </div>
 
-          {/* Card Principal da Calculadora */}
           <div className="bg-[#FFFDF5] border-[3.5px] border-[#080808] rounded-[40px] p-6 sm:p-10 shadow-[8px_8px_0px_0px_#080808] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Coluna de Controles (7 cols) */}
             <div className="lg:col-span-7 space-y-7">
               {/* Passo 1: Cachorro ou Gato */}
               <div>
                 <label className="block font-brand font-black lowercase text-xl mb-3">
-                  1. quem vai ganhar carinho hoje?
+                  1. quem vem tomar banho hoje?
                 </label>
                 <div className="grid grid-cols-2 gap-4">
                   <button
@@ -801,7 +777,7 @@ export default function App() {
                     <MinimalDogIcon className="w-12 h-12 shrink-0" fillAccent="#FFFDF5" />
                     <div className="text-left">
                       <div className="font-brand font-black text-lg lowercase">cachorro!</div>
-                      <div className="text-xs font-bold text-[#080808]/75">Banho Ozônio + Massagem</div>
+                      <div className="text-xs font-bold text-[#080808]/75">Banho & Tosa Caprichado</div>
                     </div>
                   </button>
 
@@ -817,7 +793,7 @@ export default function App() {
                     <MinimalCatIcon className="w-12 h-12 shrink-0" fillAccent="#F9D957" />
                     <div className="text-left">
                       <div className="font-brand font-black text-lg lowercase">gato!</div>
-                      <div className="text-xs font-bold text-[#080808]/75">Suíte Silenciosa Feliway</div>
+                      <div className="text-xs font-bold text-[#080808]/75">Cuidado Calmo & Delicado</div>
                     </div>
                   </button>
                 </div>
@@ -860,7 +836,7 @@ export default function App() {
                   {[
                     { id: 'curto', title: 'Pelo Curto', desc: 'Secagem rápida' },
                     { id: 'medio', title: 'Médio / Duplo', desc: 'Escovação extra' },
-                    { id: 'longo', title: 'Longo / Cacheado', desc: 'Desembolo suave' },
+                    { id: 'longo', title: 'Longo / Cacheado', desc: 'Desembolo cuidadoso' },
                   ].map((coat) => (
                     <button
                       key={coat.id}
@@ -879,10 +855,10 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Passo 4: Mimos Extras Opcionais */}
+              {/* Passo 4: Serviços Adicionais */}
               <div>
                 <label className="block font-brand font-black lowercase text-xl mb-3">
-                  4. quer adicionar algum mimo extra? (opcional)
+                  4. quer incluir mais algum cuidado?
                 </label>
                 <div className="flex flex-wrap gap-2.5">
                   {ADDONS.map((addon) => {
@@ -901,7 +877,7 @@ export default function App() {
                         <span>{active ? '✓' : '+'}</span>
                         <span>{addon.label}</span>
                         <span className="bg-[#080808] text-[#FFFDF5] px-2 py-0.5 rounded-full text-[11px]">
-                          +R$ {addon.price}
+                          +{addon.minutes} min
                         </span>
                       </button>
                     )
@@ -910,16 +886,14 @@ export default function App() {
               </div>
             </div>
 
-            {/* Coluna de Resultado Instantâneo em Cápsula/Ticket (5 cols) */}
+            {/* Coluna de Resultado Instantâneo (5 cols) */}
             <div className="lg:col-span-5">
               <div className="bg-[#F9D957] border-[3.5px] border-[#080808] rounded-[36px] p-6 sm:p-8 shadow-[6px_6px_0px_0px_#080808] relative">
-                {/* Selo no Topo */}
                 <div className="inline-flex items-center gap-2 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-3.5 py-1 text-xs font-brand font-black uppercase mb-5 shadow-[2px_2px_0px_0px_#080808]">
                   <Sparkles className="w-3.5 h-3.5 text-[#080808]" strokeWidth={2.5} />
-                  <span>Seu Pacote Personalizado</span>
+                  <span>Estimativa na Hora</span>
                 </div>
 
-                {/* Resumo da Seleção */}
                 <div className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-3xl p-4 mb-5 shadow-[3px_3px_0px_0px_#080808]">
                   <div className="flex items-center justify-between border-b-2 border-dashed border-[#080808]/30 pb-3 mb-3">
                     <div className="flex items-center gap-2.5">
@@ -930,7 +904,7 @@ export default function App() {
                       )}
                       <div>
                         <div className="font-brand font-black text-base lowercase">
-                          spa {calculation.petLabel} uau!
+                          banho {calculation.petLabel} uau!
                         </div>
                         <div className="text-xs font-bold text-[#080808]/75">
                           {calculation.sizeLabel} • {calculation.coatLabel}
@@ -939,61 +913,44 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Tempo Estimado & Valor */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-[#64BDD1]/35 border-2 border-[#080808] rounded-2xl p-3">
-                      <span className="text-[11px] font-black uppercase block text-[#080808]/75">
-                        Tempo Estimado
-                      </span>
-                      <span className="font-brand font-black text-2xl sm:text-3xl text-[#080808]">
-                        ~{calculation.totalMinutes} min
-                      </span>
-                    </div>
-
-                    <div className="bg-[#F9D957]/60 border-2 border-[#080808] rounded-2xl p-3">
-                      <span className="text-[11px] font-black uppercase block text-[#080808]/75">
-                        Investimento
-                      </span>
-                      <span className="font-brand font-black text-2xl sm:text-3xl text-[#080808]">
-                        R$ {calculation.totalPrice}
-                      </span>
-                    </div>
+                  <div className="bg-[#64BDD1]/35 border-2 border-[#080808] rounded-2xl p-3.5 text-center">
+                    <span className="text-xs font-black uppercase block text-[#080808]/75">
+                      Tempo Estimado de Cuidado
+                    </span>
+                    <span className="font-brand font-black text-3xl sm:text-4xl text-[#080808]">
+                      ~{calculation.totalMinutes} min
+                    </span>
                   </div>
                 </div>
 
-                {/* Inclusos sempre */}
                 <div className="space-y-2 mb-6 text-xs sm:text-sm font-bold">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-                    <span>Água morna ozonizada + Shampoo Hipoalergênico</span>
+                    <span>Shampoo, Condicionador & Perfume Pet Uau!</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-                    <span>Bandana ou lacinho colecionável + Foto no WhatsApp</span>
+                    <span>Lacinho, Bandana ou Gravatinha no capricho</span>
                   </div>
                   {calculation.addonsNames.length > 0 && (
                     <div className="flex items-start gap-2 text-[#080808]">
                       <Gift className="w-4 h-4 shrink-0 mt-0.5" strokeWidth={2.5} />
                       <span>
-                        Extras: <strong>{calculation.addonsNames.join(', ')}</strong>
+                        Inclusos: <strong>{calculation.addonsNames.join(', ')}</strong>
                       </span>
                     </div>
                   )}
                 </div>
 
-                {/* CTA Direto para Reservar */}
-                <button
-                  type="button"
-                  onClick={() =>
-                    openBookingWithContext(
-                      `Pacote Calculadora: ${calculation.petLabel} | ${calculation.sizeLabel} | ${calculation.coatLabel} (~${calculation.totalMinutes} min • R$ ${calculation.totalPrice})`
-                    )
-                  }
+                <a
+                  href={getWhatsAppUrl(calculation.whatsappMessage)}
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-full bg-[#64BDD1] text-[#080808] font-brand font-black text-lg py-4 px-6 rounded-full border-[3px] border-[#080808] shadow-[5px_5px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] transition-all flex items-center justify-center gap-2"
                 >
-                  <Calendar className="w-5 h-5" strokeWidth={2.5} />
-                  <span>reservar este pacote!</span>
-                </button>
+                  <MessageCircle className="w-5 h-5" strokeWidth={2.5} />
+                  <span>reservar pacote no whatsapp!</span>
+                </a>
               </div>
             </div>
           </div>
@@ -1001,7 +958,7 @@ export default function App() {
       </section>
 
       {/* =====================================================================
-          6. ESPAÇO UAU & CLUBE DE ASSINATURA (Navegação Completa)
+          6. NOSSA LOJA & PACOTES DE BANHO
       ====================================================================== */}
       <section
         id="espaco"
@@ -1011,20 +968,19 @@ export default function App() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
               <span className="inline-flex items-center gap-2 bg-[#F9D957] border-[2.5px] border-[#080808] rounded-full px-4 py-1 font-brand font-black text-xs uppercase shadow-[3px_3px_0px_0px_#080808] mb-3">
-                <Camera className="w-4 h-4" strokeWidth={2.5} /> Tour Pelo Espaço Uau
+                <MapPin className="w-4 h-4" strokeWidth={2.5} /> Rua Piraquara, Nº 36 • Jardim Nordeste
               </span>
               <h2 className="font-brand font-black lowercase text-4xl sm:text-5xl">
-                arquitetura pensada para{' '}
+                tudo para o seu pet na{' '}
                 <span className="bg-[#64BDD1] px-4 py-0.5 rounded-full border-[3px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] inline-flex items-baseline">
-                  acalmar
+                  pet uau
                   <span className="uau-bang ml-0.5">!</span>
                 </span>
               </h2>
             </div>
 
-            {/* Botões Seletores do Tour */}
             <div className="flex flex-wrap gap-2">
-              {ESPACO_ZONES.map((z) => (
+              {STORE_HIGHLIGHTS.map((z) => (
                 <button
                   key={z.id}
                   onClick={() => setActiveZone(z.id)}
@@ -1040,8 +996,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Card Ativo do Espaço Uau */}
-          {ESPACO_ZONES.filter((z) => z.id === activeZone).map((zone) => (
+          {STORE_HIGHLIGHTS.filter((z) => z.id === activeZone).map((zone) => (
             <div
               key={zone.id}
               className={`${zone.bg} border-[3.5px] border-[#080808] rounded-[40px] p-6 sm:p-10 shadow-[8px_8px_0px_0px_#080808] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center`}
@@ -1060,14 +1015,16 @@ export default function App() {
                   <div className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-5 py-2.5 font-brand font-black text-base shadow-[3px_3px_0px_0px_#080808]">
                     ✨ {zone.stat}
                   </div>
-                  <button
-                    onClick={() =>
-                      openBookingWithContext(`Visita guiada ao ${zone.title}`)
-                    }
+                  <a
+                    href={getWhatsAppUrl(
+                      `Olá Pet Uau! Quero saber mais sobre ${zone.title}`
+                    )}
+                    target="_blank"
+                    rel="noreferrer"
                     className="bg-[#080808] text-[#FFFDF5] font-brand font-extrabold text-sm px-6 py-3 rounded-full border-2 border-[#080808] hover:bg-[#FFFDF5] hover:text-[#080808] transition-colors"
                   >
-                    agendar visita gratuita!
-                  </button>
+                    falar no whatsapp!
+                  </a>
                 </div>
               </div>
 
@@ -1083,16 +1040,16 @@ export default function App() {
             </div>
           ))}
 
-          {/* Subseção: Clube de Assinatura Uau! */}
+          {/* Subseção: Pacotes de Banho Mensais */}
           <div id="clube" className="mt-24 pt-10">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="inline-flex items-center gap-2 bg-[#64BDD1] border-[2.5px] border-[#080808] rounded-full px-4 py-1 font-brand font-black text-xs uppercase shadow-[3px_3px_0px_0px_#080808] mb-3">
-                <Flame className="w-4 h-4" strokeWidth={2.5} /> Clube de Assinatura Pet Uau!
+                <Flame className="w-4 h-4" strokeWidth={2.5} /> Pacotes de Banho & Tosa
               </span>
               <h2 className="font-brand font-black lowercase text-4xl sm:text-5xl">
-                pet cheiroso o mês inteiro por menos{' '}
+                pet cheiroso o mês inteiro na{' '}
                 <span className="bg-[#F9D957] px-4 py-0.5 rounded-full border-[3px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] inline-flex items-baseline">
-                  uau
+                  pet uau
                   <span className="uau-bang ml-0.5">!</span>
                 </span>
               </h2>
@@ -1115,16 +1072,9 @@ export default function App() {
                     <h3 className="font-brand font-black lowercase text-3xl mb-1">
                       {plan.name}
                     </h3>
-                    <p className="text-xs font-extrabold text-[#080808]/75 mb-5">
+                    <p className="text-xs font-extrabold text-[#080808]/75 mb-6 pb-5 border-b-2 border-[#080808]/20">
                       {plan.frequency}
                     </p>
-
-                    <div className="flex items-baseline gap-1 mb-6 pb-5 border-b-2 border-[#080808]/20">
-                      <span className="font-brand font-black text-4xl sm:text-5xl">
-                        {plan.price}
-                      </span>
-                      <span className="font-bold text-sm">{plan.period}</span>
-                    </div>
 
                     <ul className="space-y-3 mb-8">
                       {plan.perks.map((perk, pIdx) => (
@@ -1142,18 +1092,20 @@ export default function App() {
                     </ul>
                   </div>
 
-                  <button
-                    onClick={() =>
-                      openBookingWithContext(`Assinatura ${plan.name} (${plan.price}/mês)`)
-                    }
-                    className={`w-full py-3.5 px-6 rounded-full border-[2.5px] border-[#080808] font-brand font-black text-base shadow-[4px_4px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] transition-all ${
+                  <a
+                    href={getWhatsAppUrl(
+                      `Olá Pet Uau! Gostaria de consultar valores do ${plan.name} (${plan.frequency}).`
+                    )}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`w-full py-3.5 px-6 rounded-full border-[2.5px] border-[#080808] font-brand font-black text-base text-center shadow-[4px_4px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] transition-all block ${
                       plan.featured
                         ? 'bg-[#64BDD1] text-[#080808]'
                         : 'bg-[#F9D957] text-[#080808]'
                     }`}
                   >
-                    assinar {plan.name}
-                  </button>
+                    consultar {plan.name}
+                  </a>
                 </div>
               ))}
             </div>
@@ -1173,7 +1125,7 @@ export default function App() {
             <div className="inline-flex items-center gap-2 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-4 py-1.5 shadow-[4px_4px_0px_0px_#080808] mb-4">
               <Heart className="w-4 h-4 fill-[#64BDD1]" strokeWidth={2.5} />
               <span className="font-brand font-extrabold text-sm uppercase">
-                Aprovado por Cães, Gatos & Humanos
+                Carinho que conquista o bairro
               </span>
             </div>
             <h2 className="font-brand font-black lowercase text-4xl sm:text-5xl lg:text-6xl">
@@ -1185,15 +1137,12 @@ export default function App() {
             </h2>
           </div>
 
-          {/* Grid de Balões de Fala */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((item) => (
               <div key={item.id} className="flex flex-col justify-between group">
-                {/* Balão de Fala com Contorno Preto Grosso */}
                 <div
                   className={`relative ${item.bubbleBg} border-[3px] border-[#080808] rounded-[36px] p-7 shadow-[6px_6px_0px_0px_#080808] group-hover:-translate-y-1 transition-transform mb-7`}
                 >
-                  {/* Topo: 5 Estrelas + Tag */}
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, sIdx) => (
@@ -1209,18 +1158,15 @@ export default function App() {
                     </span>
                   </div>
 
-                  {/* Depoimento */}
                   <p className="text-base font-bold text-[#080808] leading-relaxed mb-2">
                     “{item.quote}”
                   </p>
 
-                  {/* Rabicho do Balão de Fala */}
                   <div
                     className={`w-6 h-6 ${item.bubbleBg} border-r-[3px] border-b-[3px] border-[#080808] rotate-45 absolute -bottom-[14px] left-10`}
                   />
                 </div>
 
-                {/* Tutor + Foto do Pet em Moldura Circular Azul (#64BDD1) */}
                 <div className="flex items-center gap-4 pl-3">
                   <div className="w-16 h-16 rounded-full bg-[#64BDD1] border-[3px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] p-1 shrink-0 overflow-hidden">
                     <img
@@ -1237,7 +1183,7 @@ export default function App() {
                       {item.petBreed}
                     </div>
                     <div className="text-xs font-bold text-[#080808]/70">
-                      Tutor(a): {item.tutorName}
+                      {item.tutorName}
                     </div>
                   </div>
                 </div>
@@ -1252,66 +1198,82 @@ export default function App() {
       ====================================================================== */}
       <footer className="bg-[#080808] text-[#F9D957] pt-20 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Grid Principal do Footer */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-16 border-b-2 border-[#F9D957]/25">
-            {/* Coluna 1: Marca & Manifesto (4 cols) */}
+            {/* Coluna 1: Marca & Bio (4 cols) */}
             <div className="lg:col-span-4 space-y-6">
               <div className="inline-block bg-[#F9D957] border-[3px] border-[#FFFDF5] rounded-full px-5 py-2.5 shadow-[5px_5px_0px_0px_#64BDD1]">
                 <PetUauLogo size="md" />
               </div>
 
               <p className="text-[#FFFDF5]/90 font-semibold text-base leading-relaxed">
-                O petshop e clínica veterinária onde estética, saúde e diversão se encontram com zero estresse e muito carinho!
+                Banho e Tosa • Rações • Perfumaria • Farmácia • Acessórios. Cuidado com muito carinho na Rua Piraquara, 36 — Jardim Nordeste!
               </p>
 
-              {/* Botões Instagram & WhatsApp em Azul #64BDD1 */}
               <div className="flex flex-wrap gap-3 pt-1">
                 <a
-                  href="https://wa.me/5511999999999"
+                  href={getWhatsAppUrl(
+                    'Olá Pet Uau! Vim pelo site e gostaria de falar com vocês.'
+                  )}
                   target="_blank"
                   rel="noreferrer"
                   className="bg-[#64BDD1] text-[#080808] font-brand font-black text-sm px-5 py-3 rounded-full border-2 border-[#FFFDF5] shadow-[4px_4px_0px_0px_#F9D957] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#F9D957] transition-all flex items-center gap-2"
                 >
                   <MessageCircle className="w-4 h-4" strokeWidth={2.5} />
-                  <span>WhatsApp Direto</span>
+                  <span>WhatsApp {WHATSAPP_DISPLAY}</span>
                 </a>
 
                 <a
-                  href="https://instagram.com"
+                  href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="bg-[#64BDD1] text-[#080808] font-brand font-black text-sm px-5 py-3 rounded-full border-2 border-[#FFFDF5] shadow-[4px_4px_0px_0px_#F9D957] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#F9D957] transition-all flex items-center gap-2"
                 >
                   <Instagram className="w-4 h-4" strokeWidth={2.5} />
-                  <span>@petuau.oficial</span>
+                  <span>@petuauoficial</span>
                 </a>
               </div>
             </div>
 
-            {/* Coluna 2: Horários de Funcionamento (4 cols) */}
+            {/* Coluna 2: O que você encontra aqui (4 cols) */}
             <div className="lg:col-span-4 space-y-4">
               <div className="flex items-center gap-2 font-brand font-black lowercase text-2xl text-[#F9D957]">
-                <Clock className="w-6 h-6 text-[#64BDD1]" strokeWidth={2.5} />
-                <span>horários uau!</span>
+                <Phone className="w-6 h-6 text-[#64BDD1]" strokeWidth={2.5} />
+                <span>atendimento & loja!</span>
               </div>
 
               <div className="bg-[#FFFDF5]/5 border-2 border-[#F9D957]/40 rounded-3xl p-5 space-y-3 text-sm">
                 <div className="flex items-center justify-between pb-2.5 border-b border-[#F9D957]/20">
-                  <span className="font-bold text-[#FFFDF5]">Segunda a Sexta</span>
-                  <span className="font-brand font-black text-[#F9D957]">07h30 às 20h00</span>
+                  <span className="font-bold text-[#FFFDF5]">Telefone / WhatsApp</span>
+                  <a
+                    href={getWhatsAppUrl('Olá Pet Uau!')}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-brand font-black text-[#F9D957] hover:underline"
+                  >
+                    {WHATSAPP_DISPLAY}
+                  </a>
                 </div>
                 <div className="flex items-center justify-between pb-2.5 border-b border-[#F9D957]/20">
-                  <span className="font-bold text-[#FFFDF5]">Sábados</span>
-                  <span className="font-brand font-black text-[#F9D957]">08h00 às 18h00</span>
+                  <span className="font-bold text-[#FFFDF5]">Instagram</span>
+                  <a
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-brand font-black text-[#64BDD1] hover:underline"
+                  >
+                    @petuauoficial
+                  </a>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-[#FFFDF5]">Domingos (Plantão Vet)</span>
-                  <span className="font-brand font-black text-[#64BDD1]">09h00 às 15h00</span>
+                  <span className="font-bold text-[#FFFDF5]">Bairro</span>
+                  <span className="font-brand font-black text-[#F9D957]">
+                    Jardim Nordeste • SP
+                  </span>
                 </div>
 
                 <div className="pt-2 flex items-center gap-2 text-xs font-extrabold text-[#64BDD1]">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#64BDD1] animate-ping" />
-                  <span>Estacionamento próprio para clientes na porta!</span>
+                  <span>Chame no WhatsApp para agendar Banho e Tosa!</span>
                 </div>
               </div>
             </div>
@@ -1323,39 +1285,37 @@ export default function App() {
                 <span>onde estamos!</span>
               </div>
 
-              {/* Card de Mapa Estilizado Pop-Art */}
               <div className="relative bg-[#FFFDF5] text-[#080808] border-[3px] border-[#F9D957] rounded-3xl p-4 shadow-[5px_5px_0px_0px_#64BDD1] overflow-hidden">
-                {/* Grade de ruas estilizada */}
                 <div className="relative h-36 rounded-2xl bg-[#F9D957]/40 border-2 border-[#080808] overflow-hidden mb-3 flex items-center justify-center">
-                  {/* Ruas desenhadas */}
                   <div className="absolute inset-x-0 top-1/2 h-5 bg-[#FFFDF5] border-y-2 border-[#080808] -rotate-6" />
                   <div className="absolute inset-y-0 left-1/3 w-5 bg-[#FFFDF5] border-x-2 border-[#080808] rotate-12" />
                   <div className="absolute top-3 right-3 bg-[#64BDD1] border-2 border-[#080808] rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase">
-                    Próx. à Praça das Árvores
+                    Jardim Nordeste
                   </div>
 
-                  {/* Pin Central Pulsante */}
                   <div className="relative z-10 bg-[#64BDD1] border-[2.5px] border-[#080808] rounded-full px-3.5 py-1.5 shadow-[3px_3px_0px_0px_#080808] flex items-center gap-1.5 animate-bounce">
                     <PawPrint className="w-4 h-4 text-[#080808]" strokeWidth={2.5} />
-                    <span className="font-brand font-black text-xs lowercase">pet uau! aqui</span>
+                    <span className="font-brand font-black text-xs lowercase">
+                      rua piraquara, 36
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between gap-2">
                   <div>
                     <div className="font-brand font-black text-sm">
-                      Rua dos Girassóis, 420 — Jardim Uau
+                      Rua Piraquara, Nº 36 — Jardim Nordeste
                     </div>
                     <div className="text-xs font-bold text-[#080808]/70">
-                      São Paulo • SP • CEP 04567-000
+                      São Paulo • SP • Loja: 2280-6929
                     </div>
                   </div>
                   <a
-                    href="https://maps.google.com"
+                    href={MAPS_URL}
                     target="_blank"
                     rel="noreferrer"
                     className="bg-[#64BDD1] border-2 border-[#080808] rounded-full p-2.5 shadow-[2px_2px_0px_0px_#080808] hover:bg-[#F9D957] transition-colors"
-                    title="Abrir rota no Google Maps"
+                    title="Abrir Rua Piraquara, 36 no Google Maps"
                   >
                     <Navigation className="w-4 h-4 text-[#080808]" strokeWidth={2.5} />
                   </a>
@@ -1364,10 +1324,9 @@ export default function App() {
             </div>
           </div>
 
-          {/* Barra Inferior do Footer */}
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-[#F9D957]/80">
             <div>
-              © {new Date().getFullYear()} pet uau! estética animal & clínica veterinária ltda. todos os latidos e ronronados reservados!
+              © {new Date().getFullYear()} pet uau! (@petuauoficial) • Rua Piraquara, Nº 36 — Jardim Nordeste • WhatsApp: {WHATSAPP_DISPLAY}
             </div>
             <div className="flex items-center gap-4">
               <a href="#topo" className="hover:text-[#64BDD1] underline">
@@ -1377,149 +1336,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
-      {/* =====================================================================
-          MODAL INTERATIVO DE AGENDAMENTO RÁPIDO (WHATSAPP / AGENDA UAU!)
-      ====================================================================== */}
-      {bookingModal.open && (
-        <div
-          className="fixed inset-0 z-50 bg-[#080808]/70 backdrop-blur-sm flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="bg-[#FFFDF5] border-[3.5px] border-[#080808] rounded-[36px] max-w-lg w-full p-6 sm:p-8 shadow-[10px_10px_0px_0px_#F9D957] relative">
-            <button
-              onClick={() => setBookingModal((prev) => ({ ...prev, open: false }))}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#F9D957] border-[2.5px] border-[#080808] shadow-[2px_2px_0px_0px_#080808] flex items-center justify-center hover:bg-[#64BDD1] transition-colors"
-              aria-label="Fechar modal"
-            >
-              <X className="w-5 h-5" strokeWidth={2.5} />
-            </button>
-
-            {!bookingModal.submitted ? (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setBookingModal((prev) => ({ ...prev, submitted: true }))
-                }}
-                className="space-y-4"
-              >
-                <div className="inline-flex items-center gap-2 bg-[#64BDD1] border-2 border-[#080808] rounded-full px-3.5 py-1 font-brand font-black text-xs uppercase">
-                  <Sparkles className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  <span>Reserva Expressa</span>
-                </div>
-
-                <h3 className="font-brand font-black lowercase text-3xl">
-                  vamos agendar seu momento{' '}
-                  <span className="bg-[#F9D957] px-3 rounded-full border-2 border-[#080808]">
-                    uau!
-                  </span>
-                </h3>
-
-                <div className="bg-[#F9D957]/40 border-2 border-[#080808] rounded-2xl p-3 text-xs font-extrabold">
-                  🐾 Selecionado: {bookingModal.presetSummary}
-                </div>
-
-                <div>
-                  <label className="block font-brand font-extrabold text-sm lowercase mb-1">
-                    nome do seu pet *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Ex: Paçoca, Mingau, Thor..."
-                    value={bookingModal.petName}
-                    onChange={(e) =>
-                      setBookingModal((prev) => ({ ...prev, petName: e.target.value }))
-                    }
-                    className="w-full px-4 py-3 rounded-2xl border-[2.5px] border-[#080808] bg-[#FFFDF5] font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#64BDD1]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-brand font-extrabold text-sm lowercase mb-1">
-                    seu whatsapp com ddd *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="(11) 99999-9999"
-                    value={bookingModal.tutorPhone}
-                    onChange={(e) =>
-                      setBookingModal((prev) => ({
-                        ...prev,
-                        tutorPhone: e.target.value
-                      }))
-                    }
-                    className="w-full px-4 py-3 rounded-2xl border-[2.5px] border-[#080808] bg-[#FFFDF5] font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#64BDD1]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-brand font-extrabold text-sm lowercase mb-1">
-                    melhor período
-                  </label>
-                  <select
-                    value={bookingModal.preferredTime}
-                    onChange={(e) =>
-                      setBookingModal((prev) => ({
-                        ...prev,
-                        preferredTime: e.target.value
-                      }))
-                    }
-                    className="w-full px-4 py-3 rounded-2xl border-[2.5px] border-[#080808] bg-[#FFFDF5] font-bold text-sm focus:outline-none"
-                  >
-                    <option>Hoje à tarde (14h–17h)</option>
-                    <option>Amanhã de manhã (08h–12h)</option>
-                    <option>Amanhã à tarde (13h–18h)</option>
-                    <option>Sábado Especial Uau!</option>
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#64BDD1] text-[#080808] font-brand font-black text-lg py-3.5 rounded-full border-[3px] border-[#080808] shadow-[5px_5px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] transition-all flex items-center justify-center gap-2"
-                >
-                  <MessageCircle className="w-5 h-5" strokeWidth={2.5} />
-                  <span>confirmar horário uau!</span>
-                </button>
-              </form>
-            ) : (
-              <div className="text-center py-6 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-[#64BDD1] border-[3px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] mx-auto flex items-center justify-center">
-                  <CheckCircle2 className="w-9 h-9 text-[#080808]" strokeWidth={2.5} />
-                </div>
-                <h4 className="font-brand font-black lowercase text-3xl">
-                  oba, {bookingModal.petName || 'seu pet'} vai amar!
-                </h4>
-                <p className="text-sm font-bold text-[#080808]/80 max-w-sm mx-auto">
-                  Recebemos seu pedido para <strong>{bookingModal.preferredTime}</strong>! Nossa recepção já está preparando o biscoito de boas-vindas.
-                </p>
-                <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
-                  <a
-                    href={`https://wa.me/5511999999999?text=${encodeURIComponent(
-                      `Olá pet uau! Quero confirmar o horário de ${bookingModal.petName}: ${bookingModal.presetSummary} (${bookingModal.preferredTime})`
-                    )}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="bg-[#F9D957] border-[2.5px] border-[#080808] rounded-full px-6 py-3 font-brand font-black text-sm shadow-[4px_4px_0px_0px_#080808]"
-                  >
-                    abrir conversa no whatsapp 🐾
-                  </a>
-                  <button
-                    onClick={() =>
-                      setBookingModal((prev) => ({ ...prev, open: false }))
-                    }
-                    className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-5 py-3 font-brand font-extrabold text-sm"
-                  >
-                    voltar ao site
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
