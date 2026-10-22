@@ -341,7 +341,7 @@ export default function App() {
       <header className="fixed top-4 inset-x-0 z-50 px-4 sm:px-6">
         <nav
           aria-label="Navegação Principal"
-          className="max-w-6xl mx-auto bg-[#FFFDF5]/95 backdrop-blur-md border-[2.5px] border-[#080808] rounded-full px-4 sm:px-7 py-2.5 shadow-[5px_5px_0px_0px_#080808] flex items-center justify-between transition-all"
+          className="max-w-6xl mx-auto bg-[#FFFDF5]/95 backdrop-blur-md border-[2.5px] border-[#080808] rounded-full pl-3 pr-2.5 sm:px-7 py-2 shadow-[5px_5px_0px_0px_#080808] flex items-center justify-between transition-all"
         >
           {/* Logo à esquerda */}
           <a
@@ -379,17 +379,18 @@ export default function App() {
               )}
               target="_blank"
               rel="noreferrer"
-              className="bg-[#64BDD1] text-[#080808] font-brand font-extrabold text-sm sm:text-base px-4 sm:px-6 py-2.5 rounded-full border-[2.5px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all flex items-center gap-2"
+              className="bg-[#64BDD1] text-[#080808] font-brand font-extrabold text-sm sm:text-base px-3.5 sm:px-6 py-2.5 rounded-full whitespace-nowrap border-[2.5px] border-[#080808] shadow-[4px_4px_0px_0px_#080808] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#080808] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-              <span>Agendar Banho!</span>
+              <span className="sm:hidden">Agendar</span>
+              <span className="hidden sm:inline">Agendar Banho!</span>
             </a>
 
             {/* Botão Menu Mobile */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Abrir menu"
-              className="md:hidden p-2.5 rounded-full bg-[#F9D957] border-[2.5px] border-[#080808] shadow-[3px_3px_0px_0px_#080808]"
+              className="md:hidden shrink-0 p-2.5 rounded-full bg-[#F9D957] border-[2.5px] border-[#080808] shadow-[3px_3px_0px_0px_#080808]"
             >
               {mobileMenuOpen ? (
                 <X className="w-5 h-5" strokeWidth={2.5} />
@@ -444,12 +445,12 @@ export default function App() {
           {/* Coluna Esquerda */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Badge estilo Sticker */}
-            <div className="inline-flex items-center gap-2.5 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-4 py-2 shadow-[4px_4px_0px_0px_#080808] -rotate-1 hover:rotate-0 transition-transform mb-6">
+            <div className="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1.5 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-3xl sm:rounded-full px-4 py-2 shadow-[4px_4px_0px_0px_#080808] -rotate-1 hover:rotate-0 transition-transform mb-6">
               <span className="text-lg">🐾</span>
               <span className="font-brand font-extrabold text-sm sm:text-base tracking-tight">
                 O petshop mais feliz do Jardim Nordeste
               </span>
-              <span className="bg-[#64BDD1] border-2 border-[#080808] rounded-full px-2.5 py-0.5 text-xs font-black">
+              <span className="bg-[#64BDD1] border-2 border-[#080808] rounded-full px-2.5 py-0.5 text-xs font-black whitespace-nowrap">
                 Rua Piraquara, 36
               </span>
             </div>
@@ -493,7 +494,7 @@ export default function App() {
             </div>
 
             {/* Mini Pílulas dos Pilares da Bio */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-xl">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full max-w-xl">
               {[
                 { icon: Scissors, value: 'Banho & Tosa', label: 'Estética com carinho' },
                 { icon: Bone, value: 'Rações & Mimos', label: 'As melhores marcas' },
@@ -501,9 +502,9 @@ export default function App() {
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-2xl p-3 shadow-[3px_3px_0px_0px_#080808] flex flex-col"
+                  className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-2xl p-2.5 sm:p-3 shadow-[3px_3px_0px_0px_#080808] flex flex-col min-w-0"
                 >
-                  <div className="flex items-center gap-1.5 font-brand font-black text-sm sm:text-base">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-1.5 font-brand font-black text-[13px] leading-tight sm:text-base">
                     <stat.icon className="w-4 h-4 text-[#080808] shrink-0" strokeWidth={2.5} />
                     <span>{stat.value}</span>
                   </div>
@@ -516,7 +517,7 @@ export default function App() {
           </div>
 
           {/* Coluna Direita: Duas Cápsulas Verticais Gigantes inspiradas no Ícone da Logo */}
-          <div className="lg:col-span-5 relative flex items-center justify-center min-h-[450px] sm:min-h-[510px]">
+          <div className="lg:col-span-5 relative flex items-center justify-center min-h-[420px] sm:min-h-[510px] px-1 sm:px-0">
             <div className="absolute -top-4 left-2 sm:left-6 z-30 animate-float-slow">
               <div className="bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-3.5 py-1.5 shadow-[4px_4px_0px_0px_#080808] flex items-center gap-1.5 rotate-[-8deg]">
                 <Droplets className="w-4 h-4 text-[#64BDD1]" strokeWidth={2.5} />
@@ -540,7 +541,7 @@ export default function App() {
             <div className="grid grid-cols-2 gap-4 sm:gap-6 items-center w-full max-w-md mx-auto">
               {/* Cápsula 1: Cachorro Feliz */}
               <div className="relative group -mt-8">
-                <div className="relative h-[340px] sm:h-[400px] w-full rounded-full bg-[#64BDD1] border-[4px] border-[#080808] shadow-[8px_8px_0px_0px_#080808] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5">
+                <div className="relative h-[300px] sm:h-[400px] w-full rounded-full bg-[#64BDD1] border-[4px] border-[#080808] shadow-[8px_8px_0px_0px_#080808] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5">
                   <div className="absolute -bottom-8 inset-x-0 h-44 bg-[#F9D957] border-t-[4px] border-[#080808] rounded-t-full" />
 
                   <img
@@ -549,8 +550,8 @@ export default function App() {
                     className="relative z-10 w-full h-full object-cover object-center scale-105 group-hover:scale-110 transition-transform duration-500"
                   />
 
-                  <div className="absolute bottom-5 inset-x-4 z-20 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full py-1.5 px-3 text-center shadow-[3px_3px_0px_0px_#080808]">
-                    <span className="font-brand font-black text-xs sm:text-sm lowercase">
+                  <div className="absolute bottom-5 inset-x-2 sm:inset-x-4 z-20 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full py-1.5 px-3 text-center shadow-[3px_3px_0px_0px_#080808]">
+                    <span className="font-brand font-black text-[11px] sm:text-sm lowercase whitespace-nowrap">
                       🐶 banho & tosa!
                     </span>
                   </div>
@@ -559,11 +560,11 @@ export default function App() {
 
               {/* Cápsula 2: Gato Feliz */}
               <div className="relative group mt-10">
-                <div className="absolute -top-6 -right-3 z-30 bg-[#FFFDF5] border-[3px] border-[#080808] w-14 h-14 rounded-full shadow-[4px_4px_0px_0px_#080808] flex items-center justify-center rotate-12 group-hover:rotate-0 transition-transform">
+                <div className="absolute -top-6 -right-1 sm:-right-3 z-30 bg-[#FFFDF5] border-[3px] border-[#080808] w-14 h-14 rounded-full shadow-[4px_4px_0px_0px_#080808] flex items-center justify-center rotate-12 group-hover:rotate-0 transition-transform">
                   <PawPrint className="w-7 h-7 text-[#080808]" strokeWidth={2.5} />
                 </div>
 
-                <div className="relative h-[340px] sm:h-[400px] w-full rounded-full bg-[#64BDD1] border-[4px] border-[#080808] shadow-[8px_8px_0px_0px_#080808] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5">
+                <div className="relative h-[300px] sm:h-[400px] w-full rounded-full bg-[#64BDD1] border-[4px] border-[#080808] shadow-[8px_8px_0px_0px_#080808] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5">
                   <div className="absolute top-5 right-5 w-16 h-16 rounded-full bg-[#F9D957] border-[3px] border-[#080808]" />
 
                   <img
@@ -572,8 +573,8 @@ export default function App() {
                     className="relative z-10 w-full h-full object-cover object-center scale-105 group-hover:scale-110 transition-transform duration-500"
                   />
 
-                  <div className="absolute bottom-5 inset-x-4 z-20 bg-[#F9D957] border-[2.5px] border-[#080808] rounded-full py-1.5 px-3 text-center shadow-[3px_3px_0px_0px_#080808]">
-                    <span className="font-brand font-black text-xs sm:text-sm lowercase">
+                  <div className="absolute bottom-5 inset-x-2 sm:inset-x-4 z-20 bg-[#F9D957] border-[2.5px] border-[#080808] rounded-full py-1.5 px-3 text-center shadow-[3px_3px_0px_0px_#080808]">
+                    <span className="font-brand font-black text-[11px] sm:text-sm lowercase whitespace-nowrap">
                       🐱 rações & mimos!
                     </span>
                   </div>
@@ -629,7 +630,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
               <div className="inline-flex items-center gap-2 bg-[#64BDD1] border-[2.5px] border-[#080808] rounded-full px-4 py-1.5 shadow-[3px_3px_0px_0px_#080808] mb-4">
-                <Sparkles className="w-4 h-4" strokeWidth={2.5} />
+                <Sparkles className="w-4 h-4 shrink-0" strokeWidth={2.5} />
                 <span className="font-brand font-extrabold text-sm uppercase tracking-wide">
                   Banho e Tosa • Rações • Perfumaria • Farmácia • Acessórios
                 </span>
@@ -643,7 +644,7 @@ export default function App() {
               </h2>
             </div>
             <p className="text-base sm:text-lg font-semibold text-[#080808]/80 max-w-md">
-              Passe o mouse nos cards! Tudo o que o seu cão ou gato precisa na nossa loja na <strong className="font-extrabold">Rua Piraquara, 36</strong>.
+              Tudo o que o seu cão ou gato precisa na nossa loja na <strong className="font-extrabold">Rua Piraquara, 36</strong>.
             </p>
           </div>
 
@@ -706,7 +707,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="pt-5 mt-4 border-t-[2.5px] border-[#080808]/20 group-hover:border-[#080808] flex items-center justify-between gap-4">
+                  <div className="pt-5 mt-4 border-t-[2.5px] border-[#080808]/20 group-hover:border-[#080808] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <span className="font-brand font-black text-sm sm:text-base">
                       📍 Jardim Nordeste • {WHATSAPP_DISPLAY}
                     </span>
@@ -714,7 +715,7 @@ export default function App() {
                       href={getWhatsAppUrl(service.whatsappText)}
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-[#080808] text-[#FFFDF5] group-hover:bg-[#FFFDF5] group-hover:text-[#080808] font-brand font-extrabold text-sm px-5 py-2.5 rounded-full border-[2.5px] border-[#080808] shadow-[3px_3px_0px_0px_#080808] transition-all flex items-center gap-2"
+                      className="bg-[#080808] text-[#FFFDF5] group-hover:bg-[#FFFDF5] group-hover:text-[#080808] font-brand font-extrabold text-sm px-5 py-3 rounded-full border-[2.5px] border-[#080808] shadow-[3px_3px_0px_0px_#080808] transition-all flex items-center justify-center gap-2"
                     >
                       <span>{service.ctaLabel}</span>
                       <ArrowUpRight className="w-4 h-4" strokeWidth={2.5} />
