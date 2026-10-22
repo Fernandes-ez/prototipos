@@ -758,18 +758,18 @@ export default function App() {
             </p>
           </div>
 
-          <div className="bg-[#FFFDF5] border-[3.5px] border-[#080808] rounded-[40px] p-6 sm:p-10 shadow-[8px_8px_0px_0px_#080808] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="bg-[#FFFDF5] border-[3.5px] border-[#080808] rounded-[32px] sm:rounded-[40px] p-5 sm:p-10 shadow-[6px_6px_0px_0px_#080808] sm:shadow-[8px_8px_0px_0px_#080808] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             <div className="lg:col-span-7 space-y-7">
               {/* Passo 1: Cachorro ou Gato */}
               <div>
                 <label className="block font-brand font-black lowercase text-xl mb-3">
                   1. quem vem tomar banho hoje?
                 </label>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3 sm:gap-4">
                   <button
                     type="button"
                     onClick={() => setPetType('dog')}
-                    className={`p-4 rounded-3xl border-[3px] border-[#080808] flex items-center gap-3.5 transition-all ${
+                    className={`p-4 rounded-3xl border-[3px] border-[#080808] flex items-center gap-3.5 min-w-0 transition-all ${
                       petType === 'dog'
                         ? 'bg-[#F9D957] shadow-[5px_5px_0px_0px_#080808] -translate-y-0.5'
                         : 'bg-[#FFFDF5] shadow-[2px_2px_0px_0px_#080808] hover:bg-[#F9D957]/30'
@@ -785,7 +785,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => setPetType('cat')}
-                    className={`p-4 rounded-3xl border-[3px] border-[#080808] flex items-center gap-3.5 transition-all ${
+                    className={`p-4 rounded-3xl border-[3px] border-[#080808] flex items-center gap-3.5 min-w-0 transition-all ${
                       petType === 'cat'
                         ? 'bg-[#64BDD1] shadow-[5px_5px_0px_0px_#080808] -translate-y-0.5'
                         : 'bg-[#FFFDF5] shadow-[2px_2px_0px_0px_#080808] hover:bg-[#64BDD1]/30'
@@ -805,7 +805,7 @@ export default function App() {
                 <label className="block font-brand font-black lowercase text-xl mb-3">
                   2. qual é o porte?
                 </label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {[
                     { id: 'pequeno', title: 'Pequeno', sub: 'até 10kg' },
                     { id: 'medio', title: 'Médio', sub: '10 a 25kg' },
@@ -815,14 +815,14 @@ export default function App() {
                       key={size.id}
                       type="button"
                       onClick={() => setPetSize(size.id)}
-                      className={`py-3.5 px-4 rounded-2xl border-[2.5px] border-[#080808] text-center transition-all ${
+                      className={`py-3.5 px-1.5 sm:px-4 rounded-2xl border-[2.5px] border-[#080808] text-center min-w-0 transition-all ${
                         petSize === size.id
                           ? 'bg-[#F9D957] shadow-[4px_4px_0px_0px_#080808] font-black'
                           : 'bg-[#FFFDF5] hover:bg-[#F9D957]/25 font-bold'
                       }`}
                     >
                       <div className="font-brand text-base sm:text-lg">{size.title}</div>
-                      <div className="text-xs text-[#080808]/75">{size.sub}</div>
+                      <div className="text-[11px] sm:text-xs leading-tight text-[#080808]/75">{size.sub}</div>
                     </button>
                   ))}
                 </div>
@@ -889,7 +889,7 @@ export default function App() {
 
             {/* Coluna de Resultado Instantâneo (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="bg-[#F9D957] border-[3.5px] border-[#080808] rounded-[36px] p-6 sm:p-8 shadow-[6px_6px_0px_0px_#080808] relative">
+              <div className="bg-[#F9D957] border-[3.5px] border-[#080808] rounded-[32px] sm:rounded-[36px] p-5 sm:p-8 shadow-[6px_6px_0px_0px_#080808] relative">
                 <div className="inline-flex items-center gap-2 bg-[#FFFDF5] border-[2.5px] border-[#080808] rounded-full px-3.5 py-1 text-xs font-brand font-black uppercase mb-5 shadow-[2px_2px_0px_0px_#080808]">
                   <Sparkles className="w-3.5 h-3.5 text-[#080808]" strokeWidth={2.5} />
                   <span>Estimativa na Hora</span>
