@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>SUP Brasil · Prancha de stand up paddle direto da fábrica, São Paulo</title>
-<meta name="description" content="Prancha SUP 10'0 para iniciantes com kit completo e arte personalizada. Retirada em São Paulo ou envio para todo o Brasil.">
+<title>SUP Brasil · Pranchas de stand up paddle direto da fábrica, São Paulo</title>
+<meta name="description" content="Pranchas de stand up paddle em 4 tamanhos, com kit completo e arte personalizada. Retirada em São Paulo ou envio para todo o Brasil.">
 <link rel="icon" href="imagens/logo-sup-brasil.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -39,6 +39,9 @@ input[type=number]{font:600 1.6rem var(--serif);width:8ch;min-height:56px;border
 dl.ficha{display:flex;flex-wrap:wrap;gap:1.25rem 3rem}.ficha dt{font-size:.85rem;opacity:.8}.ficha dd{font:600 1.5rem var(--serif)}
 .valor{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
 .valor ul{list-style:none;margin-top:1rem}.valor #kit li{font:400 clamp(1.15rem,2vw,1.6rem)/1.3 var(--serif);padding:.35rem 0;border-bottom:1px solid var(--ceu)}
+.modelos{list-style:none;width:100%}.modelos li{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--ceu)}
+.modelos a{font:600 1.1rem var(--serif);min-height:44px;display:flex;align-items:center}.modelos span{text-align:right;font-size:.88rem;line-height:1.45}.modelos span strong{font-size:1.05rem}
+.op input[type=checkbox]:checked+span{background:var(--tinta);color:#fff}
 .preco{font:600 clamp(3.2rem,8vw,6rem)/1 var(--serif)}
 summary{cursor:pointer;font-weight:600;min-height:48px;padding:.7rem 0}
 details ul{padding-left:1.2rem}details .link{display:flex}
@@ -68,78 +71,91 @@ details ul{padding-left:1.2rem}details .link{display:flex}
 <img src="imagens/hero-largo-1200.webp" srcset="imagens/hero-largo-1200.webp 1200w, imagens/hero-largo-2200.webp 2200w" sizes="100vw" width="1200" height="744" alt="Mulher remando de pé em água calma no pôr do sol" fetchpriority="high">
 <div class="pilha"><h1>Sua primeira remada, firme e com a sua arte.</h1>
 <p class="prova"><span data-t="prova">Pranchas feitas em São Paulo</span>. Envio para todo o Brasil.</p>
-<p class="resumo" data-t="resumo">Prancha para quem está começando, direto da fábrica.</p>
+<p class="resumo" data-t="resumo">Pranchas de stand up paddle com a sua arte, direto da fábrica.</p>
 <div class="acoes"><a class="btn" href="#qual">Descobrir minha prancha</a><a class="link" href="#preco">Ver preço e kit</a></div></div>
 </section>
 <svg class="onda" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62C210 70 380 58 520 34S760 0 850 20c52 12 62 38 28 44-30 5-44-20-16-28-40-4-62 30-22 42 70 21 230-30 360-22" fill="none" stroke="#112233" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
 
 <section class="sec ceu" id="qual"><div class="seletor">
-<div><h2>Qual prancha é pra você?</h2><p>Três respostas para conferir se o modelo da casa serve para você.</p>
+<div><h2>Qual prancha é pra você?</h2><p>Responda e veja qual dos nossos 4 modelos combina com você.</p>
 <form id="quiz">
 <label><span class="campo">Seu peso, em kg</span><input type="number" name="peso" min="30" max="200" value="75" inputmode="numeric" required></label>
-<fieldset><legend>Onde vai remar</legend><label class="op"><input type="radio" name="onde" value="represa" checked><span>Represa ou lago</span></label><label class="op"><input type="radio" name="onde" value="mar"><span>Mar</span></label></fieldset>
+<fieldset><legend>Onde vai remar</legend><label class="op"><input type="radio" name="onde" value="represa" checked><span>Represa ou rio</span></label><label class="op"><input type="radio" name="onde" value="mar"><span>Mar ou ondas</span></label></fieldset>
 <fieldset><legend>Experiência</legend><label class="op"><input type="radio" name="exp" value="nova" checked><span>Estou começando</span></label><label class="op"><input type="radio" name="exp" value="ja"><span>Já remo</span></label></fieldset>
+<fieldset><legend>Companhia no bico</legend><label class="op"><input type="checkbox" name="junto"><span>Vou levar criança ou pet</span></label></fieldset>
 <div><button class="btn" type="submit">Ver resultado</button></div>
 </form></div>
 <div class="resposta pilha" id="resposta"><p>Ative o JavaScript para usar o seletor, ou chame no WhatsApp.</p></div><p class="pular" id="anuncio" aria-live="polite"></p>
 </div></section>
 
-<section class="sec" id="artes"><h2>A arte é sua. Comece por uma destas.</h2><p>No modelo da casa você escolhe 2 artes.</p><p class="dica" aria-hidden="true">Deslize →</p>
-<div class="artes" tabindex="0" role="region" aria-label="Artes, role para o lado"><a href="catalogo/#mandala"><img src="imagens/mandala-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala, verso"><strong>Mandala</strong></a><a href="catalogo/#fogo"><img src="imagens/fogo-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte céu em fogo, verso"><strong>Céu em fogo</strong></a><a href="catalogo/#leao"><img src="imagens/leao-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte leão, verso"><strong>Leão</strong></a><a href="catalogo/#guerreira"><img src="imagens/guerreira-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte guerreira, verso"><strong>Guerreira</strong></a><a href="catalogo/#tartaruga-azul"><img src="imagens/tartaruga-azul-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte tartaruga azul, verso"><strong>Tartaruga azul</strong></a><a href="catalogo/#hibisco"><img src="imagens/hibisco-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte hibisco, verso"><strong>Hibisco</strong></a><a href="catalogo/#mandala-azul"><img src="imagens/mandala-azul-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala azul, verso"><strong>Mandala azul</strong></a></div></section>
+<section class="sec" id="artes"><h2>A arte é sua. Comece por uma destas.</h2><p>Em qualquer modelo você escolhe 2 artes.</p><p class="dica" aria-hidden="true">Deslize →</p>
+<div class="artes" tabindex="0" role="region" aria-label="Artes, role para o lado"><a href="catalogo/#mandala"><img src="imagens/mandala-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala, verso"><strong>Mandala</strong></a><a href="catalogo/#fogo"><img src="imagens/fogo-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte céu em fogo, verso"><strong>Céu em fogo</strong></a><a href="catalogo/#leao"><img src="imagens/leao-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte leão, verso"><strong>Leão</strong></a><a href="catalogo/#guerreira"><img src="imagens/guerreira-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte guerreira, verso"><strong>Guerreira</strong></a><a href="catalogo/#tartaruga"><img src="imagens/tartaruga-azul-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte tartaruga azul, verso"><strong>Tartaruga</strong></a><a href="catalogo/#hibisco"><img src="imagens/hibisco-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte hibisco, verso"><strong>Hibisco</strong></a><a href="catalogo/#mandala-azul"><img src="imagens/mandala-azul-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala azul, verso"><strong>Mandala azul</strong></a></div></section>
 
 <section class="sec noite" id="filme"><div class="oficina">
 <div class="filme"><video data-loop muted loop playsinline preload="metadata" width="360" height="640" poster="imagens/tartaruga-poster.jpg" aria-label="Vídeo sem som percorrendo uma prancha com arte de tartaruga, do bico à rabeta"><source src="imagens/tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></div>
 <div class="pilha"><h2>Passe os olhos de perto.</h2><p>Brilho de resina, traço fechado e a arte correndo até a borda. É assim que a prancha sai da casa.</p>
-<dl class="ficha"><div><dt>Bloco</dt><dd data-t="bloco">·</dd></div><div><dt>Fibra de vidro</dt><dd data-t="fibra">·</dd></div><div><dt>Resina</dt><dd data-t="resina">·</dd></div><div><dt>Suporta até</dt><dd data-t="peso">·</dd></div></dl>
-<p class="mono" data-t="medida"></p>
+<dl class="ficha"><div><dt>Bloco</dt><dd data-t="bloco">·</dd></div><div><dt>Fibra de vidro</dt><dd data-t="fibra">·</dd></div><div><dt>Resina</dt><dd data-t="resina">·</dd></div><div><dt>Tamanhos</dt><dd>4</dd></div></dl>
 <a class="btn claro" href="#contato" data-zap="Oi! Vi o vídeo no site e quero ver mais fotos e vídeos de pranchas prontas.">Pedir mais vídeos no WhatsApp</a></div></div></section>
 
 <section class="sec" id="preco"><div class="valor">
 <div><h2>O que você leva</h2><ul id="kit"><li>Prancha com kit completo</li></ul></div>
-<div class="pilha"><p class="preco" data-t="aVista">Consulte</p><p><strong>à vista</strong>, <span data-t="parcelado">ou parcelado no cartão</span>.</p>
+<div class="pilha"><p>Pranchas a partir de</p><p class="preco" data-t="aPartir">Consulte</p><p>à vista, com o kit.</p>
+<ul class="modelos" id="modelos"></ul>
 <p class="so-promo pequeno" data-t="notaPromo"></p>
 <p>Reserve com <strong data-t="sinal">um sinal</strong> e pague o restante na retirada ou antes da coleta pela transportadora.</p>
-<a class="btn" href="#contato" data-zap="Oi! Quero encomendar a prancha SUP com kit completo.">Encomendar minha prancha</a>
+<div class="acoes"><a class="btn" href="loja/">Escolher meu modelo</a><a class="link" href="catalogo/">Ver catálogo</a></div>
 <details><summary>O que perguntar antes de comprar em qualquer lugar</summary><ul><li>Qual o bloco e a gramatura da fibra?</li><li>Remo e leash entram no preço ou são à parte?</li><li>Dá para escolher a arte?</li><li>Quem resolve se precisar de reparo?</li></ul></details></div></div></section>
 
 <section class="sec ceu" id="clientes"><h2>Quem já rema com a gente</h2>
-<div class="depo" id="depoimentos"><p class="pendente">[DEPOIMENTO REAL]</p></div>
+<div class="depo" id="depoimentos" hidden></div>
 <div class="mosaico"><figure><img src="imagens/saida-do-mar-500.webp" srcset="imagens/saida-do-mar-500.webp 500w, imagens/saida-do-mar-1000.webp 1000w" sizes="(max-width:860px) 50vw, 25vw" width="500" height="667" alt="Mulher saindo do mar com remo e prancha" loading="lazy" decoding="async"><figcaption>Saindo do mar.</figcaption></figure><figure><img src="imagens/prancha-personalizada-500.webp" srcset="imagens/prancha-personalizada-500.webp 500w, imagens/prancha-personalizada-1000.webp 1000w" sizes="(max-width:860px) 50vw, 25vw" width="500" height="667" alt="Mulher ao lado de uma prancha vermelha e laranja personalizada com nome, na areia" loading="lazy" decoding="async"><figcaption>Nome na prancha.</figcaption></figure><figure><img src="imagens/bico-mar-verde-500.webp" srcset="imagens/bico-mar-verde-500.webp 500w, imagens/bico-mar-verde-1000.webp 1000w" sizes="(max-width:860px) 50vw, 25vw" width="500" height="889" alt="Bico de prancha com tartaruga sobre mar verde transparente" loading="lazy" decoding="async"><figcaption>Mar verde pela frente.</figcaption></figure><figure><img src="imagens/beira-do-lago-500.webp" srcset="imagens/beira-do-lago-500.webp 500w, imagens/beira-do-lago-1000.webp 1000w" sizes="(max-width:860px) 50vw, 25vw" width="500" height="889" alt="Prancha na grama à beira de um lago cercado de árvores" loading="lazy" decoding="async"><figcaption>Beira do lago.</figcaption></figure></div>
 <p><a class="link" data-url="insta" href="#contato" target="_blank" rel="noopener">Ver mais no Instagram</a></p></section>
 
 <section class="sec" id="duvidas"><h2>Antes de fechar</h2><div class="duvidas">
-<details><summary>Qual o prazo?</summary><p data-pendente="prazo|PRAZO REAL">Consulte no WhatsApp.</p></details>
-<details><summary>Quanto custa o frete?</summary><p>Retire em Cidade Patriarca ou receba por transportadora em todo o Brasil.</p><p>Faixa de frete: <span data-pendente="frete|FAIXA DE FRETE REAL">consulte</span></p><a class="link" href="#contato" data-origem="frete" data-zap="Oi! Quero simular o frete de uma prancha. Meu CEP é: ">Simular meu frete no WhatsApp</a></details>
-<details><summary>Tem garantia e reparo?</summary><p>Garantia: <span data-pendente="garantia|GARANTIA REAL">consulte</span></p><p>Reparo: <span data-pendente="reparo|COMO FUNCIONA O REPARO">consulte</span></p></details>
+<details><summary>Qual o prazo?</summary><p data-campo="prazo">Pergunte o prazo atual no WhatsApp antes de pagar o sinal.</p></details>
+<details><summary>Quanto custa o frete?</summary><p>Retire em Cidade Patriarca ou receba por transportadora em todo o Brasil.</p><p data-campo="frete">O valor depende do seu CEP.</p><a class="link" href="#contato" data-origem="frete" data-zap="Oi! Quero simular o frete de uma prancha. Meu CEP é: ">Simular meu frete no WhatsApp</a></details>
+<details><summary>Tem garantia e reparo?</summary><p data-campo="garantia">Confirme a cobertura de garantia no WhatsApp antes de fechar.</p><p data-campo="reparo">Pergunte também como funciona o reparo em caso de impacto.</p><a class="link" href="#contato" data-origem="garantia" data-zap="Oi! Como funcionam a garantia e o reparo das pranchas?">Perguntar sobre garantia</a></details>
 <details><summary>É seguro pagar o sinal?</summary><p>Antes de pagar, peça fotos e vídeos de pranchas da casa, confirme prazo e valor, ou visite o endereço abaixo.</p><a class="link" href="#contato" data-origem="sinal" data-zap="Oi! Antes de pagar o sinal, quero ver fotos e vídeos de pranchas e entender os prazos.">Tirar essa dúvida</a></details>
-<details><summary>Vou conseguir ficar em pé?</summary><p>O modelo da casa é largo e anunciado para iniciantes. Comece em água calma, com leash e colete.</p><a class="link" href="#qual">Conferir pelo meu peso</a></details>
+<details><summary>Vou conseguir ficar em pé?</summary><p>Os modelos Clássico e Grande Porte são os mais largos e estáveis. Comece em água calma, com leash e colete.</p><a class="link" href="#qual">Conferir pelo meu peso</a></details>
 </div></section>
 
 <section class="sec ceu onde" id="onde"><h2>Venha ver de perto</h2><address data-t="endereco">Cidade Patriarca, São Paulo</address>
 <div class="acoes"><a class="btn" data-url="maps" href="#contato" target="_blank" rel="noopener">Abrir no Google Maps</a><a class="link" data-url="tel1" data-t="tel1" href="#contato">Ligar</a></div></section>
 </main>
 <div class="assinatura" aria-hidden="true"></div>
-<footer id="contato"><h2>Bora remar?</h2><p>Mande seu peso, onde quer remar e a arte que você imaginou.</p>
-<a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
-<small>SUP Brasil. <a data-url="maps" href="#contato" target="_blank" rel="noopener" data-t="endereco">Cidade Patriarca, São Paulo</a>.<br>
-<a data-url="tel1" href="#contato" data-t="tel1">Telefone</a> · <a data-url="tel2" href="#contato" data-t="tel2">Segundo telefone</a><br>
-<a data-url="insta" href="#contato" target="_blank" rel="noopener">Instagram</a>. Protótipo de demonstração por ezf.tech.</small>
+<footer id="contato"><div class="chamada">
+<h2>Bora remar?</h2><p>Mande seu peso, onde quer remar e a arte que você imaginou.</p>
+<a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg>Chamar no WhatsApp</a></div>
+<ul class="contatos"><li><a data-url="maps" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.500-5.700-6.500-11a6.500 6.500 0 0 1 13 0c0 5.300-6.500 11-6.500 11z"/><circle cx="12" cy="10" r="2.300"/></svg><span><small>Endereço, abrir no mapa</small><span data-t="endereco">Cidade Patriarca, São Paulo</span></span></a></li><li><a href="#contato" data-origem="rodape" data-zap="Oi! Vim pelo site da SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg><span><small>WhatsApp</small><span data-t="tel1">Atendimento</span></span></a></li><li><a data-url="tel2" href="#contato"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a1.500 1.500 0 0 1-1.500 1.500C10.500 20 4 13.500 3.500 5.500A1.500 1.500 0 0 1 5 4z"/></svg><span><small>Telefone</small><span data-t="tel2">Segundo contato</span></span></a></li><li><a data-url="insta" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8.500 7l1.500-3h4l1.500 3"/><circle cx="12" cy="13.500" r="3.500"/></svg><span><small>Instagram</small>@supbrasil2020</span></a></li></ul>
+<p class="credito">SUP Brasil. Site por ezf.tech.</p>
 <noscript><p>Chame no WhatsApp: <a href="https://wa.me/5511954334404">(11) 95433-4404</a></p></noscript></footer>
 <script>
-const $=s=>document.querySelector(s), quiz=$('#quiz'), saida=$('#resposta'), M=SUP.modelo;
-$('#kit').innerHTML=SUP.kit.map(i=>`<li>${i}</li>`).join('');
-$('#depoimentos').innerHTML=SUP.depoimentos.map(d=>d
-  ?`<figure><blockquote>${d.texto}</blockquote><figcaption>${d.nome}, ${d.cidade}</figcaption></figure>`
-  :`<figure><blockquote><mark class="pendente">[DEPOIMENTO REAL]</mark></blockquote><figcaption>[nome e cidade do cliente]</figcaption></figure>`).join('');
+const $=s=>document.querySelector(s), quiz=$('#quiz'), saida=$('#resposta');
+$('#kit').innerHTML=[...SUP.kit,'Quilhas 2+1 (quilha única no Travessia)'].map(i=>`<li>${i}</li>`).join('');
+$('#modelos').innerHTML=SUP.shapes.map(m=>`<li><a href="catalogo/#${m.id}">${m.nome}</a><span><strong>${SUP.brl(m.aVista)}</strong> à vista<br>${SUP.parcelas}x de ${SUP.brl(m.cartao/SUP.parcelas)} (${SUP.brl(m.cartao)})</span></li>`).join('');
+if(SUP.depoimentos.length){ const d=$('#depoimentos'); d.hidden=false; d.innerHTML=SUP.depoimentos.map(x=>`<figure><blockquote>${x.texto}</blockquote><figcaption>${x.nome}, ${x.cidade}</figcaption></figure>`).join(''); }
+
+// escolhe o modelo e explica o motivo
+function indicar(peso, mar, ja, junto){
+  const g=SUP.shape('grande'), t=SUP.shape('travessia'), p=SUP.shape('compacto'), k=SUP.shape('classico');
+  const onde=mar?'no mar':'na represa ou no rio';
+  if(peso>g.pesoMax) return null;
+  if(junto) return [g, `Levando criança ou pet no bico, os ${g.litros} L e 34" de largura do ${g.nome} dão a base mais estável. O limite de ${g.pesoMax} kg vale para vocês juntos, e todos de colete.`];
+  if(peso>110) return [g, `Com ${peso} kg ${onde}, os ${g.litros} L e 34" de largura do ${g.nome} dão mais flutuação e estabilidade.`];
+  if(ja && !mar) return [t, `Com ${peso} kg e já remando, o bico do ${t.nome} faz a prancha deslizar mais entre uma remada e outra, bom para distâncias longas.`];
+  if(peso<=p.pesoMax && (mar || peso<=65)) return [p, `Com ${peso} kg ${onde}, os ${p.litros} L do ${p.nome} seguram bem e a prancha menor é mais fácil de virar e carregar.`];
+  return [k, `Com ${peso} kg ${onde}, os ${k.litros} L do ${k.nome} dão sobra de flutuação para ficar em pé com estabilidade.${mar?' Comece em dia de mar calmo.':''}`];
+}
 function recomenda(anunciar){
-  const d=new FormData(quiz), peso=+d.get('peso'), mar=d.get('onde')==='mar', ja=d.get('exp')==='ja';
+  const d=new FormData(quiz), peso=+d.get('peso'), mar=d.get('onde')==='mar', ja=d.get('exp')==='ja', junto=d.has('junto');
   if(!quiz.checkValidity()){ saida.innerHTML='<p>Digite um peso entre 30 e 200 kg.</p>'; if(anunciar) $('#anuncio').textContent=saida.textContent; return; }
-  const local=mar?'no mar':'em represa ou lago', passa=peso>M.pesoMax;
-  const nome=passa?'Fale com a gente':M.nome;
-  const texto=passa?`O ${M.nome} é indicado para até ${M.pesoMax} kg. Antes de escolher, converse com quem fabrica.`
-    :`${M.largura} de largura, até ${M.pesoMax} kg.`+(mar?' No mar, comece em dia calmo.':'')+(ja?' É um modelo anunciado para iniciantes: conte o que você busca.':'');
-  saida.innerHTML=`<p>Para ${peso} kg, ${local}:</p><p class="grande">${nome}</p><p>${texto}</p><a class="btn" href="#contato" data-origem="seletor">Enviar meus dados no WhatsApp</a>`;
-  saida.querySelector('a').dataset.zap=`Oi! Peso ${peso} kg, vou remar ${local} e ${ja?'já remo':'estou começando'}. ${passa?'Qual prancha vocês indicam?':'O site indicou o '+M.nome+'.'}`;
+  const r=indicar(peso,mar,ja,junto);
+  const nome=r?r[0].nome:'Fale com a gente';
+  const texto=r?r[1]:`Acima de ${SUP.shape('grande').pesoMax} kg, converse com quem fabrica antes de escolher.`;
+  saida.innerHTML=`<p>Nossa indicação</p><p class="grande">${nome}</p><p>${texto}</p>`
+    +(r?`<p class="specs">${r[0].medida}, cerca de ${r[0].litros} L, até ${r[0].pesoMax} kg. ${SUP.brl(r[0].aVista)} à vista.</p>`:'')
+    +`<div class="acoes"><a class="btn" href="#contato" data-origem="seletor">Enviar meus dados no WhatsApp</a>${r?`<a class="link" href="catalogo/#${r[0].id}">Ver este modelo</a>`:''}</div>`;
+  saida.querySelector('a[data-origem]').dataset.zap=`Oi! Peso ${peso} kg, vou remar ${mar?'no mar':'em represa ou rio'}, ${ja?'já remo':'estou começando'}${junto?' e quero levar criança ou pet':''}. ${r?'O site indicou o '+nome+'.':'Qual prancha vocês indicam?'}`;
   if(anunciar) $('#anuncio').textContent=`${nome}. ${texto}`;
 }
 quiz.addEventListener('change',()=>recomenda(true));

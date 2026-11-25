@@ -4,23 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Catálogo de artes · SUP Brasil</title>
-<meta name="description" content="Artes de pranchas SUP Brasil para personalizar a sua.">
+<title>Catálogo · SUP Brasil</title>
+<meta name="description" content="4 modelos de prancha SUP Brasil e as artes da casa.">
 <link rel="icon" href="../imagens/logo-sup-brasil.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../estilo.css">
 <script src="../dados.js"></script>
 <style>
-.abre{padding:2.5rem var(--lado) 1.5rem;display:grid;gap:1rem}
-.indice{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
-.arte{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.25rem,6vw,6rem);padding:2rem var(--lado);align-items:center;scroll-margin-top:1rem}
-.arte:nth-of-type(even) .fotos{order:2}
-.fotos{display:flex;gap:1rem;justify-content:center;align-items:center;background:var(--ceu2);border-radius:18px;padding:1.25rem;height:620px}
-.fotos figure{flex:0 1 190px;min-width:0;display:grid;justify-items:center}.fotos img{width:auto;max-width:100%;height:540px;object-fit:contain}
-.fotos figcaption{font-size:.85rem;margin-top:.4rem}
-.arte h2{font-size:clamp(2.2rem,5vw,4rem)}
-@media(max-width:760px){.arte{grid-template-columns:1fr}.arte:nth-of-type(even) .fotos{order:0}.fotos{height:470px;padding:.75rem}.fotos img{height:400px}}
+.abre{padding:2.5rem var(--lado) 1.5rem;display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)}
+.arte{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.25rem,6vw,6rem);padding:2rem var(--lado);align-items:center;scroll-margin-top:1rem}
+.arte:nth-of-type(even) .vitrine{order:2}
+.vitrine .midia{height:600px}
+.arte h2{font-size:clamp(2.2rem,4.5vw,3.6rem)}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:2rem 1.5rem;margin-top:1.5rem}
+.galeria article{display:grid;gap:.5rem;align-content:start;justify-items:start;scroll-margin-top:1rem}.galeria .midia{width:100%;height:380px}
+@media(max-width:760px){.arte{grid-template-columns:minmax(0,1fr)}.arte:nth-of-type(even) .vitrine{order:0}.vitrine .midia{height:440px}}
 </style>
 </head>
 <body>
@@ -28,25 +27,48 @@
 <header class="topo"><a class="marca" href="../"><img src="../imagens/logo-sup-brasil.jpg" width="52" height="52" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="../">Oficina</a><a href="../catalogo/" aria-current="page">Catálogo</a><a href="../loja/">Loja</a></nav></header>
 <a class="promo" href="#contato" data-origem="faixa" data-zap="Oi! Quero aproveitar a Black Week da SUP Brasil."><span data-t="faixa">Black Week SUP Brasil</span></a>
 <main id="conteudo">
-<div class="abre" data-hero><h1>Artes que já saíram da casa</h1><p>Escolha uma como ponto de partida. As encomendas são cotadas sobre o modelo <span data-t="modelo">da casa</span>, com kit completo.</p>
-<p><strong data-t="aVista">Preço no WhatsApp</strong> <strong>à vista</strong>, <span data-t="parcelado">ou no cartão</span>.</p><p class="so-promo pequeno" data-t="notaPromo"></p>
-<noscript><p><strong>Ative o JavaScript para ver as artes, ou chame no WhatsApp pelo link no fim da página.</strong></p></noscript><nav class="indice" id="indice" aria-label="Ir para a arte"></nav></div>
+<div class="abre" data-hero><h1>Modelos e artes da casa</h1><p>4 tamanhos de prancha, todos com bloco <span data-t="bloco">EPS</span>, fibra de <span data-t="fibra">vidro</span> e resina <span data-t="resina">epóxi</span>.</p>
+<p class="so-promo pequeno" data-t="notaPromo"></p>
+<div class="filtros" id="filtros" role="group" aria-label="Filtrar por perfil"></div>
+<p class="pequeno">As fotos mostram a arte. O formato final é o do modelo escolhido.</p>
+<noscript><p><strong>Ative o JavaScript para ver os modelos, ou chame no WhatsApp pelo link no fim da página.</strong></p></noscript></div>
 <div id="lista"></div>
+<section class="sec ceu" id="outras"><h2>Outras artes que já saíram da casa</h2><p>Peça qualquer uma no modelo que preferir.</p><div class="galeria" id="galeria"></div></section>
 </main>
 <div class="assinatura" aria-hidden="true"></div>
-<footer id="contato"><h2>Tem outra ideia de arte?</h2><p>Mande a referência pelo WhatsApp.</p>
-<a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
-<small>SUP Brasil. <a data-url="maps" href="#contato" target="_blank" rel="noopener" data-t="endereco">Cidade Patriarca, São Paulo</a>.<br>
-<a data-url="tel1" href="#contato" data-t="tel1">Telefone</a> · <a data-url="tel2" href="#contato" data-t="tel2">Segundo telefone</a><br>
-<a data-url="insta" href="#contato" target="_blank" rel="noopener">Instagram</a>. Protótipo de demonstração por ezf.tech.</small>
+<footer id="contato"><div class="chamada">
+<h2>Tem outra ideia de arte?</h2><p>Mande a referência pelo WhatsApp.</p>
+<a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg>Chamar no WhatsApp</a></div>
+<ul class="contatos"><li><a data-url="maps" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.500-5.700-6.500-11a6.500 6.500 0 0 1 13 0c0 5.300-6.500 11-6.500 11z"/><circle cx="12" cy="10" r="2.300"/></svg><span><small>Endereço, abrir no mapa</small><span data-t="endereco">Cidade Patriarca, São Paulo</span></span></a></li><li><a href="#contato" data-origem="rodape" data-zap="Oi! Vim pelo site da SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg><span><small>WhatsApp</small><span data-t="tel1">Atendimento</span></span></a></li><li><a data-url="tel2" href="#contato"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a1.500 1.500 0 0 1-1.500 1.500C10.500 20 4 13.500 3.500 5.500A1.500 1.500 0 0 1 5 4z"/></svg><span><small>Telefone</small><span data-t="tel2">Segundo contato</span></span></a></li><li><a data-url="insta" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8.500 7l1.500-3h4l1.500 3"/><circle cx="12" cy="13.500" r="3.500"/></svg><span><small>Instagram</small>@supbrasil2020</span></a></li></ul>
+<p class="credito">SUP Brasil. Site por ezf.tech.</p>
 <noscript><p>Chame no WhatsApp: <a href="https://wa.me/5511954334404">(11) 95433-4404</a></p></noscript></footer>
 <script>
-const I='../imagens/';
-document.getElementById('indice').innerHTML=SUP.pranchas.map(p=>`<a class="link" href="#${p.id}">${p.nome}</a>`).join('');
-document.getElementById('lista').innerHTML=SUP.pranchas.map(p=>`<section class="arte" id="${p.id}">
-<div class="fotos">${p.fotos.map(([f,w,h,r])=>`<figure><img src="${I}${f}.webp" width="${w}" height="${h}" loading="lazy" alt="Prancha ${p.nome}, ${r}"><figcaption>${r}</figcaption></figure>`).join('')}</div>
-<div class="pilha"><h2>${p.nome}</h2><p>${p.texto}</p><p class="mono">${SUP.modelo.medida}</p>${p.video?'<a class="link" href="../#filme">Ver o vídeo desta prancha</a>':''}
-<a class="btn" href="#contato" data-zap="Oi! Quero encomendar uma prancha ${SUP.modelo.nome} com arte inspirada em ${p.nome}.">Quero essa arte</a></div></section>`).join('');
+const I='../imagens/', $=s=>document.querySelector(s), lista=$('#lista');
+lista.innerHTML=SUP.shapes.map(m=>`<section class="arte" id="${m.id}" data-perfil="${m.perfil}">
+<div class="vitrine">${SUP.midia(m,m.artes[0],I)}</div>
+<div class="pilha"><h2>${m.nome}</h2><p>${m.uso}</p>
+<p class="specs">${m.medida}, cerca de ${m.litros} L, até ${m.pesoMax} kg. ${m.quilhas}.</p>
+<p><span class="valor-linha">${SUP.brl(m.aVista)}</span> à vista<br><span class="pequeno">ou ${SUP.parcelas}x de ${SUP.brl(m.cartao/SUP.parcelas)} (${SUP.brl(m.cartao)} no total)</span></p>
+${SUP.opcoesArte(m,'arte-'+m.id)}
+<div class="acoes"><a class="btn" href="#contato" data-origem="catalogo">Quero este modelo</a><a class="link" href="../loja/#${m.id}">Ver na loja</a></div></div></section>`).join('');
+$('#galeria').innerHTML=SUP.galeria.map(a=>`<article id="${a.id}"><div class="midia">${a.fotos.map(([f,w,h,r])=>`<img src="${I}${f}.webp" width="${w}" height="${h}" loading="lazy" alt="${a.nome}, ${r}">`).join('')}</div>
+<h3>${a.nome}</h3>${a.video?'<a class="link" href="../#filme">Ver o vídeo</a>':''}<a class="link" href="#contato" data-origem="galeria" data-zap="Oi! Quero uma prancha com a arte ${a.nome}.">Pedir essa arte</a></article>`).join('');
+function escolher(secao){
+  const m=SUP.shape(secao.id), arte=secao.querySelector('input:checked').value, a=secao.querySelector('a[data-zap],a[data-origem]');
+  secao.querySelector('.vitrine').innerHTML=SUP.midia(m,arte,I);
+  a.dataset.zap=`Oi! Quero o modelo ${m.nome} com a arte ${SUP.artes[arte].nome}.`; a.href=SUP.link(a.dataset.zap);
+}
+lista.querySelectorAll('.arte').forEach(escolher);
+lista.addEventListener('change',e=>escolher(e.target.closest('.arte')));
+SUP.filtros($('#filtros'),lista);
+// links antigos por arte (ex.: #leao) abrem o modelo com a arte marcada
+function irPara(){
+  const h=location.hash.slice(1), radio=lista.querySelector(`input[value="${CSS.escape(h)}"]`), alvo=radio?radio.closest('.arte'):h&&document.getElementById(h);
+  if(!alvo) return;
+  SUP.filtrar($('#filtros'),lista,'todos');
+  if(radio){ radio.checked=true; escolher(alvo); }
+  alvo.scrollIntoView();
+}
+addEventListener('hashchange',irPara); addEventListener('load',irPara);
 </script>
-
 </body></html>
