@@ -55,11 +55,12 @@ function desenha(){
   $('.ficha').innerHTML=`<h1>${p.nome}</h1><p class="mono">Ficha ${p.ref}</p><p>${p.texto}</p>
   <table>${Object.entries(p.medidas).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</table>
   <p class="nota">Medidas e linhas de exemplo, a confirmar com a oficina.</p>
-  <a class="btn" target="_blank" rel="noopener" href="${SUP.zap(`Oi! Quero reservar a prancha ${p.nome} (ref. ${p.ref}).`)}">Reservar a ${p.nome}</a>`;
+  <a class="btn" href="#" data-zap="Oi! Quero reservar a prancha ${p.nome} (ref. ${p.ref}).">Reservar a ${p.nome}</a>`;
 }
 document.addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
   const {linha:l,id:i,aba:a}=b.dataset;
+  if(!l&&!i&&!a) return;
   if(l) linha=l; if(i){id=i; history.replaceState(null,'','#'+i);} if(a) aba=a;
   desenha();
   document.querySelector(l?`[data-linha="${l}"]`:i?`[data-id="${i}"]`:`[data-aba="${a}"]`).focus();

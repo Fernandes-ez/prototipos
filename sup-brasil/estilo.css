@@ -21,6 +21,11 @@ p{max-width:62ch}
 .topo nav{display:flex;flex-wrap:wrap}
 .topo nav a,.topo nav button{display:flex;align-items:center;min-height:52px;padding:0 1.1rem;border:0;border-left:var(--b);background:none;color:inherit;font:600 .92rem var(--sans);text-decoration:none;cursor:pointer}
 .topo nav [aria-current]{background:var(--tinta);color:var(--papel)}
+#contatos{margin:auto;width:min(360px,calc(100% - 2rem));padding:1.5rem;border:var(--b);background:var(--papel);color:var(--tinta)}
+#contatos[open]{display:grid;gap:.8rem}
+#contatos::backdrop{background:rgba(17,34,51,.55)}
+#contatos h2{font-size:1.6rem}
+#contatos .btn{width:100%}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.3rem;border:var(--b);border-radius:0;background:var(--tinta);color:var(--papel);font:600 .95rem var(--sans);text-decoration:none;cursor:pointer}
 .btn:hover{background:#A93F10}
 .btn.claro{background:var(--papel);color:var(--tinta)}

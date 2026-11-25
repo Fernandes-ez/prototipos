@@ -102,7 +102,7 @@ $('#abrir').onclick=()=>$('#sacola').showModal();
 $('#fechar').onclick=()=>$('#sacola').close();
 $('#fecharpedido').onclick=()=>{
   const linhas=Object.entries(sacola).map(([k,q])=>{const [i,v]=k.split(':'); return `${q}x Prancha ${prod(i).nome} (${V[v]}): ${SUP.brl(preco(prod(i),v)*q)}`;});
-  open(SUP.zap(['Oi! Quero fechar este pedido na SUP Brasil:',...linhas,'',`Subtotal: ${SUP.brl(total())}`,`À vista no PIX (5% off): ${SUP.brl(pix(total()))}`].join('\n')),'_blank','noopener');
+  SUP.chamar(['Oi! Quero fechar este pedido na SUP Brasil:',...linhas,'',`Subtotal: ${SUP.brl(total())}`,`À vista no PIX (5% off): ${SUP.brl(pix(total()))}`].join('\n'));
 };
 desenha();
 </script>

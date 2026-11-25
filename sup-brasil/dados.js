@@ -1,9 +1,9 @@
 /* Dados da SUP Brasil (edite aqui).
-   ATENÇÃO: WhatsApp, preços, medidas e linhas abaixo ainda NÃO foram confirmados pelo cliente.
-   Preços e medidas são exemplos do protótipo. */
-/* Endereço e Instagram (@supbrasil2020) informados em 25/11/2026; no HTML das páginas. */
+   Confirmados em 25/11/2026: telefones, endereço e Instagram @supbrasil2020 (os dois últimos no HTML).
+   ATENÇÃO: preços, medidas e linhas abaixo são exemplos do protótipo, ainda não confirmados. */
 window.SUP = {
-  whatsapp: '', // 55 + DDD + número, só dígitos. Vazio: o WhatsApp abre pedindo para escolher o contato.
+  contatos: [ { nome:'Osmar', zap:'5511954334404', tel:'(11) 95433-4404' },
+              { nome:'Otávio', zap:'5511921868337', tel:'(11) 92186-8337' } ],
   kitExtra: 700, // exemplo: remo + leash
   pranchas: [
     { id:'mandala', nome:'Mandala', ref:'SB-MDL', linhas:['madeira','represa'], preco:4200,
@@ -15,7 +15,19 @@ window.SUP = {
       medidas:{'Comprimento':'10\'6"','Largura':'32"','Espessura':'4.5"','Volume':'185 L','Peso suportado':'até 120 kg','Quilhas':'2+1'},
       detalhe:{img:'leao-caixas-quilha.jpg',alt:'Rabeta da prancha Leão com as três caixas de quilha',legenda:'As três caixas de quilha no fundo da Leão: uma central e duas laterais.'} }
   ],
-  zap(msg){ return 'https://wa.me/' + this.whatsapp + '?text=' + encodeURIComponent(msg); },
+  // abre a escolha entre os dois contatos, com a mensagem pronta
+  chamar(msg){
+    let d = document.getElementById('contatos');
+    if(!d){ d = document.createElement('dialog'); d.id = 'contatos'; d.setAttribute('aria-label','Escolha com quem falar'); document.body.append(d); }
+    d.innerHTML = '<h2>Falar com quem?</h2>' + this.contatos.map(c =>
+      `<a class="btn" target="_blank" rel="noopener" href="https://wa.me/${c.zap}?text=${encodeURIComponent(msg)}">${c.nome}, ${c.tel}</a>`).join('')
+      + '<form method="dialog"><button class="btn claro">Fechar</button></form>';
+    d.querySelectorAll('a').forEach(a => a.addEventListener('click', () => d.close()));
+    d.showModal();
+  },
   brl(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
 };
-document.querySelectorAll('[data-zap]').forEach(a => { a.href = SUP.zap(a.dataset.zap); a.target = '_blank'; a.rel = 'noopener'; });
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-zap]');
+  if(a){ e.preventDefault(); SUP.chamar(a.dataset.zap); }
+});
