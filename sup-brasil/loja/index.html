@@ -48,7 +48,7 @@
 </main>
 <div class="assinatura" aria-hidden="true"></div>
 <footer id="contato"><div class="chamada">
-<h2>Dúvida antes de pedir?</h2><p>Mande seu peso e onde pretende remar.</p>
+<h2>Dúvida antes de pedir?</h2><p>Conte onde pretende remar e a arte que imaginou.</p>
 <a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg>Chamar no WhatsApp</a></div>
 <ul class="contatos"><li><a data-url="maps" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.500-5.700-6.500-11a6.500 6.500 0 0 1 13 0c0 5.300-6.500 11-6.500 11z"/><circle cx="12" cy="10" r="2.300"/></svg><span><small>Endereço, abrir no mapa</small><span data-t="endereco">Cidade Patriarca, São Paulo</span></span></a></li><li><a href="#contato" data-origem="rodape" data-zap="Oi! Vim pelo site da SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg><span><small>WhatsApp</small><span data-t="tel1">Atendimento</span></span></a></li><li><a data-url="tel2" href="#contato"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a1.500 1.500 0 0 1-1.500 1.500C10.500 20 4 13.500 3.500 5.500A1.500 1.500 0 0 1 5 4z"/></svg><span><small>Telefone</small><span data-t="tel2">Segundo contato</span></span></a></li><li><a data-url="insta" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8.500 7l1.500-3h4l1.500 3"/><circle cx="12" cy="13.500" r="3.500"/></svg><span><small>Instagram</small>@supbrasil2020</span></a></li></ul>
 <p class="credito">SUP Brasil. Site por ezf.tech.</p>
@@ -87,8 +87,8 @@ const total=()=>Object.entries(sacola).reduce((s,[k,q])=>{const x=partes(k); ret
 function desenha(){
   const itens=Object.entries(sacola);
   $('#cont').textContent=itens.reduce((s,[,q])=>s+q,0);
-  $('#itens').innerHTML=itens.map(([k,q])=>{const {m,arte,v}=partes(k), f=arte.fotos?arte.fotos[0][0]:m.foto.arquivo;
-    return `<div class="item"><img src="${I+f}.webp" alt=""><div><strong>${m.nome}</strong><p>Arte ${arte.nome}, ${V[v].toLowerCase()}</p><p class="mono">${SUP.brl(preco(m,v)*q)}</p>
+  $('#itens').innerHTML=itens.map(([k,q])=>{const {m,arte,v}=partes(k), mini=arte.fotos?`<img src="${I+arte.fotos[0][0]}.webp" alt="">`:SUP.contorno;
+    return `<div class="item">${mini}<div><strong>${m.nome}</strong><p>Arte ${arte.nome}, ${V[v].toLowerCase()}</p><p class="mono">${SUP.brl(preco(m,v)*q)}</p>
     <div class="qtd"><button class="btn claro" data-k="${k}" data-d="-1" aria-label="Tirar uma ${m.nome}">−</button><span class="mono">${q}</span><button class="btn claro" data-k="${k}" data-d="1" aria-label="Somar uma ${m.nome}">+</button></div></div></div>`;
   }).join('')||'<p style="padding:1rem">A sacola está vazia. Escolha um modelo na loja.</p>';
   $('#sub').textContent=SUP.brl(total());

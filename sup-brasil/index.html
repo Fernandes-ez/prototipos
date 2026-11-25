@@ -22,8 +22,9 @@
 .seletor{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
 form{display:grid;gap:1.4rem;margin-top:1.5rem}
 fieldset{border:0;display:flex;flex-wrap:wrap;gap:.5rem}legend,.campo{font-weight:600;margin-bottom:.5rem;display:block}
-.op input{position:absolute;opacity:0}
-.op span{display:flex;align-items:center;min-height:48px;padding:0 1.2rem;border-radius:999px;background:#fff;cursor:pointer}
+.op{position:relative;display:inline-flex}.op input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.op span{display:flex;align-items:center;min-height:48px;padding:0 1.2rem;border-radius:999px;background:#fff}
+.porte{flex-direction:column;align-items:stretch;max-width:30rem}.porte .op{display:flex}.porte .op span{flex:1;padding:.6rem 1.2rem;line-height:1.35}
 .op input:checked+span{background:var(--tinta);color:#fff}
 .op input:focus-visible+span{outline:3px solid var(--laranja);outline-offset:2px}
 input[type=number]{font:600 1.6rem var(--serif);width:8ch;min-height:56px;border:0;border-bottom:3px solid var(--tinta);background:transparent;color:var(--tinta)}
@@ -34,14 +35,13 @@ input[type=number]{font:600 1.6rem var(--serif);width:8ch;min-height:56px;border
 .artes img{height:clamp(300px,30vw,420px);width:auto;max-width:none}
 .artes strong{display:block;font:600 1.15rem var(--serif);text-align:center}
 .oficina{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:clamp(2rem,7vw,7rem);align-items:center}
-.filme video{width:100%;aspect-ratio:9/16;background:#000}
+.filme video{width:100%;aspect-ratio:9/16;background:var(--tinta) url(imagens/tartaruga-poster.jpg) center/cover}
 .filme button{margin-top:.5rem;min-height:44px;background:none;border:0;color:var(--ceu);font:600 .9rem var(--sans);text-decoration:underline;cursor:pointer}
 dl.ficha{display:flex;flex-wrap:wrap;gap:1.25rem 3rem}.ficha dt{font-size:.85rem;opacity:.8}.ficha dd{font:600 1.5rem var(--serif)}
 .valor{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
 .valor ul{list-style:none;margin-top:1rem}.valor #kit li{font:400 clamp(1.15rem,2vw,1.6rem)/1.3 var(--serif);padding:.35rem 0;border-bottom:1px solid var(--ceu)}
 .modelos{list-style:none;width:100%}.modelos li{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--ceu)}
 .modelos a{font:600 1.1rem var(--serif);min-height:44px;display:flex;align-items:center}.modelos span{text-align:right;font-size:.88rem;line-height:1.45}.modelos span strong{font-size:1.05rem}
-.op input[type=checkbox]:checked+span{background:var(--tinta);color:#fff}
 .preco{font:600 clamp(3.2rem,8vw,6rem)/1 var(--serif)}
 summary{cursor:pointer;font-weight:600;min-height:48px;padding:.7rem 0}
 details ul{padding-left:1.2rem}details .link{display:flex}
@@ -79,10 +79,9 @@ details ul{padding-left:1.2rem}details .link{display:flex}
 <section class="sec ceu" id="qual"><div class="seletor">
 <div><h2>Qual prancha é pra você?</h2><p>Responda e veja qual dos nossos 4 modelos combina com você.</p>
 <form id="quiz">
-<label><span class="campo">Seu peso, em kg</span><input type="number" name="peso" min="30" max="200" value="75" inputmode="numeric" required></label>
+<fieldset class="porte"><legend>O que combina com você?</legend><label class="op"><input type="radio" name="porte" value="leve"><span>Mais leve e ágil (até ~85 kg)</span></label><label class="op"><input type="radio" name="porte" value="medio" checked><span>Equilíbrio clássico (até ~120 kg)</span></label><label class="op"><input type="radio" name="porte" value="maxima"><span>Máxima estabilidade ou em dupla (até ~150 kg)</span></label></fieldset>
 <fieldset><legend>Onde vai remar</legend><label class="op"><input type="radio" name="onde" value="represa" checked><span>Represa ou rio</span></label><label class="op"><input type="radio" name="onde" value="mar"><span>Mar ou ondas</span></label></fieldset>
 <fieldset><legend>Experiência</legend><label class="op"><input type="radio" name="exp" value="nova" checked><span>Estou começando</span></label><label class="op"><input type="radio" name="exp" value="ja"><span>Já remo</span></label></fieldset>
-<fieldset><legend>Companhia no bico</legend><label class="op"><input type="checkbox" name="junto"><span>Vou levar criança ou pet</span></label></fieldset>
 <div><button class="btn" type="submit">Ver resultado</button></div>
 </form></div>
 <div class="resposta pilha" id="resposta"><p>Ative o JavaScript para usar o seletor, ou chame no WhatsApp.</p></div><p class="pular" id="anuncio" aria-live="polite"></p>
@@ -92,7 +91,7 @@ details ul{padding-left:1.2rem}details .link{display:flex}
 <div class="artes" tabindex="0" role="region" aria-label="Artes, role para o lado"><a href="catalogo/#mandala"><img src="imagens/mandala-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala, verso"><strong>Mandala</strong></a><a href="catalogo/#fogo"><img src="imagens/fogo-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte céu em fogo, verso"><strong>Céu em fogo</strong></a><a href="catalogo/#leao"><img src="imagens/leao-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte leão, verso"><strong>Leão</strong></a><a href="catalogo/#guerreira"><img src="imagens/guerreira-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte guerreira, verso"><strong>Guerreira</strong></a><a href="catalogo/#tartaruga"><img src="imagens/tartaruga-azul-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte tartaruga azul, verso"><strong>Tartaruga</strong></a><a href="catalogo/#hibisco"><img src="imagens/hibisco-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte hibisco, verso"><strong>Hibisco</strong></a><a href="catalogo/#mandala-azul"><img src="imagens/mandala-azul-verso.webp" width="400" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala azul, verso"><strong>Mandala azul</strong></a></div></section>
 
 <section class="sec noite" id="filme"><div class="oficina">
-<div class="filme"><video data-loop muted loop playsinline preload="metadata" width="360" height="640" poster="imagens/tartaruga-poster.jpg" aria-label="Vídeo sem som percorrendo uma prancha com arte de tartaruga, do bico à rabeta"><source src="imagens/tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></div>
+<div class="filme"><video data-loop muted loop playsinline preload="none" width="360" height="640" poster="imagens/tartaruga-poster.jpg" aria-label="Vídeo sem som percorrendo uma prancha com arte de tartaruga, do bico à rabeta"><source src="imagens/tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></div>
 <div class="pilha"><h2>Passe os olhos de perto.</h2><p>Brilho de resina, traço fechado e a arte correndo até a borda. É assim que a prancha sai da casa.</p>
 <dl class="ficha"><div><dt>Bloco</dt><dd data-t="bloco">·</dd></div><div><dt>Fibra de vidro</dt><dd data-t="fibra">·</dd></div><div><dt>Resina</dt><dd data-t="resina">·</dd></div><div><dt>Tamanhos</dt><dd>4</dd></div></dl>
 <a class="btn claro" href="#contato" data-zap="Oi! Vi o vídeo no site e quero ver mais fotos e vídeos de pranchas prontas.">Pedir mais vídeos no WhatsApp</a></div></div></section>
@@ -116,7 +115,7 @@ details ul{padding-left:1.2rem}details .link{display:flex}
 <details><summary>Quanto custa o frete?</summary><p>Retire em Cidade Patriarca ou receba por transportadora em todo o Brasil.</p><p data-campo="frete">O valor depende do seu CEP.</p><a class="link" href="#contato" data-origem="frete" data-zap="Oi! Quero simular o frete de uma prancha. Meu CEP é: ">Simular meu frete no WhatsApp</a></details>
 <details><summary>Tem garantia e reparo?</summary><p data-campo="garantia">Confirme a cobertura de garantia no WhatsApp antes de fechar.</p><p data-campo="reparo">Pergunte também como funciona o reparo em caso de impacto.</p><a class="link" href="#contato" data-origem="garantia" data-zap="Oi! Como funcionam a garantia e o reparo das pranchas?">Perguntar sobre garantia</a></details>
 <details><summary>É seguro pagar o sinal?</summary><p>Antes de pagar, peça fotos e vídeos de pranchas da casa, confirme prazo e valor, ou visite o endereço abaixo.</p><a class="link" href="#contato" data-origem="sinal" data-zap="Oi! Antes de pagar o sinal, quero ver fotos e vídeos de pranchas e entender os prazos.">Tirar essa dúvida</a></details>
-<details><summary>Vou conseguir ficar em pé?</summary><p>Os modelos Clássico e Grande Porte são os mais largos e estáveis. Comece em água calma, com leash e colete.</p><a class="link" href="#qual">Conferir pelo meu peso</a></details>
+<details><summary>Vou conseguir ficar em pé?</summary><p>Os modelos Clássico e Grande Porte são os mais largos e estáveis. Comece em água calma, com leash e colete.</p><a class="link" href="#qual">Descobrir meu modelo</a></details>
 </div></section>
 
 <section class="sec ceu onde" id="onde"><h2>Venha ver de perto</h2><address data-t="endereco">Cidade Patriarca, São Paulo</address>
@@ -124,7 +123,7 @@ details ul{padding-left:1.2rem}details .link{display:flex}
 </main>
 <div class="assinatura" aria-hidden="true"></div>
 <footer id="contato"><div class="chamada">
-<h2>Bora remar?</h2><p>Mande seu peso, onde quer remar e a arte que você imaginou.</p>
+<h2>Bora remar?</h2><p>Conte onde quer remar e a arte que você imaginou.</p>
 <a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg>Chamar no WhatsApp</a></div>
 <ul class="contatos"><li><a data-url="maps" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.500-5.700-6.500-11a6.500 6.500 0 0 1 13 0c0 5.300-6.500 11-6.500 11z"/><circle cx="12" cy="10" r="2.300"/></svg><span><small>Endereço, abrir no mapa</small><span data-t="endereco">Cidade Patriarca, São Paulo</span></span></a></li><li><a href="#contato" data-origem="rodape" data-zap="Oi! Vim pelo site da SUP Brasil."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.300-4A8 8 0 1 1 8.500 19z"/><path d="M9 10.500h6M9 13.500h4"/></svg><span><small>WhatsApp</small><span data-t="tel1">Atendimento</span></span></a></li><li><a data-url="tel2" href="#contato"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a1.500 1.500 0 0 1-1.500 1.500C10.500 20 4 13.500 3.500 5.500A1.500 1.500 0 0 1 5 4z"/></svg><span><small>Telefone</small><span data-t="tel2">Segundo contato</span></span></a></li><li><a data-url="insta" href="#contato" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8.500 7l1.500-3h4l1.500 3"/><circle cx="12" cy="13.500" r="3.500"/></svg><span><small>Instagram</small>@supbrasil2020</span></a></li></ul>
 <p class="credito">SUP Brasil. Site por ezf.tech.</p>
@@ -136,27 +135,26 @@ $('#modelos').innerHTML=SUP.shapes.map(m=>`<li><a href="catalogo/#${m.id}">${m.n
 if(SUP.depoimentos.length){ const d=$('#depoimentos'); d.hidden=false; d.innerHTML=SUP.depoimentos.map(x=>`<figure><blockquote>${x.texto}</blockquote><figcaption>${x.nome}, ${x.cidade}</figcaption></figure>`).join(''); }
 
 // escolhe o modelo e explica o motivo
-function indicar(peso, mar, ja, junto){
+const PORTES={leve:'Mais leve e ágil (até ~85 kg)', medio:'Equilíbrio clássico (até ~120 kg)', maxima:'Máxima estabilidade ou em dupla (até ~150 kg)'};
+function indicar(porte, mar, ja){
   const g=SUP.shape('grande'), t=SUP.shape('travessia'), p=SUP.shape('compacto'), k=SUP.shape('classico');
   const onde=mar?'no mar':'na represa ou no rio';
-  if(peso>g.pesoMax) return null;
-  if(junto) return [g, `Levando criança ou pet no bico, os ${g.litros} L e 34" de largura do ${g.nome} dão a base mais estável. O limite de ${g.pesoMax} kg vale para vocês juntos, e todos de colete.`];
-  if(peso>110) return [g, `Com ${peso} kg ${onde}, os ${g.litros} L e 34" de largura do ${g.nome} dão mais flutuação e estabilidade.`];
-  if(ja && !mar) return [t, `Com ${peso} kg e já remando, o bico do ${t.nome} faz a prancha deslizar mais entre uma remada e outra, bom para distâncias longas.`];
-  if(peso<=p.pesoMax && (mar || peso<=65)) return [p, `Com ${peso} kg ${onde}, os ${p.litros} L do ${p.nome} seguram bem e a prancha menor é mais fácil de virar e carregar.`];
-  return [k, `Com ${peso} kg ${onde}, os ${k.litros} L do ${k.nome} dão sobra de flutuação para ficar em pé com estabilidade.${mar?' Comece em dia de mar calmo.':''}`];
+  if(porte==='maxima') return [g, `Os ${g.litros} L e 34" de largura do ${g.nome} dão a base mais estável. O limite de ${g.pesoMax} kg é a soma de tudo que vai na prancha. Em dupla, todos de colete.`];
+  if(ja && !mar) return [t, `Para quem já rema em represa ou rio, o bico do ${t.nome} faz a prancha deslizar mais entre uma remada e outra.${porte==='medio'?` Ele vai até ${t.pesoMax} kg; acima disso, fique no ${k.nome}.`:''}`];
+  if(porte==='leve') return [p, `Para um porte mais leve ${onde}, os ${p.litros} L do ${p.nome} seguram bem e a prancha menor é mais fácil de virar e carregar.`];
+  return [k, `Os ${k.litros} L do ${k.nome} dão sobra de flutuação ${onde}, para ficar em pé com estabilidade.${mar?' Comece em dia de mar calmo.':''} Acima de 110 kg, vale olhar o ${g.nome}.`];
 }
 function recomenda(anunciar){
-  const d=new FormData(quiz), peso=+d.get('peso'), mar=d.get('onde')==='mar', ja=d.get('exp')==='ja', junto=d.has('junto');
-  if(!quiz.checkValidity()){ saida.innerHTML='<p>Digite um peso entre 30 e 200 kg.</p>'; if(anunciar) $('#anuncio').textContent=saida.textContent; return; }
-  const r=indicar(peso,mar,ja,junto);
-  const nome=r?r[0].nome:'Fale com a gente';
-  const texto=r?r[1]:`Acima de ${SUP.shape('grande').pesoMax} kg, converse com quem fabrica antes de escolher.`;
-  saida.innerHTML=`<p>Nossa indicação</p><p class="grande">${nome}</p><p>${texto}</p>`
-    +(r?`<p class="specs">${r[0].medida}, cerca de ${r[0].litros} L, até ${r[0].pesoMax} kg. ${SUP.brl(r[0].aVista)} à vista.</p>`:'')
-    +`<div class="acoes"><a class="btn" href="#contato" data-origem="seletor">Enviar meus dados no WhatsApp</a>${r?`<a class="link" href="catalogo/#${r[0].id}">Ver este modelo</a>`:''}</div>`;
-  saida.querySelector('a[data-origem]').dataset.zap=`Oi! Peso ${peso} kg, vou remar ${mar?'no mar':'em represa ou rio'}, ${ja?'já remo':'estou começando'}${junto?' e quero levar criança ou pet':''}. ${r?'O site indicou o '+nome+'.':'Qual prancha vocês indicam?'}`;
-  if(anunciar) $('#anuncio').textContent=`${nome}. ${texto}`;
+  const d=new FormData(quiz), porte=d.get('porte'), mar=d.get('onde')==='mar', ja=d.get('exp')==='ja';
+  const [m,texto]=indicar(porte,mar,ja);
+  saida.innerHTML=`<p>Nossa indicação</p><p class="grande">${m.nome}</p><p>${texto}</p>`
+    +`<p class="specs">${m.medida}, cerca de ${m.litros} L, até ${m.pesoMax} kg. ${SUP.brl(m.aVista)} à vista.</p>`
+    +`<div class="acoes"><a class="btn" data-origem="seletor" target="_blank" rel="noopener">Enviar minhas respostas no WhatsApp</a><a class="link" href="catalogo/#${m.id}">Ver este modelo</a></div>`;
+  // o link já sai pronto, também para toque longo e "abrir em nova aba"
+  const a=saida.querySelector('a[data-origem]');
+  a.dataset.zap=`Oi! Minha faixa: ${PORTES[porte]}. Vou remar ${mar?'no mar':'em represa ou rio'} e ${ja?'já remo':'estou começando'}. O site indicou o ${m.nome}.`;
+  a.href=SUP.link(a.dataset.zap);
+  if(anunciar) $('#anuncio').textContent=`${m.nome}. ${texto}`;
 }
 quiz.addEventListener('change',()=>recomenda(true));
 quiz.addEventListener('submit',e=>{e.preventDefault(); recomenda(true);});

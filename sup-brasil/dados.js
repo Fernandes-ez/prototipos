@@ -7,7 +7,7 @@
    - depoimentos: o bloco só aparece quando houver depoimento real autorizado.
    - promo.ate é suposição. Confirmar data final e se os preços já incluem os R$ 200.
    - kit e sinal vieram do post do 10'0; confirmar se valem para os 4 modelos.
-   - artes sem 'fotos' (Onda Azul, Flor de Lótus) e a foto do Compacto: enviar fotos reais. */
+   - artes sem 'fotos' (Onda Azul, Flor de Lótus): enviar fotos reais do Compacto. */
 window.SUP = {
   contato: { nome:'Osmar', zap:'5511954334404', tel:'(11) 95433-4404' },     // atendimento principal (1 clique)
   contato2:{ nome:'Otávio', zap:'5511921868337', tel:'(11) 92186-8337' },    // aparece só no rodapé
@@ -16,11 +16,11 @@ window.SUP = {
   prova:'Mais de 800 pranchas vendidas',
   construcao:{ bloco:'EPS T4', fibra:'330 g', resina:'Epóxi UV' },
   sinal:500, parcelas:6,
-  // perfil: usado nos filtros ('leve', 'familia', 'travessia'). foto: usada quando a arte não tem foto própria.
+  // perfil: usado nos filtros ('leve', 'familia', 'travessia').
   shapes:[
     { id:'compacto', nome:'Compacto 9\'6"', medida:'9\'6" × 31" × 4,25"', litros:155, pesoMax:85, aVista:2250, cartao:2520,
       perfil:'leve', quilhas:'Quilhas 2+1', uso:'Para pessoas mais leves, jovens ou marolinha.',
-      artes:['onda-azul','flor-de-lotus'], foto:{arquivo:'bico-mar-verde-500', alt:'Bico de prancha sobre mar verde'} },
+      artes:['onda-azul','flor-de-lotus'] },
     { id:'classico', nome:'Clássico 10\'0"', medida:'10\'0" × 33" × 4"', litros:180, pesoMax:120, aVista:2400, cartao:2700,
       perfil:'familia', quilhas:'Quilhas 2+1', uso:'O carro-chefe: iniciantes e uso geral em represa ou mar calmo.',
       artes:['mandala','leao'] },
@@ -62,10 +62,12 @@ window.SUP = {
   ],
 
   shape(id){ return this.shapes.find(x=>x.id===id); },
+  // contorno genérico de prancha, usado quando a arte ainda é só sob encomenda
+  contorno:'<svg viewBox="0 0 100 380" aria-hidden="true"><path d="M50 4C76 36 91 112 91 196c0 72-11 138-25 178H34C20 334 9 268 9 196 9 112 24 36 50 4Z"/><path d="M50 40v300M20 214c20-12 40 12 60 0"/></svg>',
   // imagem de uma arte dentro de um modelo (usada na loja e no catálogo)
   midia(sh, idArte, base){
     const a=this.artes[idArte];
-    if(!a.fotos) return `<div class="midia cheia"><img src="${base}${sh.foto.arquivo}.webp" width="500" height="889" loading="lazy" alt="Foto ilustrativa: ${sh.foto.alt}"><p class="selo">Arte sob encomenda. Peça foto ou simulação no WhatsApp.</p></div>`;
+    if(!a.fotos) return `<div class="midia encomenda">${this.contorno}<p><strong>${a.nome}</strong>Arte sob encomenda. Peça foto ou simulação no WhatsApp.</p></div>`;
     return `<div class="midia${a.paisagem?' cheia':''}">`+a.fotos.map(([f,w,h,r])=>`<img src="${base}${f}.webp" width="${w}" height="${h}" loading="lazy" style="max-height:${Math.round(h*1.4)}px" alt="${a.nome}, ${r}">`).join('')+'</div>';
   },
   // escolha de arte em botões
@@ -125,19 +127,26 @@ addEventListener('DOMContentLoaded', () => {
     '<a class="barra fora" href="#contato" data-origem="barra" data-zap="Oi! Vim pelo site e quero tirar uma dúvida sobre as pranchas.">Tirar dúvida no WhatsApp</a>');
   document.querySelectorAll('a[data-zap]').forEach(a => { a.href = S.link(a.dataset.zap); a.target='_blank'; a.rel='noopener'; });
 
-  // a barra do rodapé só aparece depois que a primeira dobra sai da tela
-  const barra = document.querySelector('.barra'), topo = document.querySelector('[data-hero]');
-  if(topo && 'IntersectionObserver' in window)
-    new IntersectionObserver(([e]) => barra.classList.toggle('fora', e.isIntersecting || e.boundingClientRect.top > 0)).observe(topo);
-  else barra.classList.remove('fora');
+  // barra do WhatsApp: só depois da primeira dobra, ao rolar para cima, e nunca sobre o seletor ou o rodapé
+  const barra = document.querySelector('.barra'), topo = document.querySelector('[data-hero]'), ocupada = new Set();
+  let passou = !topo, descendo = false, y = scrollY;
+  const mostrar = () => barra.classList.toggle('fora', !passou || descendo || ocupada.size > 0);
+  if('IntersectionObserver' in window){
+    if(topo) new IntersectionObserver(([e]) => { passou = !e.isIntersecting && e.boundingClientRect.top <= 0; mostrar(); }).observe(topo);
+    const o = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? ocupada.add(e.target) : ocupada.delete(e.target)); mostrar(); });
+    document.querySelectorAll('footer, #qual').forEach(el => o.observe(el));
+    addEventListener('scroll', () => { if(Math.abs(scrollY - y) > 6){ descendo = scrollY > y; y = scrollY; mostrar(); } }, {passive:true});
+  } else barra.classList.remove('fora');
 
-  // vídeo mudo: respeita "reduzir movimento" e tem botão de pausa
+  // vídeo mudo: o pôster fica até o vídeo entrar na tela; respeita "reduzir movimento" e tem botão de pausa
   document.querySelectorAll('video[data-loop]').forEach(v => {
     const bt = v.parentElement.querySelector('button');
+    let pausado = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const rotulo = () => bt.textContent = v.paused ? 'Tocar vídeo' : 'Pausar vídeo';
     v.addEventListener('play', rotulo); v.addEventListener('pause', rotulo);
-    bt.addEventListener('click', () => v.paused ? v.play() : v.pause());
-    if(!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(()=>{});
+    bt.addEventListener('click', () => { pausado = !v.paused; v.paused ? v.play() : v.pause(); });
+    if('IntersectionObserver' in window)
+      new IntersectionObserver(([e]) => { if(!e.isIntersecting) v.pause(); else if(!pausado) v.play().catch(()=>{}); }, {threshold:.25}).observe(v);
     rotulo();
   });
 });
