@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SUP Brasil · Stand Up Paddle em São Paulo</title>
+<meta name="description" content="Pranchas de stand up paddle com madeira aparente e quilhas 2+1. São Paulo, SP.">
+<link rel="icon" href="imagens/logo-sup-brasil.jpg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.hero{display:grid;grid-template-columns:7fr 5fr;border-bottom:var(--b)}
+.hero>div{padding:clamp(1.5rem,5vw,4.5rem);display:flex;flex-direction:column;gap:1.4rem;justify-content:center}
+.hero figure{border-left:var(--b);position:relative;min-height:520px}
+.hero figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 75%}
+.acoes{display:flex;gap:.8rem;flex-wrap:wrap}
+.rapidas{display:grid;grid-template-columns:repeat(4,auto);border:var(--b);font-family:var(--mono)}
+.rapidas div{padding:.6rem .8rem;border-left:1px solid var(--tinta)}.rapidas div:first-child{border:0}
+.rapidas dt{font-family:var(--sans);font-size:.75rem}.rapidas dd{font-weight:600}
+.letreiro{background:var(--tinta);color:var(--papel);font:400 clamp(1.4rem,3vw,2.4rem)/1.3 var(--serif);padding:1.4rem 1.25rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem}
+.cab{padding:clamp(2.5rem,6vw,5rem) 1.25rem 2rem;max-width:1200px;margin:auto}.cab p{margin-top:.8rem}
+.vitrine{display:grid;grid-template-columns:1fr 1fr;border-block:var(--b)}
+.shape{display:flex;flex-direction:column}.shape+.shape{border-left:var(--b)}
+.shape .fotos{padding:clamp(1rem,3vw,2.5rem);display:grid;grid-template-columns:1fr 1fr;gap:.8rem;max-width:560px;width:100%;margin:auto}
+.shape .fotos img{border:var(--b);width:100%}
+.shape .txt{background:var(--papel);border-top:var(--b);padding:1.5rem;display:grid;gap:.8rem;flex:1;align-content:start;justify-items:start}
+.selo{display:grid;grid-template-columns:5fr 7fr;border-bottom:var(--b)}
+.selo .logo{display:grid;place-items:center;padding:2rem;border-right:var(--b);background:#fff}.selo .logo img{width:min(360px,100%);mix-blend-mode:multiply}
+.selo .txt{padding:clamp(1.5rem,5vw,4rem);display:grid;gap:1.2rem;align-content:center}
+.quilhas{display:grid;grid-template-columns:5fr 7fr}
+.quilhas figure{border-right:var(--b)}.quilhas figure img{width:100%}
+.quilhas figcaption{padding:.7rem 1rem;border-top:var(--b);font-size:.85rem}
+.quilhas .txt{padding:clamp(1.5rem,5vw,4rem);display:grid;gap:1.4rem;align-content:center}
+@media(max-width:860px){.hero,.vitrine,.selo,.quilhas{grid-template-columns:1fr}
+.hero figure{border-left:0;border-top:var(--b);min-height:460px}.shape+.shape{border-left:0;border-top:var(--b)}
+.selo .logo,.quilhas figure{border-right:0;border-bottom:var(--b)}.rapidas{grid-template-columns:1fr 1fr}
+.rapidas div:nth-child(3){border-left:0}.rapidas div:nth-child(n+3){border-top:1px solid var(--tinta)}}
+</style>
+</head>
+<body>
+<header class="topo"><a class="marca" href="./"><img src="imagens/logo-sup-brasil.jpg" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="./" aria-current="page">Oficina</a><a href="catalogo/">Catálogo</a><a href="loja/">Loja</a></nav></header>
+<div class="faixa xadrez"></div>
+<main>
+<section class="hero">
+<div><h1>Pranchas de stand up paddle com a madeira à mostra.</h1>
+<p>A SUP Brasil é de São Paulo. A gente trabalha pensando em água de represa: estável para subir, firme na remada e com desenho que não se repete de qualquer jeito.</p>
+<dl class="rapidas"><div><dt>Comprimento</dt><dd>10'6"</dd></div><div><dt>Largura</dt><dd>32"</dd></div><div><dt>Espessura</dt><dd>4.5"</dd></div><div><dt>Volume</dt><dd>185 L</dd></div></dl>
+<p class="nota">Medidas de exemplo, a confirmar com a oficina.</p>
+<div class="acoes"><a class="btn" href="#pranchas">Ver as pranchas</a><a class="btn claro" data-zap="Oi! Vim pelo site da SUP Brasil e quero falar sobre uma prancha." href="#">Chamar no WhatsApp</a></div></div>
+<figure><img src="imagens/bico-laranja-agua-represa.jpg" alt="Bico laranja de uma prancha SUP Brasil molhado, sobre a água lisa da represa com morros ao fundo"></figure>
+</section>
+<div class="letreiro"><span>Stand Up Paddle</span><span>Madeira aparente</span><span>Quilhas 2+1</span><span>São Paulo, SP</span></div>
+<section id="pranchas">
+<div class="cab"><h2>Duas pranchas, dois temperamentos</h2><p>Frente e verso de cada uma, fotografadas na frente do painel da casa.</p></div>
+<div class="vitrine"><article class="shape xadrez"><div class="fotos"><img src="imagens/mandala-frente.jpg" alt="Prancha Mandala, deck" loading="lazy"><img src="imagens/mandala-verso.jpg" alt="Prancha Mandala, fundo" loading="lazy"></div>
+<div class="txt"><h3>Mandala</h3><p>Madeira clara, mandala em traço escuro correndo do bico à rabeta, no deck e no fundo.</p><p class="mono">10'6" × 32" × 4.5" / 185 L (medidas de exemplo)</p><a class="btn" data-zap="Oi! Vi a prancha Mandala no site e quero saber medidas e preço." href="#">Perguntar sobre a Mandala</a></div></article>
+<article class="shape xadrez"><div class="fotos"><img src="imagens/leao-frente.jpg" alt="Prancha Leão, deck" loading="lazy"><img src="imagens/leao-verso.jpg" alt="Prancha Leão, fundo" loading="lazy"></div>
+<div class="txt"><h3>Leão</h3><p>Madeira escura de veio marcado e um leão pintado dos dois lados.</p><p class="mono">10'6" × 32" × 4.5" / 185 L (medidas de exemplo)</p><a class="btn" data-zap="Oi! Vi a prancha Leão no site e quero saber medidas e preço." href="#">Perguntar sobre a Leão</a></div></article>
+</div></section>
+<section class="selo"><div class="logo"><img src="imagens/logo-sup-brasil.jpg" alt="Selo oval SUP Brasil, Stand Up Paddle, São Paulo, SP"></div>
+<div class="txt"><h2>O que o selo carrega</h2>
+<p>Em cima de uma prancha parada, largura e volume mandam. Mais área na água dá apoio para os pés e perdoa o desequilíbrio de quem está começando. Mais litros seguram o remador e a mochila sem afundar a borda.</p>
+<p>No deck, o antiderrapante marca onde pisar e a alça central deixa carregar a prancha equilibrada. A madeira fica à mostra, com a arte por cima.</p>
+<table><tr><th>Largura de referência</th><td>32"</td></tr><tr><th>Volume de referência</th><td>185 L</td></tr><tr><th>Deck</th><td>antiderrapante em partes + alça central</td></tr></table></div></section>
+<section class="quilhas"><figure><img src="imagens/detalhe-quilha-mandala.jpg" alt="Fundo de prancha com mandala, uma quilha central grande e duas laterais pequenas" loading="lazy"><figcaption>Uma quilha central na caixa longa e duas laterais.</figcaption></figure>
+<div class="txt"><h2>Sistema 2+1</h2><p>São três quilhas com trabalhos diferentes. Juntas, deixam a prancha andar reta na represa sem perder resposta quando você vira.</p>
+<table><tr><th>Central</th><td>segura o rumo e reduz o ziguezague entre uma remada e outra</td></tr><tr><th>Laterais</th><td>dão apoio nas curvas e quando a água mexe</td></tr><tr><th>Caixa longa</th><td>a central desliza: para trás, mais rumo; para a frente, vira mais fácil</td></tr></table></div></section>
+</main>
+<footer><div><h2>Fale com a oficina</h2><p>Conte seu peso, onde pretende remar e qual arte chamou sua atenção.</p></div>
+<a class="btn" data-zap="Oi! Quero atendimento sobre as pranchas SUP Brasil." href="#">Chamar no WhatsApp</a><small>SUP Brasil, São Paulo, SP. Protótipo de demonstração por ezf.tech.</small></footer>
+<script src="dados.js"></script>
+</body></html>
