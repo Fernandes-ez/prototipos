@@ -2,70 +2,49 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Catálogo técnico · SUP Brasil</title>
-<meta name="description" content="Fichas das pranchas SUP Brasil.">
+<title>Catálogo de artes · SUP Brasil</title>
+<meta name="description" content="Artes de pranchas SUP Brasil para personalizar o modelo 10'0.">
 <link rel="icon" href="../imagens/logo-sup-brasil.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../estilo.css">
 <style>
-.filtros{display:flex;flex-wrap:wrap;gap:.6rem;padding:1rem 1.25rem;border-bottom:var(--b)}
-.filtros .btn[aria-pressed="false"],.abas .btn[aria-selected="false"]{background:var(--papel);color:var(--tinta)}
-.tela{display:grid;grid-template-columns:280px 1fr;min-height:70vh}
-aside{border-right:var(--b)}
-aside button{display:flex;gap:.9rem;align-items:center;width:100%;text-align:left;padding:.9rem 1.1rem;border:0;border-bottom:var(--b);background:none;color:inherit;font:inherit;cursor:pointer}
-aside button img{width:38px;height:128px;object-fit:cover;border:1px solid var(--tinta)}
-aside button strong{display:block;font:600 1.25rem var(--serif)}
-aside button[aria-current="true"]{background:var(--ceu2);box-shadow:inset 6px 0 0 var(--laranja)}
-.area{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
-.visor{border-right:var(--b);display:flex;flex-direction:column}
-.abas{display:flex;gap:.6rem;flex-wrap:wrap;padding:1rem;border-bottom:var(--b)}
-.palco{flex:1;padding:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-content:center}
-.palco figure{width:min(45%,260px)}.palco figure.unica{width:min(100%,460px)}
-.palco img{width:100%;border:var(--b)}.palco figcaption{background:var(--papel);border:var(--b);border-top:0;padding:.4rem .6rem;font-size:.85rem}
-.ficha{padding:1.5rem;display:grid;gap:1rem;align-content:start}
-@media(max-width:1000px){.area{grid-template-columns:1fr}.visor{border-right:0;border-bottom:var(--b)}}
-@media(max-width:700px){.tela{grid-template-columns:1fr}aside{display:flex;overflow-x:auto;border-right:0;border-bottom:var(--b)}aside button{border-bottom:0;border-right:var(--b);min-width:200px}}
+.abre{padding:var(--alto) var(--lado) 2rem;display:grid;gap:1rem}
+.indice{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
+.arte{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,6vw,6rem);padding:var(--alto) var(--lado);align-items:center;scroll-margin-top:1rem}
+.arte:nth-of-type(even){background:var(--ceu2)}.arte:nth-of-type(even) .fotos{order:2}
+.fotos{display:flex;gap:1rem;justify-content:center;align-items:flex-start}
+.fotos figure{flex:0 1 240px;min-width:0}.fotos img,.fotos video{width:100%;max-height:620px;object-fit:cover}.fotos figure+figure{margin-top:2.5rem}
+.fotos figcaption{font-size:.85rem;margin-top:.4rem}
+.fotos button{min-height:44px;background:none;border:0;font:600 .9rem var(--sans);color:var(--tinta);text-decoration:underline;cursor:pointer}
+.arte h2{font-size:clamp(2.6rem,6vw,5rem)}
+@media(max-width:760px){.arte{grid-template-columns:1fr}.arte:nth-of-type(even) .fotos{order:0}}
 </style>
 </head>
 <body>
-<header class="topo"><a class="marca" href="../"><img src="../imagens/logo-sup-brasil.jpg" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="../">Oficina</a><a href="../catalogo/" aria-current="page">Catálogo</a><a href="../loja/">Loja</a></nav></header>
-<div class="faixa xadrez"></div>
-<div class="filtros" role="group" aria-label="Filtrar por linha"></div>
-<main class="tela"><aside aria-label="Shapes"></aside>
-<div class="area"><section class="visor"><div class="abas" role="tablist" aria-label="Vista"></div><div class="palco xadrez" role="tabpanel"></div></section>
-<section class="ficha" aria-live="polite"></section></div></main>
-<footer><small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><a class="marca" href="../"><img src="../imagens/logo-sup-brasil.jpg" width="52" height="52" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="../">Oficina</a><a href="../catalogo/" aria-current="page">Catálogo</a><a href="../loja/">Loja</a></nav></header>
+<main id="conteudo">
+<div class="abre"><h1>Artes que já saíram da casa</h1><p>Escolha uma como ponto de partida. Todas as encomendas abaixo são cotadas sobre o modelo 10'0: 33" de largura, 4" de espessura, até 120 kg, kit completo.</p>
+<p><strong>R$ 2.400 à vista</strong> ou R$ 2.700 em até 6x no cartão.</p><nav class="indice" id="indice" aria-label="Ir para a arte"></nav></div>
+<div id="lista"></div>
+</main>
+<div class="assinatura" aria-hidden="true"></div>
+<footer><h2>Tem outra ideia de arte?</h2><p>Mande a referência pelo WhatsApp.</p>
+<a class="btn claro" href="#" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
+<small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&amp;query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
 <script src="../dados.js"></script>
 <script>
-const $=s=>document.querySelector(s), I='../imagens/';
-const LINHAS={todas:'Todas',madeira:'Linha Madeira',represa:'Travessia & Represa'}, ABAS={fv:'Frente & Verso',q:'Detalhe de Quilhas'};
-let linha='todas', id=location.hash.slice(1), aba='fv';
-function desenha(){
-  const lista=SUP.pranchas.filter(p=>linha==='todas'||p.linhas.includes(linha));
-  const p=lista.find(x=>x.id===id)||lista[0]; id=p.id;
-  $('.filtros').innerHTML=Object.entries(LINHAS).map(([k,v])=>`<button class="btn" data-linha="${k}" aria-pressed="${k===linha}">${v}</button>`).join('');
-  $('aside').innerHTML=lista.map(x=>`<button data-id="${x.id}" aria-current="${x===p}"><img src="${I+x.id}-frente.jpg" alt=""><span><strong>${x.nome}</strong><span class="mono">${x.ref}</span></span></button>`).join('');
-  $('.abas').innerHTML=Object.entries(ABAS).map(([k,v])=>`<button class="btn" role="tab" data-aba="${k}" aria-selected="${k===aba}">${v}</button>`).join('');
-  $('.palco').innerHTML=aba==='fv'
-    ?['frente','verso'].map(v=>`<figure><img src="${I+p.id}-${v}.jpg" alt="Prancha ${p.nome}, ${v}"><figcaption>${v==='frente'?'Frente (deck)':'Verso (fundo)'}</figcaption></figure>`).join('')
-    :`<figure class="unica"><img src="${I+p.detalhe.img}" alt="${p.detalhe.alt}"><figcaption>${p.detalhe.legenda}</figcaption></figure>`;
-  $('.ficha').innerHTML=`<h1>${p.nome}</h1><p class="mono">Ficha ${p.ref}</p><p>${p.texto}</p>
-  <table>${Object.entries(SUP.modelo.medidas).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</table>
-  <p><strong>${SUP.brl(SUP.modelo.aVista)} à vista</strong> ou ${SUP.brl(SUP.modelo.cartao)} em até 6x no cartão, com kit completo.</p>
-  <p class="nota">Ficha do modelo 10'0. ${p.nome} é uma referência de arte para personalizar. Kit: ${SUP.modelo.kit.join(', ').toLowerCase()}.</p>
-  <a class="btn" href="#" data-zap="Oi! Quero reservar a prancha ${p.nome} (ref. ${p.ref}).">Reservar a ${p.nome}</a>`;
-}
-document.addEventListener('click',e=>{
-  const b=e.target.closest('button'); if(!b) return;
-  const {linha:l,id:i,aba:a}=b.dataset;
-  if(!l&&!i&&!a) return;
-  if(l) linha=l; if(i){id=i; history.replaceState(null,'','#'+i);} if(a) aba=a;
-  desenha();
-  document.querySelector(l?`[data-linha="${l}"]`:i?`[data-id="${i}"]`:`[data-aba="${a}"]`).focus();
-});
-desenha();
+const I='../imagens/';
+document.getElementById('indice').innerHTML=SUP.pranchas.map(p=>`<a class="link" href="#${p.id}">${p.nome}</a>`).join('');
+document.getElementById('lista').innerHTML=SUP.pranchas.map(p=>`<section class="arte" id="${p.id}">
+<div class="fotos">${p.video
+ ?`<figure><video data-loop muted loop playsinline preload="none" width="360" height="640" poster="${I}tartaruga-poster.jpg" aria-label="Vídeo sem som da prancha ${p.nome}"><source src="${I}tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></figure>`
+ :p.fotos.map(([f,w,h,r])=>`<figure><img src="${I}${f}.jpg" width="${w}" height="${h}" loading="lazy" alt="Prancha ${p.nome}, ${r}"><figcaption>${r}</figcaption></figure>`).join('')}</div>
+<div class="pilha desliza"><h2>${p.nome}</h2><p>${p.texto}</p><p class="mono">modelo 10'0" × 33" × 4"</p>
+<a class="btn" href="#" data-zap="Oi! Quero encomendar uma prancha 10'0 com arte inspirada em ${p.nome}.">Quero essa arte</a></div></section>`).join('');
 </script>
+
 </body></html>

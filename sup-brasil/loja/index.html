@@ -2,53 +2,52 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Loja · SUP Brasil</title>
-<meta name="description" content="Loja de demonstração SUP Brasil.">
+<meta name="description" content="Encomende a prancha SUP 10'0 com kit completo.">
 <link rel="icon" href="../imagens/logo-sup-brasil.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../estilo.css">
 <style>
-.aviso{max-width:none;padding:.5rem 1.25rem;border-bottom:var(--b);font-size:.85rem;background:var(--ceu2)}
-.banner{padding:clamp(1rem,4vw,3rem);border-bottom:var(--b)}
-.banner>div{background:var(--papel);border:var(--b);padding:clamp(1.25rem,3vw,2.5rem);max-width:760px;display:grid;gap:.8rem}
-.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1.5rem;padding:clamp(1rem,4vw,3rem);max-width:1200px;margin:auto}
-.produto{border:var(--b);display:grid;grid-template-rows:auto 1fr}
-.produto .foto{padding:1.25rem;border-bottom:var(--b);display:flex;justify-content:center;gap:.8rem}.produto .foto img{width:min(42%,200px);border:var(--b)}
-.produto .txt{padding:1.25rem;display:grid;gap:.8rem;align-content:start}
-fieldset{border:0;display:grid;grid-template-columns:1fr 1fr}
-legend{font-weight:600;font-size:.9rem;margin-bottom:.35rem}
-fieldset label{border:var(--b);min-height:48px;padding:.5rem .7rem;cursor:pointer;font-size:.9rem;display:flex;align-items:center}
-fieldset label+label{border-left:0}
+.abre{padding:var(--alto) var(--lado);display:grid;gap:1rem;background:var(--ceu2)}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:4.5rem clamp(1.5rem,4vw,4rem);padding:var(--alto) var(--lado)}
+.produto{display:grid;gap:.9rem;align-content:start}
+.foto{display:flex;gap:.5rem;height:460px;justify-content:center;background:var(--ceu2);border-radius:18px;padding:1.25rem}
+.foto img{height:100%;width:auto;min-width:0;object-fit:cover}
+fieldset{border:0;display:flex;gap:.5rem;flex-wrap:wrap}legend{font-weight:600;margin-bottom:.4rem}
 fieldset input{position:absolute;opacity:0}
-fieldset label:has(:checked){background:var(--tinta);color:var(--papel)}
-fieldset label:has(:focus-visible){outline:3px solid var(--laranja)}
-.preco{font:600 1.7rem var(--mono)}.parc{font:400 .85rem var(--mono);color:#8F3A10}
-dialog{margin:0 0 0 auto;height:100dvh;max-height:100dvh;width:min(420px,100%);max-width:100%;border:0;border-left:var(--b);background:var(--papel);color:var(--tinta)}
-dialog[open]{display:flex;flex-direction:column}
-dialog::backdrop{background:rgba(17,34,51,.55)}
-.dtopo{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:var(--b)}
-.itens{flex:1;overflow:auto}
-.item{display:grid;grid-template-columns:56px 1fr;gap:.9rem;padding:1rem;border-bottom:1px solid var(--tinta)}.item img{border:1px solid var(--tinta)}
+fieldset span{display:flex;align-items:center;min-height:48px;padding:0 1.1rem;border-radius:999px;background:var(--ceu2);cursor:pointer}
+fieldset input:checked+span{background:var(--tinta);color:#fff}fieldset input:focus-visible+span{outline:3px solid var(--laranja)}
+.preco{font:600 2.2rem var(--serif)}.parc{font-size:.9rem;color:var(--acao);font-weight:600}
+#abrir{position:fixed;z-index:11;right:16px;bottom:16px;background:var(--tinta);border:1px solid var(--ceu)}
+@media(max-width:760px){#abrir{bottom:76px}}
+#sacola{margin:0 0 0 auto;height:100dvh;max-height:100dvh;width:min(420px,100%);max-width:100%;border:0;background:var(--papel);color:var(--tinta)}
+#sacola[open]{display:flex;flex-direction:column}#sacola::backdrop{background:rgba(17,34,51,.55)}
+.dtopo{display:flex;justify-content:space-between;align-items:center;padding:1rem}
+.itens{flex:1;overflow:auto}.item{display:grid;grid-template-columns:56px 1fr;gap:.9rem;padding:1rem;border-bottom:1px solid var(--ceu)}
 .qtd{display:flex;align-items:center;gap:.6rem;margin-top:.4rem}.qtd .btn{min-height:44px;min-width:44px;padding:0}
-.total{border-top:var(--b);padding:1rem;display:grid;gap:.5rem}.total div{display:flex;justify-content:space-between}
+.total{padding:1rem;display:grid;gap:.6rem;background:var(--ceu2)}.total div{display:flex;justify-content:space-between;gap:1rem}
 </style>
 </head>
 <body>
-<header class="topo"><a class="marca" href="../"><img src="../imagens/logo-sup-brasil.jpg" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="../">Oficina</a><a href="../catalogo/">Catálogo</a><a href="../loja/" aria-current="page">Loja</a></nav></header>
-<nav class="topo" aria-label="Categorias" style="justify-content:flex-start"><div id="cats" style="display:flex;flex-wrap:wrap;flex:1;gap:.6rem;padding:.75rem 1.25rem"></div><button class="btn" id="abrir" style="border-width:0 0 0 1.5px">Sacola (<span id="cont">0</span>)</button></nav>
-<p class="aviso">Loja de demonstração. Valores do modelo SUP 10'0 com kit completo; confirme as condições no WhatsApp.</p>
-<main>
-<section class="banner xadrez"><div><h1>Escolha a arte e saia pronto para a água.</h1><p>Modelo 10'0 para iniciantes com kit completo de remada. Reserve com sinal de R$ 500.</p><p><strong>Mais de 800 pranchas vendidas. Entregamos em todo o Brasil.</strong></p></div></section>
-<section class="grade" id="grade"></section>
-</main>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><a class="marca" href="../"><img src="../imagens/logo-sup-brasil.jpg" width="52" height="52" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="../">Oficina</a><a href="../catalogo/">Catálogo</a><a href="../loja/" aria-current="page">Loja</a></nav></header>
+<main id="conteudo">
+<div class="abre"><h1>Escolha a arte e reserve a sua.</h1><p>Prancha 10'0 com kit completo: remo, triquilhas, leash, deck e protetor de borda. Sinal de R$ 500 para reservar.</p>
+<p><strong>Mais de 800 pranchas vendidas. Entregamos em todo o Brasil.</strong></p><p class="pequeno">Loja de demonstração. O pedido é conversado e fechado no WhatsApp, sem pagamento neste site.</p></div>
+<section class="grade" id="grade" aria-label="Artes disponíveis para encomenda"></section>
+<button class="btn" id="abrir" type="button">Sacola (<span id="cont">0</span>)</button>
 <dialog id="sacola" aria-labelledby="tsac"><div class="dtopo"><h2 id="tsac">Sacola</h2><button class="btn claro" id="fechar">Fechar</button></div>
 <div class="itens" id="itens"></div>
-<div class="total"><div><span>Subtotal</span><strong class="mono" id="sub"></strong></div><div class="parc"><span>Sinal para reservar, por prancha</span><strong>R$ 500</strong></div>
-<button class="btn" id="fecharpedido">Fechar pedido no WhatsApp</button></div></dialog>
-<footer><div><h2>Dúvida antes de pedir?</h2><p>Mande seu peso e onde pretende remar.</p></div><a class="btn" data-zap="Oi! Tenho uma dúvida sobre as pranchas SUP Brasil." href="#">Chamar no WhatsApp</a><small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
+<div class="total"><div><span>Subtotal</span><strong id="sub"></strong></div><div class="pequeno"><span>Sinal para reservar, por prancha</span><strong>R$ 500</strong></div>
+<button class="btn" id="fecharpedido">Enviar pedido no WhatsApp</button></div></dialog>
+</main>
+<div class="assinatura" aria-hidden="true"></div>
+<footer><h2>Dúvida antes de pedir?</h2><p>Mande seu peso e onde pretende remar.</p>
+<a class="btn claro" href="#" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
+<small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&amp;query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
 <script src="../dados.js"></script>
 <script>
 const $=s=>document.querySelector(s), I='../imagens/', V={vista:'À vista',cartao:'Até 6x no cartão'};
@@ -57,12 +56,12 @@ let sacola={}; // chave "id:variante" -> quantidade
 try{ const s=JSON.parse(localStorage.getItem('supbrasil-sacola-v2'))||{};
   for(const [k,q] of Object.entries(s)){const [i,v]=k.split(':'); if(prod(i)&&V[v]&&q>0) sacola[k]=q;} }catch(e){}
 
-$('#grade').innerHTML=SUP.pranchas.map(p=>`<article class="produto" data-id="${p.id}" data-linhas="${p.linhas.join(' ')}">
-<div class="foto xadrez"><img src="${I+p.id}-frente.jpg" alt="Prancha ${p.nome}, frente"><img src="${I+p.id}-verso.jpg" alt="Prancha ${p.nome}, verso"></div>
-<div class="txt"><h3>${p.nome}</h3><p>${p.texto}</p><p class="mono">10'0" × 33" × 4" / até 120 kg / kit completo</p>
-<fieldset><legend>Pagamento</legend>${Object.entries(V).map(([k,t],i)=>`<label><input type="radio" name="v-${p.id}" value="${k}"${i?'':' checked'}>${t}</label>`).join('')}</fieldset>
+$('#grade').innerHTML=SUP.pranchas.map(p=>`<article class="produto" data-id="${p.id}">
+<div class="foto">${p.fotos.map(([f,w,h,r])=>`<img src="${I}${f}.jpg" width="${w}" height="${h}" loading="lazy" alt="Prancha ${p.nome}, ${r}">`).join('')}</div>
+<h2 style="font-size:1.8rem">${p.nome}</h2><p>${p.texto}</p>
+<fieldset><legend>Pagamento</legend>${Object.entries(V).map(([k,t],i)=>`<label><input type="radio" name="v-${p.id}" value="${k}"${i?'':' checked'}><span>${t}</span></label>`).join('')}</fieldset>
 <div aria-live="polite"><p class="preco"></p><p class="parc"></p></div>
-<button class="btn" data-add>Colocar na sacola</button></div></article>`).join('');
+<button class="btn" data-add>Colocar na sacola</button></article>`).join('');
 
 function precos(card){
   const v=card.querySelector('input:checked').value, t=preco(prod(card.dataset.id),v);
@@ -71,21 +70,12 @@ function precos(card){
 }
 document.querySelectorAll('.produto').forEach(c=>{precos(c); c.addEventListener('change',()=>precos(c));});
 
-const CATS={todas:'Todas',madeira:'Linha Madeira',represa:'Travessia & Represa'};
-function filtra(l){
-  $('#cats').innerHTML=Object.entries(CATS).map(([k,v])=>`<button class="btn${k===l?'':' claro'}" data-cat="${k}" aria-pressed="${k===l}">${v}</button>`).join('');
-  document.querySelectorAll('.produto').forEach(c=>c.hidden=l!=='todas'&&!c.dataset.linhas.includes(l));
-}
-filtra('todas');
-// .produto define display:grid, então hidden precisa vencer
-document.head.insertAdjacentHTML('beforeend','<style>[hidden]{display:none!important}</style>');
-
 const total=()=>Object.entries(sacola).reduce((s,[k,q])=>{const [i,v]=k.split(':'); return s+preco(prod(i),v)*q;},0);
 function desenha(){
   const itens=Object.entries(sacola);
   $('#cont').textContent=itens.reduce((s,[,q])=>s+q,0);
   $('#itens').innerHTML=itens.map(([k,q])=>{const [i,v]=k.split(':'), p=prod(i);
-    return `<div class="item"><img src="${I+i}-frente.jpg" alt=""><div><strong>${p.nome}</strong><p>${V[v]}</p><p class="mono">${SUP.brl(preco(p,v)*q)}</p>
+    return `<div class="item"><img src="${I+p.fotos[0][0]}.jpg" alt=""><div><strong>${p.nome}</strong><p>${V[v]}</p><p class="mono">${SUP.brl(preco(p,v)*q)}</p>
     <div class="qtd"><button class="btn claro" data-k="${k}" data-d="-1" aria-label="Tirar uma ${p.nome}">−</button><span class="mono">${q}</span><button class="btn claro" data-k="${k}" data-d="1" aria-label="Somar uma ${p.nome}">+</button></div></div></div>`;
   }).join('')||'<p style="padding:1rem">A sacola está vazia. Escolha uma prancha na loja.</p>';
   $('#sub').textContent=SUP.brl(total());
@@ -94,7 +84,6 @@ function desenha(){
 }
 document.addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
-  if(b.dataset.cat){filtra(b.dataset.cat); $(`[data-cat="${b.dataset.cat}"]`).focus();}
   if(b.hasAttribute('data-add')){const c=b.closest('.produto'), k=c.dataset.id+':'+c.querySelector('input:checked').value; sacola[k]=(sacola[k]||0)+1; desenha(); $('#sacola').showModal();}
   if(b.dataset.k){const {k,d}=b.dataset; sacola[k]+=+d; if(sacola[k]<1) delete sacola[k]; desenha(); ($(`[data-k="${k}"][data-d="${d}"]`)||$('#fechar')).focus();}
 });

@@ -2,83 +2,144 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>SUP Brasil · Stand Up Paddle em São Paulo</title>
-<meta name="description" content="Pranchas de stand up paddle com madeira aparente e quilhas 2+1. São Paulo, SP.">
+<title>SUP Brasil · Prancha de stand up paddle direto da fábrica, São Paulo</title>
+<meta name="description" content="Prancha SUP 10'0 para iniciantes com kit completo e arte personalizada. Retirada em São Paulo ou envio para todo o Brasil.">
 <link rel="icon" href="imagens/logo-sup-brasil.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 <style>
-.hero{display:grid;grid-template-columns:7fr 5fr;border-bottom:var(--b)}
-.hero>div{padding:clamp(1.5rem,5vw,4.5rem);display:flex;flex-direction:column;gap:1.4rem;justify-content:center}
-.hero figure{border-left:var(--b);position:relative;min-height:520px}
-.hero figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 75%}
-.acoes{display:flex;gap:.8rem;flex-wrap:wrap}
-.rapidas{display:grid;grid-template-columns:repeat(4,auto);border:var(--b);font-family:var(--mono)}
-.rapidas div{padding:.6rem .8rem;border-left:1px solid var(--tinta)}.rapidas div:first-child{border:0}
-.rapidas dt{font-family:var(--sans);font-size:.75rem}.rapidas dd{font-weight:600}
-.letreiro{background:var(--tinta);color:var(--papel);font:400 clamp(1.4rem,3vw,2.4rem)/1.3 var(--serif);padding:1.4rem 1.25rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem}
-.cab{padding:clamp(2.5rem,6vw,5rem) 1.25rem 2rem;max-width:1200px;margin:auto}.cab p{margin-top:.8rem}
-.vitrine{display:grid;grid-template-columns:1fr 1fr;border-block:var(--b)}
-.shape{display:flex;flex-direction:column}.shape+.shape{border-left:var(--b)}
-.shape .fotos{padding:clamp(1rem,3vw,2.5rem);display:grid;grid-template-columns:1fr 1fr;gap:.8rem;max-width:560px;width:100%;margin:auto}
-.shape .fotos img{border:var(--b);width:100%}
-.shape .txt{background:var(--papel);border-top:var(--b);padding:1.5rem;display:grid;gap:.8rem;flex:1;align-content:start;justify-items:start}
-.selo{display:grid;grid-template-columns:5fr 7fr;border-bottom:var(--b)}
-.selo .logo{display:grid;place-items:center;padding:2rem;border-right:var(--b);background:#fff}.selo .logo img{width:min(360px,100%);mix-blend-mode:multiply}
-.selo .txt{padding:clamp(1.5rem,5vw,4rem);display:grid;gap:1.2rem;align-content:center}
-.quilhas{display:grid;grid-template-columns:5fr 7fr}
-.quilhas figure{border-right:var(--b)}.quilhas figure img{width:100%}
-.quilhas figcaption{padding:.7rem 1rem;border-top:var(--b);font-size:.85rem}
-.quilhas .txt{padding:clamp(1.5rem,5vw,4rem);display:grid;gap:1.4rem;align-content:center}
-@media(max-width:860px){.hero,.vitrine,.selo,.quilhas{grid-template-columns:1fr}
-.hero figure{border-left:0;border-top:var(--b);min-height:460px}.shape+.shape{border-left:0;border-top:var(--b)}
-.selo .logo,.quilhas figure{border-right:0;border-bottom:var(--b)}.rapidas{grid-template-columns:1fr 1fr}
-.rapidas div:nth-child(3){border-left:0}.rapidas div:nth-child(n+3){border-top:1px solid var(--tinta)}}
-.onde{border-top:var(--b);padding:clamp(1rem,4vw,3rem)}.onde>div{background:var(--papel);border:var(--b);padding:clamp(1.25rem,3vw,2.5rem);max-width:640px;display:grid;gap:1rem}address{font-style:normal;font-size:1.1rem}
-.prova{border-bottom:1.5px solid var(--papel);justify-content:space-around;font-size:clamp(1.7rem,3.8vw,3rem)}.prova strong{font-weight:600}
-.kit{display:grid;grid-template-columns:1fr 1fr;border-top:var(--b)}.kit>div{padding:clamp(1.5rem,5vw,4rem);display:grid;gap:1rem;align-content:start}.kit>div+div{border-left:var(--b);background:var(--ceu2)}.kit ul{padding-left:1.2rem}@media(max-width:860px){.kit{grid-template-columns:1fr}.kit>div+div{border-left:0;border-top:var(--b)}}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:min(780px,calc(100svh - 130px))}
+.hero .pilha{padding:clamp(2rem,5vw,5rem) var(--lado)}
+.hero h1{max-width:12ch}.hero p{font-size:1.1rem}
+.hero figure{position:relative;min-height:420px}
+.hero figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
+.prova{font-weight:600;font-size:.95rem!important}
+.onda{display:block;width:100%;height:clamp(40px,6vw,84px);background:var(--papel)}
+.seletor{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
+form{display:grid;gap:1.4rem;margin-top:1.5rem}
+fieldset{border:0;display:flex;flex-wrap:wrap;gap:.5rem}legend,.campo{font-weight:600;margin-bottom:.5rem;display:block}
+.op input{position:absolute;opacity:0}
+.op span{display:flex;align-items:center;min-height:48px;padding:0 1.2rem;border-radius:999px;background:#fff;cursor:pointer}
+.op input:checked+span{background:var(--tinta);color:#fff}
+.op input:focus-visible+span{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font:600 1.6rem var(--serif);width:8ch;min-height:56px;border:0;border-bottom:3px solid var(--tinta);background:transparent;color:var(--tinta)}
+.resposta{align-self:center}.resposta .grande{font:600 clamp(2.6rem,6vw,4.6rem)/1 var(--serif)}
+.exemplo{color:var(--acao);font-weight:600}
+.artes{display:flex;gap:clamp(1rem,2.5vw,2.5rem);overflow-x:auto;scroll-snap-type:x mandatory;padding:2.5rem var(--lado) 1rem;margin:0 calc(-1*var(--lado));align-items:flex-start}
+.artes a{flex:0 0 auto;scroll-snap-align:start;text-decoration:none}
+.artes a:nth-child(even){margin-top:3.5rem}
+.artes img{height:clamp(320px,32vw,430px);width:auto;max-width:none}
+.artes strong{display:block;font:600 1.3rem var(--serif);margin-top:.6rem}
+.oficina{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:clamp(2rem,7vw,7rem);align-items:center}
+.filme video{width:100%;aspect-ratio:9/16;background:#000}
+.filme button{margin-top:.5rem;min-height:44px;background:none;border:0;color:var(--ceu);font:600 .9rem var(--sans);text-decoration:underline;cursor:pointer}
+dl.ficha{display:flex;flex-wrap:wrap;gap:1.25rem 3rem}.ficha dt{font-size:.85rem;opacity:.8}.ficha dd{font:600 1.5rem var(--serif)}
+.valor{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
+.valor ul{list-style:none;margin-top:1.5rem}.valor li{font:400 clamp(1.3rem,2.2vw,1.8rem)/1.3 var(--serif);padding:.5rem 0;border-bottom:1px solid var(--ceu)}
+.preco{font:600 clamp(3.4rem,8vw,6.5rem)/1 var(--serif)}
+table{width:100%;border-collapse:collapse;margin-top:2rem;font-size:.95rem}
+th,td{text-align:left;vertical-align:top;padding:.8rem .8rem .8rem 0;border-bottom:1px solid var(--ceu)}
+.mosaico{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(.75rem,2vw,2rem);margin-top:2.5rem;align-items:start}
+.mosaico img{width:100%;max-width:360px}figcaption{font-size:.88rem;margin-top:.4rem}
+.m1{grid-column:1/span 5}.m2{grid-column:7/span 3;margin-top:5rem}.m3{grid-column:10/span 3}.m4{grid-column:3/span 4;margin-top:-2rem}.m5{grid-column:8/span 3}
+.duvidas{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,4rem);margin-top:2.5rem}.duvidas>div{display:grid;gap:.8rem;align-content:start;justify-items:start}
+.quilhas{display:grid;grid-template-columns:1fr 1fr}
+.quilhas>img{width:100%;height:100%;max-height:720px;object-fit:cover;object-position:50% 65%}
+.onde{display:grid;gap:1rem;justify-items:start}address{font-style:normal}
+@media(max-width:860px){
+.hero,.seletor,.oficina,.valor,.duvidas,.quilhas{grid-template-columns:1fr}
+.hero{min-height:0}.hero figure{order:-1;min-height:25svh}.hero .pilha{padding-top:1.25rem;gap:.9rem}.hero h1{font-size:2.15rem}.hero p{font-size:1rem}
+.filme{max-width:320px;justify-self:center;width:100%}
+.m1{grid-column:1/-1}.m2{grid-column:1/span 6;margin-top:0}.m3{grid-column:7/span 6;margin-top:2.5rem}.m4{grid-column:2/span 7;margin-top:0}.m5{grid-column:7/span 6}
+}
 </style>
 </head>
 <body>
-<header class="topo"><a class="marca" href="./"><img src="imagens/logo-sup-brasil.jpg" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="./" aria-current="page">Oficina</a><a href="catalogo/">Catálogo</a><a href="loja/">Loja</a></nav></header>
-<div class="faixa xadrez"></div>
-<main>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><a class="marca" href="./"><img src="imagens/logo-sup-brasil.jpg" width="52" height="52" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="./" aria-current="page">Oficina</a><a href="catalogo/">Catálogo</a><a href="loja/">Loja</a></nav></header>
+<main id="conteudo">
 <section class="hero">
-<div><h1>Pranchas de stand up paddle com a sua arte.</h1>
-<p>A SUP Brasil é de São Paulo. Prancha personalizada, saída da nossa fábrica, com kit completo de remada para quem está começando.</p>
-<dl class="rapidas"><div><dt>Comprimento</dt><dd>10'0"</dd></div><div><dt>Largura</dt><dd>33"</dd></div><div><dt>Espessura</dt><dd>4"</dd></div><div><dt>Suporta até</dt><dd>120 kg</dd></div></dl>
-<p>Kit completo: <strong>R$ 2.400 à vista</strong> ou R$ 2.700 em até 6x no cartão.</p>
-<div class="acoes"><a class="btn" href="#pranchas">Ver as pranchas</a><a class="btn claro" data-zap="Oi! Vim pelo site da SUP Brasil e quero falar sobre uma prancha." href="#">Chamar no WhatsApp</a></div></div>
-<figure><img src="imagens/bico-laranja-agua-represa.jpg" alt="Bico laranja de uma prancha SUP Brasil molhado, sobre a água lisa da represa com morros ao fundo"></figure>
+<div class="pilha"><h1>Sua primeira remada, firme e com a sua arte.</h1>
+<p>Prancha 10'0 larga e estável para quem está começando, com kit completo. Você compra direto da fábrica, em São Paulo.</p>
+<div class="acoes"><a class="btn" href="#qual">Descobrir minha prancha</a><a class="link" href="#preco">Ver preço e kit</a></div>
+<p class="prova">Mais de 800 pranchas vendidas. Retirada em Cidade Patriarca ou envio para todo o Brasil.</p></div>
+<figure><img src="imagens/bico-laranja-agua-represa.jpg" width="591" height="796" alt="Bico laranja molhado de uma prancha SUP Brasil sobre a água lisa, com sol e morros ao fundo" fetchpriority="high"></figure>
 </section>
-<div class="letreiro prova"><strong>Mais de 800 pranchas vendidas</strong><strong>Entregamos em todo o Brasil</strong></div>
-<div class="letreiro"><span>Stand Up Paddle</span><span>Duas artes à escolha</span><span>Kit completo</span><span>São Paulo, SP</span></div>
-<section id="pranchas">
-<div class="cab"><h2>Duas artes para inspirar a sua</h2><p>Frente e verso, fotografados na frente do painel da casa. No modelo 10'0 você escolhe 2 artes.</p></div>
-<div class="vitrine"><article class="shape xadrez"><div class="fotos"><img src="imagens/mandala-frente.jpg" alt="Prancha Mandala, deck" loading="lazy"><img src="imagens/mandala-verso.jpg" alt="Prancha Mandala, fundo" loading="lazy"></div>
-<div class="txt"><h3>Mandala</h3><p>Visual de madeira clara, mandala em traço escuro correndo do bico à rabeta, no deck e no fundo.</p><a class="btn" data-zap="Oi! Vi a prancha Mandala no site e quero saber medidas e preço." href="#">Perguntar sobre a Mandala</a></div></article>
-<article class="shape xadrez"><div class="fotos"><img src="imagens/leao-frente.jpg" alt="Prancha Leão, deck" loading="lazy"><img src="imagens/leao-verso.jpg" alt="Prancha Leão, fundo" loading="lazy"></div>
-<div class="txt"><h3>Leão</h3><p>Visual de madeira escura de veio marcado e um leão pintado dos dois lados.</p><a class="btn" data-zap="Oi! Vi a prancha Leão no site e quero saber medidas e preço." href="#">Perguntar sobre a Leão</a></div></article>
+<svg class="onda" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62C210 70 380 58 520 34S760 0 850 20c52 12 62 38 28 44-30 5-44-20-16-28-40-4-62 30-22 42 70 21 230-30 360-22" fill="none" stroke="#112233" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+
+<section class="sec ceu" id="qual"><div class="seletor">
+<div><h2>Qual prancha é pra você?</h2><p>Três respostas. A conversa no WhatsApp já começa com os seus dados.</p>
+<form id="quiz">
+<label><span class="campo">Seu peso, em kg</span><input type="number" name="peso" min="30" max="200" value="75" inputmode="numeric" required></label>
+<fieldset><legend>Onde vai remar</legend><label class="op"><input type="radio" name="onde" value="represa" checked><span>Represa ou lago</span></label><label class="op"><input type="radio" name="onde" value="mar"><span>Mar</span></label></fieldset>
+<fieldset><legend>Experiência</legend><label class="op"><input type="radio" name="exp" value="nova" checked><span>Estou começando</span></label><label class="op"><input type="radio" name="exp" value="ja"><span>Já remo</span></label></fieldset>
+</form></div>
+<div class="resposta pilha" aria-live="polite" id="resposta"><p>Ative o JavaScript para usar o seletor, ou chame no WhatsApp.</p></div>
 </div></section>
-<section class="selo"><div class="logo"><img src="imagens/logo-sup-brasil.jpg" alt="Selo oval SUP Brasil, Stand Up Paddle, São Paulo, SP"></div>
-<div class="txt"><h2>O que o selo carrega</h2>
-<p>Em cima de uma prancha parada, largura e volume mandam. Mais área na água dá apoio para os pés e perdoa o desequilíbrio de quem está começando. Mais litros seguram o remador e a mochila sem afundar a borda.</p>
-<p>No deck, o antiderrapante marca onde pisar e a alça central deixa carregar a prancha equilibrada. Por dentro, bloco de EPS T4. Por fora, fibra de vidro e resina.</p>
-<table><tr><th>Bloco</th><td>EPS T4</td></tr><tr><th>Revestimento</th><td>fibra de vidro 330 g + resina epóxi UV</td></tr><tr><th>Capacidade</th><td>até 120 kg</td></tr></table></div></section>
-<section class="quilhas"><figure><img src="imagens/detalhe-quilha-mandala.jpg" alt="Fundo de prancha com mandala, uma quilha central grande e duas laterais pequenas" loading="lazy"><figcaption>Uma quilha central na caixa longa e duas laterais.</figcaption></figure>
-<div class="txt"><h2>Sistema 2+1</h2><p>São três quilhas com trabalhos diferentes. Juntas, deixam a prancha andar reta na represa sem perder resposta quando você vira.</p>
-<table><tr><th>Central</th><td>segura o rumo e reduz o ziguezague entre uma remada e outra</td></tr><tr><th>Laterais</th><td>dão apoio nas curvas e quando a água mexe</td></tr><tr><th>Caixa longa</th><td>a central desliza: para trás, mais rumo; para a frente, vira mais fácil</td></tr></table></div></section>
-<section class="kit" id="kit"><div><h2>O que vai no kit</h2><ul><li>Remo de alumínio preto</li><li>Triquilhas</li><li>Leash</li><li>Deck</li><li>Protetor de borda</li><li>Personalização com 2 artes à sua escolha</li></ul></div>
-<div><h2>R$ 2.400 à vista</h2><p>Ou R$ 2.700 em até 6x no cartão.</p><p>Reserve com sinal de R$ 500 e pague o restante na retirada ou antes da coleta pela transportadora.</p><p><a class="btn" href="#" data-zap="Oi! Quero reservar a prancha SUP 10'0 com kit completo.">Reservar a minha</a></p></div></section>
-<section class="onde xadrez" id="onde"><div><h2>Onde estamos</h2>
-<address>R. São Donaciano, 234a<br>Cidade Patriarca, São Paulo, SP<br>CEP 03553-090</address>
+
+<section class="sec"><div class="desliza"><h2>A arte é sua. Comece por uma destas.</h2><p>Pranchas da casa. No modelo 10'0 você escolhe 2 artes.</p></div>
+<div class="artes" tabindex="0" role="region" aria-label="Artes, role para o lado"><a href="catalogo/#mandala"><img src="imagens/mandala-frente.jpg" width="231" height="812" alt="Prancha com arte mandala" loading="lazy" decoding="async"><strong>Mandala</strong></a><a href="catalogo/#dragao"><img src="imagens/arte-dragao.jpg" width="244" height="406" alt="Prancha com arte dragão" loading="lazy" decoding="async"><strong>Dragão</strong></a><a href="catalogo/#leao"><img src="imagens/leao-verso.jpg" width="236" height="825" alt="Prancha com arte leão" loading="lazy" decoding="async"><strong>Leão</strong></a><a href="catalogo/#tribal"><img src="imagens/arte-tribal.jpg" width="244" height="406" alt="Prancha com arte tribal" loading="lazy" decoding="async"><strong>Tribal</strong></a><a href="catalogo/#tartaruga-preta"><img src="imagens/arte-tartaruga-preta.jpg" width="244" height="406" alt="Prancha com arte preta e branca" loading="lazy" decoding="async"><strong>Preta e branca</strong></a></div></section>
+
+<section class="sec noite"><div class="oficina">
+<div class="filme"><video data-loop muted loop playsinline preload="metadata" width="360" height="640" poster="imagens/tartaruga-poster.jpg" aria-label="Vídeo sem som percorrendo uma prancha com arte de tartaruga, do bico à rabeta"><source src="imagens/tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></div>
+<div class="pilha desliza"><h2>Passe os olhos de perto.</h2><p>Brilho de resina, traço fechado e a arte correndo até a borda. É assim que a prancha sai da casa.</p>
+<dl class="ficha"><div><dt>Bloco</dt><dd>EPS T4</dd></div><div><dt>Fibra de vidro</dt><dd>330 g</dd></div><div><dt>Resina</dt><dd>Epóxi UV</dd></div><div><dt>Suporta até</dt><dd>120 kg</dd></div></dl>
+<p class="mono">SUP 10'0" × 33" × 4"</p>
+<a class="btn claro" href="#" data-zap="Oi! Vi o vídeo no site e quero ver mais fotos e vídeos de pranchas prontas.">Pedir mais vídeos no WhatsApp</a></div></div></section>
+
+<section class="sec" id="preco"><div class="valor">
+<div class="desliza"><h2>O que você leva</h2><ul><li>Prancha 10'0 com 2 artes à sua escolha</li><li>Remo de alumínio preto</li><li>Triquilhas</li><li>Leash</li><li>Deck antiderrapante</li><li>Protetor de borda</li></ul></div>
+<div class="pilha"><p class="preco">R$ 2.400</p><p>à vista, com tudo isso. Ou R$ 2.700 em até 6x no cartão.</p><p><strong>Reserve com R$ 500</strong> e pague o restante na retirada ou antes da coleta pela transportadora.</p>
+<a class="btn" href="#" data-zap="Oi! Quero encomendar a prancha SUP 10'0 com kit completo.">Encomendar minha prancha</a>
+<table><caption class="pular">Como comparar com outras opções</caption><thead><tr><th scope="col">Direto da SUP Brasil</th><th scope="col">Pergunte antes de comprar em outro lugar</th></tr></thead>
+<tbody><tr><td>EPS T4, fibra 330 g e epóxi UV</td><td>Qual o bloco e a gramatura da fibra?</td></tr><tr><td>Kit completo no preço</td><td>Remo e leash entram ou são à parte?</td></tr><tr><td>2 artes escolhidas por você</td><td>Dá para escolher a arte?</td></tr><tr><td>Conversa com quem fabrica</td><td>Quem resolve se precisar de ajuste?</td></tr></tbody></table></div></div></section>
+
+<section class="sec ceu"><div class="desliza"><h2>Do galpão para a água</h2></div>
+<div class="mosaico">
+<figure class="m1"><img src="imagens/praia-remadora.jpg" width="244" height="244" alt="Mulher de costas caminhando com a prancha e o remo em praia espelhada" loading="lazy" decoding="async"><figcaption>Maré baixa, prancha no braço.</figcaption></figure>
+<figure class="m2"><img src="imagens/bico-colorido-selo.jpg" width="244" height="406" alt="Bico vermelho, amarelo e verde com o selo SUP Brasil" loading="lazy" decoding="async"><figcaption>Selo da casa no bico.</figcaption></figure>
+<figure class="m3"><img src="imagens/oficina-pranchas.jpg" width="224" height="298" alt="Várias pranchas com artes diferentes lado a lado na oficina" loading="lazy" decoding="async"><figcaption>Cada uma com a sua arte.</figcaption></figure>
+<figure class="m4"><img src="imagens/rio-pranchas.jpg" width="244" height="244" alt="Pranchas coloridas enfileiradas na grama à beira de um rio" loading="lazy" decoding="async"><figcaption>À beira do rio.</figcaption></figure>
+</div>
+<p style="margin-top:2rem"><a class="link" href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Ver mais no Instagram @supbrasil2020</a></p></section>
+
+<section class="sec"><h2>Antes de fechar</h2><div class="duvidas">
+<div><h3>E o frete?</h3><p>Retire em Cidade Patriarca, São Paulo, ou receba por transportadora em qualquer lugar do Brasil.</p><a class="link" href="#" data-zap="Oi! Quero simular o frete de uma prancha. Meu CEP é: ">Simular meu frete no WhatsApp</a></div>
+<div><h3>É seguro pagar?</h3><p>Fale com o Osmar ou o Otávio, peça fotos e vídeos de pranchas da casa e combine tudo antes do sinal de R$ 500.</p><a class="link" href="#" data-zap="Oi! Antes de pagar o sinal, quero ver fotos e vídeos de pranchas e entender os prazos.">Tirar essa dúvida</a></div>
+<div><h3>Vou conseguir ficar em pé?</h3><p>O modelo 10'0 tem 33" de largura e é anunciado para iniciantes, até 120 kg. Comece em água calma, com leash e colete.</p><a class="link" href="#qual">Conferir pelo meu peso</a></div>
+</div></section>
+
+<section class="quilhas ceu"><img src="imagens/detalhe-quilha-mandala.jpg" width="462" height="801" alt="Fundo de prancha com mandala, quilha central e duas laterais" loading="lazy" decoding="async">
+<div class="sec pilha desliza"><h2>Três quilhas, menos ziguezague</h2><p>A central ajuda a manter o rumo entre uma remada e outra. As laterais dão apoio nas curvas e quando a água mexe.</p></div></section>
+
+<section class="sec onde" id="onde"><h2>Venha ver de perto</h2><address>R. São Donaciano, 234a, Cidade Patriarca<br>São Paulo, SP, CEP 03553-090</address>
 <p>Osmar: <a href="tel:+5511954334404">(11) 95433-4404</a><br>Otávio: <a href="tel:+5511921868337">(11) 92186-8337</a></p>
-<p class="acoes"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">Abrir no Google Maps</a><a class="btn claro" href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a></p></div></section>
+<div class="acoes"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">Abrir no Google Maps</a></div></section>
 </main>
-<footer><div><h2>Fale com a oficina</h2><p>Conte seu peso, onde pretende remar e qual arte chamou sua atenção.</p></div>
-<a class="btn" data-zap="Oi! Quero atendimento sobre as pranchas SUP Brasil." href="#">Chamar no WhatsApp</a><small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
+<div class="assinatura" aria-hidden="true"></div>
+<footer><h2>Bora remar?</h2><p>Mande seu peso, onde quer remar e a arte que você imaginou.</p>
+<a class="btn claro" href="#" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
+<small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&amp;query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
 <script src="dados.js"></script>
+<script>
+const quiz=document.getElementById('quiz'), saida=document.getElementById('resposta');
+function recomenda(){
+  const d=new FormData(quiz), peso=+d.get('peso'), onde=d.get('onde'), exp=d.get('exp');
+  if(!quiz.checkValidity()){ saida.innerHTML='<p>Digite um peso entre 30 e 200 kg.</p>'; return; }
+  const local=onde==='mar'?'no mar':'em represa ou lago', nivel=exp==='ja'?'já remo':'estou começando';
+  let nome="SUP 10'0", texto='33" de largura, o modelo da casa para iniciantes. Kit completo por R$ 2.400 à vista.', exemplo=false;
+  if(peso>120){ nome='Sob medida'; texto="Seu peso passa dos 120 kg que o 10'0 suporta. Fale com a gente antes de escolher."; }
+  else if(exp==='ja' && peso<=100){ exemplo=true;
+    if(onde==='mar'){ nome="SUP 9'6"; texto='Mais curta, para virar com facilidade nas ondas.'; }
+    else { nome="SUP 10'6"; texto='Mais comprida, para manter o rumo em travessias.'; } }
+  else if(onde==='mar') texto+=' No mar, comece em dia calmo e confirme com a gente.';
+  const msg=`Oi! Peso ${peso} kg, vou remar ${local} e ${nivel}. O site sugeriu: ${nome}${exemplo?' (medida de exemplo)':''}. Podem me orientar?`;
+  saida.innerHTML=`<p>Para ${peso} kg ${local}:</p><p class="grande">${nome}</p><p>${texto}</p>${exemplo?'<p class="exemplo">Shape de exemplo do protótipo. Medida, disponibilidade e preço a confirmar.</p>':''}<a class="btn" href="#">Enviar meus dados no WhatsApp</a>`;
+  saida.querySelector('a').dataset.zap=msg;
+}
+quiz.addEventListener('input',recomenda); quiz.addEventListener('submit',e=>e.preventDefault()); recomenda();
+</script>
 </body></html>
