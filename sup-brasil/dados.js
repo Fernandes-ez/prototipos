@@ -14,16 +14,24 @@ window.SUP = {
   // A faixa some sozinha depois da data 'ate' (AAAA-MM-DD). Para tirar antes, use uma data passada.
   promo: { ate:'2026-11-30', texto:'Black Week: R$ 200 de desconto em qualquer modelo de prancha, ou parcele em até 6x sem juros.' },
   // artes fotografadas. 'fotos': [arquivo, largura, altura, rótulo]
+  // artes fotografadas. 'fotos': [arquivo, largura, altura, rótulo]
   pranchas: [
     { id:'tartaruga', nome:'Tartaruga', texto:'Tartaruga no bico, faixas azuis e traço preto sobre visual de madeira.', video:true,
       fotos:[['tartaruga-poster',360,640,'bico']] },
     { id:'mandala', nome:'Mandala', texto:'Mandala em traço escuro correndo pelo deck e pelo fundo.',
-      fotos:[['mandala-frente',231,812,'frente'],['mandala-verso',236,812,'verso']] },
+      fotos:[['mandala-frente',400,1440,'frente'],['mandala-verso',401,1440,'verso']] },
     { id:'leao', nome:'Leão', texto:'Leão pintado dos dois lados, sobre veio de madeira escura.',
-      fotos:[['leao-frente',236,825,'frente'],['leao-verso',236,825,'verso']] },
-    { id:'dragao', nome:'Dragão', texto:'Dragão e rosas em tom queimado, do bico à rabeta.', fotos:[['arte-dragao',244,406,'fundo']] },
-    { id:'tribal', nome:'Tribal', texto:'Geometria em preto cobrindo a prancha inteira.', fotos:[['arte-tribal',244,406,'fundo']] },
-    { id:'tartaruga-preta', nome:'Preta e branca', texto:'Deck preto e branco com tartaruga no bico.', fotos:[['arte-tartaruga-preta',244,406,'deck']] }
+      fotos:[['leao-frente',419,1440,'frente'],['leao-verso',419,1440,'verso']] },
+    { id:'fogo', nome:'Céu em fogo', texto:'Rosto entre nuvens, em laranja e azul.',
+      fotos:[['fogo-frente',419,1440,'frente'],['fogo-verso',419,1440,'verso']] },
+    { id:'guerreira', nome:'Guerreira', texto:'Retrato em preto e branco com faixa vermelha.',
+      fotos:[['guerreira-frente',419,1440,'frente'],['guerreira-verso',419,1440,'verso']] },
+    { id:'tartaruga-azul', nome:'Tartaruga azul', texto:'Tartaruga e grafismos em azul sobre visual de madeira.',
+      fotos:[['tartaruga-azul-frente',430,1440,'frente'],['tartaruga-azul-verso',430,1440,'verso']] },
+    { id:'mandala-azul', nome:'Mandala azul', texto:'Mandalas azuis e bordas turquesa sobre visual de madeira clara.',
+      fotos:[['mandala-azul-frente',419,1440,'frente'],['mandala-azul-verso',419,1440,'verso']] },
+    { id:'hibisco', nome:'Hibisco', texto:'Flores brancas num degradê do rosa ao azul.',
+      fotos:[['hibisco-frente',461,1440,'frente'],['hibisco-verso',461,1440,'verso']] }
   ],
   // abre a escolha entre os dois contatos, com a mensagem pronta
   chamar(msg){

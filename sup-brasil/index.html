@@ -11,11 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 <style>
-.hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:min(780px,calc(100svh - 130px))}
-.hero .pilha{padding:clamp(2rem,5vw,5rem) var(--lado)}
-.hero h1{max-width:12ch}.hero p{font-size:1.1rem}
-.hero figure{position:relative;min-height:420px}
-.hero figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
+.hero{position:relative;display:grid;align-items:end;min-height:min(860px,calc(100svh - 130px));background:var(--tinta);color:#fff}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 45%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(9,20,32,.9),rgba(9,20,32,.72) 32%,rgba(9,20,32,0) 62%)}
+.hero .pilha{position:relative;z-index:1;padding:2rem var(--lado) 2.25rem;max-width:900px;gap:.85rem}
+.hero h1{max-width:21ch;font-size:clamp(2.4rem,3.8vw,3.6rem)}.hero p{font-size:1.05rem;max-width:62ch}
 .prova{font-weight:600;font-size:.95rem!important}
 .onda{display:block;width:100%;height:clamp(40px,6vw,84px);background:var(--papel)}
 .seletor{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
@@ -43,17 +43,26 @@ dl.ficha{display:flex;flex-wrap:wrap;gap:1.25rem 3rem}.ficha dt{font-size:.85rem
 table{width:100%;border-collapse:collapse;margin-top:2rem;font-size:.95rem}
 th,td{text-align:left;vertical-align:top;padding:.8rem .8rem .8rem 0;border-bottom:1px solid var(--ceu)}
 .mosaico{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(.75rem,2vw,2rem);margin-top:2.5rem;align-items:start}
-.mosaico img{width:100%;max-width:360px}figcaption{font-size:.88rem;margin-top:.4rem}
-.m1{grid-column:1/span 5}.m2{grid-column:7/span 3;margin-top:5rem}.m3{grid-column:10/span 3}.m4{grid-column:3/span 4;margin-top:-2rem}.m5{grid-column:8/span 3}
+.mosaico img{width:100%}figcaption{font-size:.88rem;margin-top:.4rem}
+.m1{grid-column:1/span 5}.m2{grid-column:6/span 4;margin-top:6rem}.m3{grid-column:10/span 3}
+.m4{grid-column:1/span 3}.m5{grid-column:4/span 4;margin-top:4rem}.m6{grid-column:9/span 4;margin-top:-3rem}
+.m3 img,.m4 img,.m5 img,.m6 img{aspect-ratio:3/4;object-fit:cover}
+.faixa{position:relative;height:min(640px,82svh);color:#fff;background:var(--tinta)}
+.faixa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
+.faixa::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,20,32,.68),rgba(9,20,32,0) 45%)}
+.faixa div{position:relative;z-index:1;padding:clamp(1.5rem,4vw,4rem) var(--lado);max-width:34rem;text-shadow:0 1px 12px rgba(9,20,32,.75)}
+.faixa h2{font-size:clamp(2rem,3.6vw,3.2rem)}.faixa p{font-weight:600;font-size:1.15rem;margin-top:.6rem}
 .duvidas{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,4rem);margin-top:2.5rem}.duvidas>div{display:grid;gap:.8rem;align-content:start;justify-items:start}
 .quilhas{display:grid;grid-template-columns:1fr 1fr}
 .quilhas>img{width:100%;height:100%;max-height:720px;object-fit:cover;object-position:50% 65%}
 .onde{display:grid;gap:1rem;justify-items:start}address{font-style:normal}
 @media(max-width:860px){
-.hero,.seletor,.oficina,.valor,.duvidas,.quilhas{grid-template-columns:1fr}
-.hero{min-height:0}.hero figure{order:-1;min-height:25svh}.hero .pilha{padding-top:1.25rem;gap:.9rem}.hero h1{font-size:2.15rem}.hero p{font-size:1rem}
+.seletor,.oficina,.valor,.duvidas,.quilhas{grid-template-columns:1fr}
+.hero{display:block;min-height:0;background:var(--papel);color:var(--tinta)}.hero::after{display:none}
+.hero>img{position:static;height:23svh;object-position:65% 55%}
+.hero .pilha{padding-top:1.25rem;gap:.9rem}.hero h1{font-size:2.15rem}.hero p{font-size:1rem}
 .filme{max-width:320px;justify-self:center;width:100%}
-.m1{grid-column:1/-1}.m2{grid-column:1/span 6;margin-top:0}.m3{grid-column:7/span 6;margin-top:2.5rem}.m4{grid-column:2/span 7;margin-top:0}.m5{grid-column:7/span 6}
+.m1{grid-column:1/-1}.m2{grid-column:1/span 7;margin-top:0}.m3{grid-column:8/span 5;margin-top:2.5rem}.m4{grid-column:1/span 6;margin-top:0}.m5{grid-column:7/span 6;margin-top:2rem}.m6{grid-column:2/span 10;margin-top:0}
 }
 </style>
 </head>
@@ -62,11 +71,11 @@ th,td{text-align:left;vertical-align:top;padding:.8rem .8rem .8rem 0;border-bott
 <header class="topo"><a class="marca" href="./"><img src="imagens/logo-sup-brasil.jpg" width="52" height="52" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="./" aria-current="page">Oficina</a><a href="catalogo/">Catálogo</a><a href="loja/">Loja</a></nav></header>
 <main id="conteudo">
 <section class="hero">
+<img src="imagens/hero-largo-1200.webp" srcset="imagens/hero-largo-1200.webp 1200w, imagens/hero-largo-2200.webp 2200w" sizes="100vw" width="1200" height="744" alt="Mulher remando de pé em água calma no pôr do sol" fetchpriority="high">
 <div class="pilha"><h1>Sua primeira remada, firme e com a sua arte.</h1>
 <p>Prancha 10'0 larga e estável para quem está começando, com kit completo. Você compra direto da fábrica, em São Paulo.</p>
 <div class="acoes"><a class="btn" href="#qual">Descobrir minha prancha</a><a class="link" href="#preco">Ver preço e kit</a></div>
 <p class="prova">Mais de 800 pranchas vendidas. Retirada em Cidade Patriarca ou envio para todo o Brasil.</p></div>
-<figure><img src="imagens/bico-laranja-agua-represa.jpg" width="591" height="796" alt="Bico laranja molhado de uma prancha SUP Brasil sobre a água lisa, com sol e morros ao fundo" fetchpriority="high"></figure>
 </section>
 <svg class="onda" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62C210 70 380 58 520 34S760 0 850 20c52 12 62 38 28 44-30 5-44-20-16-28-40-4-62 30-22 42 70 21 230-30 360-22" fill="none" stroke="#112233" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
 
@@ -81,7 +90,9 @@ th,td{text-align:left;vertical-align:top;padding:.8rem .8rem .8rem 0;border-bott
 </div></section>
 
 <section class="sec"><div class="desliza"><h2>A arte é sua. Comece por uma destas.</h2><p>Pranchas da casa. No modelo 10'0 você escolhe 2 artes.</p></div>
-<div class="artes" tabindex="0" role="region" aria-label="Artes, role para o lado"><a href="catalogo/#mandala"><img src="imagens/mandala-frente.jpg" width="231" height="812" alt="Prancha com arte mandala" loading="lazy" decoding="async"><strong>Mandala</strong></a><a href="catalogo/#dragao"><img src="imagens/arte-dragao.jpg" width="244" height="406" alt="Prancha com arte dragão" loading="lazy" decoding="async"><strong>Dragão</strong></a><a href="catalogo/#leao"><img src="imagens/leao-verso.jpg" width="236" height="825" alt="Prancha com arte leão" loading="lazy" decoding="async"><strong>Leão</strong></a><a href="catalogo/#tribal"><img src="imagens/arte-tribal.jpg" width="244" height="406" alt="Prancha com arte tribal" loading="lazy" decoding="async"><strong>Tribal</strong></a><a href="catalogo/#tartaruga-preta"><img src="imagens/arte-tartaruga-preta.jpg" width="244" height="406" alt="Prancha com arte preta e branca" loading="lazy" decoding="async"><strong>Preta e branca</strong></a></div></section>
+<div class="artes" tabindex="0" role="region" aria-label="Artes, role para o lado"><a href="catalogo/#mandala"><img src="imagens/mandala-verso.jpg" width="401" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala, verso"><strong>Mandala</strong></a><a href="catalogo/#fogo"><img src="imagens/fogo-verso.jpg" width="419" height="1440" loading="lazy" decoding="async" alt="Prancha com arte céu em fogo, verso"><strong>Céu em fogo</strong></a><a href="catalogo/#leao"><img src="imagens/leao-verso.jpg" width="419" height="1440" loading="lazy" decoding="async" alt="Prancha com arte leão, verso"><strong>Leão</strong></a><a href="catalogo/#guerreira"><img src="imagens/guerreira-verso.jpg" width="419" height="1440" loading="lazy" decoding="async" alt="Prancha com arte guerreira, verso"><strong>Guerreira</strong></a><a href="catalogo/#tartaruga-azul"><img src="imagens/tartaruga-azul-verso.jpg" width="430" height="1440" loading="lazy" decoding="async" alt="Prancha com arte tartaruga azul, verso"><strong>Tartaruga azul</strong></a><a href="catalogo/#hibisco"><img src="imagens/hibisco-verso.jpg" width="461" height="1440" loading="lazy" decoding="async" alt="Prancha com arte hibisco, verso"><strong>Hibisco</strong></a><a href="catalogo/#mandala-azul"><img src="imagens/mandala-azul-verso.jpg" width="419" height="1440" loading="lazy" decoding="async" alt="Prancha com arte mandala azul, verso"><strong>Mandala azul</strong></a></div></section>
+
+<section class="faixa"><img src="imagens/mar-azul-800.webp" srcset="imagens/mar-azul-800.webp 800w, imagens/mar-azul-1448.webp 1448w" sizes="100vw" width="800" height="600" alt="Homem de ponta-cabeça sobre uma prancha no mar verde, sob céu azul com nuvens" loading="lazy" decoding="async"><div class="desliza"><h2>Mais de 800 pranchas vendidas.</h2><p>Entregamos em todo o Brasil.</p></div></section>
 
 <section class="sec noite"><div class="oficina">
 <div class="filme"><video data-loop muted loop playsinline preload="metadata" width="360" height="640" poster="imagens/tartaruga-poster.jpg" aria-label="Vídeo sem som percorrendo uma prancha com arte de tartaruga, do bico à rabeta"><source src="imagens/tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></div>
@@ -99,10 +110,12 @@ th,td{text-align:left;vertical-align:top;padding:.8rem .8rem .8rem 0;border-bott
 
 <section class="sec ceu"><div class="desliza"><h2>Do galpão para a água</h2></div>
 <div class="mosaico">
-<figure class="m1"><img src="imagens/praia-remadora.jpg" width="244" height="244" alt="Mulher de costas caminhando com a prancha e o remo em praia espelhada" loading="lazy" decoding="async"><figcaption>Maré baixa, prancha no braço.</figcaption></figure>
-<figure class="m2"><img src="imagens/bico-colorido-selo.jpg" width="244" height="406" alt="Bico vermelho, amarelo e verde com o selo SUP Brasil" loading="lazy" decoding="async"><figcaption>Selo da casa no bico.</figcaption></figure>
-<figure class="m3"><img src="imagens/oficina-pranchas.jpg" width="224" height="298" alt="Várias pranchas com artes diferentes lado a lado na oficina" loading="lazy" decoding="async"><figcaption>Cada uma com a sua arte.</figcaption></figure>
-<figure class="m4"><img src="imagens/rio-pranchas.jpg" width="244" height="244" alt="Pranchas coloridas enfileiradas na grama à beira de um rio" loading="lazy" decoding="async"><figcaption>À beira do rio.</figcaption></figure>
+<figure class="m1"><img src="imagens/saida-do-mar-500.webp" srcset="imagens/saida-do-mar-500.webp 500w, imagens/saida-do-mar-1000.webp 1000w" sizes="(max-width:860px) 100vw, 33vw" width="500" height="667" alt="Mulher saindo do mar com remo e prancha" loading="lazy" decoding="async"><figcaption>Saindo do mar.</figcaption></figure>
+<figure class="m2"><img src="imagens/prancha-personalizada-500.webp" srcset="imagens/prancha-personalizada-500.webp 500w, imagens/prancha-personalizada-1000.webp 1000w" sizes="(max-width:860px) 100vw, 33vw" width="500" height="667" alt="Mulher ao lado de uma prancha vermelha e laranja personalizada com nome, na areia" loading="lazy" decoding="async"><figcaption>Nome na prancha, do seu jeito.</figcaption></figure>
+<figure class="m3"><img src="imagens/bico-mar-verde-500.webp" srcset="imagens/bico-mar-verde-500.webp 500w, imagens/bico-mar-verde-1000.webp 1000w" sizes="(max-width:860px) 100vw, 33vw" width="500" height="889" alt="Bico de prancha com tartaruga sobre mar verde transparente" loading="lazy" decoding="async"><figcaption>Mar verde pela frente.</figcaption></figure>
+<figure class="m4"><img src="imagens/beira-do-lago-500.webp" srcset="imagens/beira-do-lago-500.webp 500w, imagens/beira-do-lago-1000.webp 1000w" sizes="(max-width:860px) 100vw, 33vw" width="500" height="889" alt="Prancha na grama à beira de um lago cercado de árvores" loading="lazy" decoding="async"><figcaption>Beira do lago.</figcaption></figure>
+<figure class="m5"><img src="imagens/remada-close-500.webp" srcset="imagens/remada-close-500.webp 500w, imagens/remada-close-1000.webp 1000w" sizes="(max-width:860px) 100vw, 33vw" width="500" height="888" alt="Mão segurando o remo ao lado de uma prancha na água" loading="lazy" decoding="async"><figcaption>Remada de perto.</figcaption></figure>
+<figure class="m6"><img src="imagens/dragao-detalhe-500.webp" srcset="imagens/dragao-detalhe-500.webp 500w, imagens/dragao-detalhe-640.webp 640w" sizes="(max-width:860px) 100vw, 33vw" width="500" height="888" alt="Detalhe de um dragão em traço escuro no fundo de uma prancha" loading="lazy" decoding="async"><figcaption>Dragão, de perto.</figcaption></figure>
 </div>
 <p style="margin-top:2rem"><a class="link" href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Ver mais no Instagram @supbrasil2020</a></p></section>
 
@@ -112,7 +125,7 @@ th,td{text-align:left;vertical-align:top;padding:.8rem .8rem .8rem 0;border-bott
 <div><h3>Vou conseguir ficar em pé?</h3><p>O modelo 10'0 tem 33" de largura e é anunciado para iniciantes, até 120 kg. Comece em água calma, com leash e colete.</p><a class="link" href="#qual">Conferir pelo meu peso</a></div>
 </div></section>
 
-<section class="quilhas ceu"><img src="imagens/detalhe-quilha-mandala.jpg" width="462" height="801" alt="Fundo de prancha com mandala, quilha central e duas laterais" loading="lazy" decoding="async">
+<section class="quilhas ceu"><img src="imagens/quilhas-macro.webp" width="640" height="1040" loading="lazy" decoding="async" alt="Fundo de prancha com mandala, quilha central e duas laterais">
 <div class="sec pilha desliza"><h2>Três quilhas, menos ziguezague</h2><p>A central ajuda a manter o rumo entre uma remada e outra. As laterais dão apoio nas curvas e quando a água mexe.</p></div></section>
 
 <section class="sec onde" id="onde"><h2>Venha ver de perto</h2><address>R. São Donaciano, 234a, Cidade Patriarca<br>São Paulo, SP, CEP 03553-090</address>
