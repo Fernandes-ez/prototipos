@@ -1,6 +1,7 @@
 /* Dados da SUP Brasil (edite aqui).
    ATENÇÃO: WhatsApp, preços, medidas e linhas abaixo ainda NÃO foram confirmados pelo cliente.
    Preços e medidas são exemplos do protótipo. */
+/* Endereço e Instagram (@supbrasil2020) informados em 25/11/2026; no HTML das páginas. */
 window.SUP = {
   whatsapp: '', // 55 + DDD + número, só dígitos. Vazio: o WhatsApp abre pedindo para escolher o contato.
   kitExtra: 700, // exemplo: remo + leash

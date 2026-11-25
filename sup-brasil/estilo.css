@@ -33,4 +33,5 @@ td{font-family:var(--mono);font-size:.84rem}
 .nota{font-size:.85rem;margin-top:.6rem}
 footer{border-top:var(--b);background:var(--tinta);color:var(--papel);padding:2.5rem 1.25rem;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:end}
 footer .btn{border-color:var(--papel);background:var(--papel);color:var(--tinta)}
-footer small{display:block;width:100%;opacity:.8}
+footer small{display:block;width:100%;opacity:.85}
+footer small a{display:inline-block;padding:.7rem 0}
