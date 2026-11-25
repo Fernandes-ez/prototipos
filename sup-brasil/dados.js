@@ -1,74 +1,97 @@
-/* Dados da SUP Brasil (edite aqui).
-   Telefones, endereço e Instagram: informados em 25/11/2026 (endereço e @ ficam no HTML).
-   Modelo, preços, kit, sinal e Black Week: posts do Instagram @supbrasil2020.
-   Os shapes marcados com 'exemplo' no seletor NÃO são reais: confirmar ou remover. */
+/* SUP Brasil: FONTE ÚNICA de dados. Edite só aqui.
+   Origem: posts do Instagram @supbrasil2020 e telefones/endereço informados em 25/11/2026.
+   Campo null = dado que ainda falta. O site mostra um marcador [ASSIM] no lugar. */
 window.SUP = {
-  contatos: [ { nome:'Osmar', zap:'5511954334404', tel:'(11) 95433-4404' },
-              { nome:'Otávio', zap:'5511921868337', tel:'(11) 92186-8337' } ],
-  modelo: {
-    medidas: {'Modelo':'SUP 10\'0 (iniciantes)','Comprimento':'10\'0"','Largura':'33"','Espessura':'4"','Peso suportado':'até 120 kg',
-              'Material':'bloco de EPS T4','Revestimento':'fibra de vidro 330 g + resina epóxi UV','Quilhas':'triquilhas'},
-    aVista: 2400, cartao: 2700, parcelas: 6, sinal: 500,
-    kit: ['Remo de alumínio preto','Triquilhas','Leash','Deck','Protetor de borda','Personalização com 2 artes à sua escolha']
-  },
-  // A faixa some sozinha depois da data 'ate' (AAAA-MM-DD). Para tirar antes, use uma data passada.
-  promo: { ate:'2026-11-30', texto:'Black Week: R$ 200 de desconto em qualquer modelo de prancha, ou parcele em até 6x sem juros.' },
-  // artes fotografadas. 'fotos': [arquivo, largura, altura, rótulo]
-  // artes fotografadas. 'fotos': [arquivo, largura, altura, rótulo]
+  contato: { nome:'Osmar', zap:'5511954334404', tel:'(11) 95433-4404' },     // atendimento principal (1 clique)
+  contato2:{ nome:'Otávio', zap:'5511921868337', tel:'(11) 92186-8337' },    // aparece só no rodapé
+  endereco:'R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090',
+  instagram:'supbrasil2020',
+  prova:'Mais de 800 pranchas vendidas',
+  // único shape confirmado
+  modelo:{ nome:"SUP 10'0", medida:'10\'0" × 33" × 4"', largura:'33"', pesoMax:120, bloco:'EPS T4', fibra:'330 g', resina:'Epóxi UV' },
+  preco:{ aVista:2400, cartao:2700, parcelas:6, sinal:500 },
+  kit:['Prancha com 2 artes à sua escolha','Remo de alumínio preto','Triquilhas','Leash','Deck antiderrapante','Protetor de borda'],
+  // a faixa some depois da data 'ate' (AAAA-MM-DD). A data final é uma suposição: confirmar.
+  promo:{ ate:'2026-11-30', faixa:'Black Week: R$ 200 de desconto na prancha', nota:'O desconto de R$ 200 da Black Week é confirmado no WhatsApp antes do sinal.' },
+  prazo:null,      // ex.: texto do prazo de produção e retirada
+  garantia:null,   // ex.: tempo e cobertura da garantia
+  reparo:null,     // ex.: como funciona o reparo
+  frete:null,      // ex.: faixa de valores por região
+  depoimentos:[null,null,null],   // {texto:'', nome:'', cidade:''} com autorização do cliente
   pranchas: [
     { id:'tartaruga', nome:'Tartaruga', texto:'Tartaruga no bico, faixas azuis e traço preto sobre visual de madeira.', video:true,
-      fotos:[['tartaruga-poster',360,640,'bico']] },
+      fotos:[['tartaruga-bico',166,575,'bico']] },
     { id:'mandala', nome:'Mandala', texto:'Mandala em traço escuro correndo pelo deck e pelo fundo.',
-      fotos:[['mandala-frente',400,1440,'frente'],['mandala-verso',401,1440,'verso']] },
+      fotos:[['mandala-frente',400,1440,'frente'],['mandala-verso',400,1440,'verso']] },
     { id:'leao', nome:'Leão', texto:'Leão pintado dos dois lados, sobre veio de madeira escura.',
-      fotos:[['leao-frente',419,1440,'frente'],['leao-verso',419,1440,'verso']] },
+      fotos:[['leao-frente',400,1440,'frente'],['leao-verso',400,1440,'verso']] },
     { id:'fogo', nome:'Céu em fogo', texto:'Rosto entre nuvens, em laranja e azul.',
-      fotos:[['fogo-frente',419,1440,'frente'],['fogo-verso',419,1440,'verso']] },
+      fotos:[['fogo-frente',400,1440,'frente'],['fogo-verso',400,1440,'verso']] },
     { id:'guerreira', nome:'Guerreira', texto:'Retrato em preto e branco com faixa vermelha.',
-      fotos:[['guerreira-frente',419,1440,'frente'],['guerreira-verso',419,1440,'verso']] },
+      fotos:[['guerreira-frente',400,1440,'frente'],['guerreira-verso',400,1440,'verso']] },
     { id:'tartaruga-azul', nome:'Tartaruga azul', texto:'Tartaruga e grafismos em azul sobre visual de madeira.',
-      fotos:[['tartaruga-azul-frente',430,1440,'frente'],['tartaruga-azul-verso',430,1440,'verso']] },
+      fotos:[['tartaruga-azul-frente',400,1440,'frente'],['tartaruga-azul-verso',400,1440,'verso']] },
     { id:'mandala-azul', nome:'Mandala azul', texto:'Mandalas azuis e bordas turquesa sobre visual de madeira clara.',
-      fotos:[['mandala-azul-frente',419,1440,'frente'],['mandala-azul-verso',419,1440,'verso']] },
+      fotos:[['mandala-azul-frente',400,1440,'frente'],['mandala-azul-verso',400,1440,'verso']] },
     { id:'hibisco', nome:'Hibisco', texto:'Flores brancas num degradê do rosa ao azul.',
-      fotos:[['hibisco-frente',461,1440,'frente'],['hibisco-verso',461,1440,'verso']] }
+      fotos:[['hibisco-frente',400,1440,'frente'],['hibisco-verso',400,1440,'verso']] }
   ],
-  // abre a escolha entre os dois contatos, com a mensagem pronta
-  chamar(msg){
-    let d = document.getElementById('contatos');
-    if(!d){ d = document.createElement('dialog'); d.id = 'contatos'; d.setAttribute('aria-label','Escolha com quem falar'); document.body.append(d); }
-    d.innerHTML = '<h2>Falar com quem?</h2>' + this.contatos.map(c =>
-      `<a class="btn" target="_blank" rel="noopener" href="https://wa.me/${c.zap}?text=${encodeURIComponent(msg)}">${c.nome}, ${c.tel}</a>`).join('')
-      + '<form method="dialog"><button class="btn claro">Fechar</button></form>';
-    d.querySelectorAll('a').forEach(a => a.addEventListener('click', () => d.close()));
-    d.showModal();
-  },
-  brl(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+  brl(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:v%1?2:0}); },
+  link(msg){ return `https://wa.me/${this.contato.zap}?text=${encodeURIComponent(msg)}`; },
+  promoAtiva(){ return new Date() <= new Date(this.promo.ate+'T23:59:59-03:00'); },
+  ou(valor,marca){ return valor || `<mark class="pendente">[${marca}]</mark>`; }
 };
-// faixa da promoção, logo abaixo do cabeçalho
-if(new Date() <= new Date(SUP.promo.ate + 'T23:59:59-03:00')){
-  document.querySelector('header').insertAdjacentHTML('afterend',
-    `<p class="promo">${SUP.promo.texto} <a href="#" data-zap="Oi! Quero aproveitar a Black Week da SUP Brasil.">Aproveitar no WhatsApp</a></p>`);
-}
+
+/* Único ponto de medição. Pronto para GA4 (gtag ou dataLayer) e Meta Pixel (fbq).
+   Não envie dados pessoais (peso, CEP, texto da mensagem). */
+window.trackEvent = function(nome, dados={}){
+  if(window.gtag) window.gtag('event', nome, dados);
+  else (window.dataLayer = window.dataLayer || []).push({event:nome, ...dados});
+  if(window.fbq) window.fbq('trackCustom', nome, dados);
+};
+
+// roda no <head>: decide a faixa antes da primeira pintura, sem pulo de layout
+if(!SUP.promoAtiva()) document.documentElement.classList.add('sem-promo');
+
 document.addEventListener('click', e => {
-  const a = e.target.closest('[data-zap]');
-  if(a){ e.preventDefault(); SUP.chamar(a.dataset.zap); }
+  const a = e.target.closest('a[data-zap]');
+  if(!a) return;
+  a.href = SUP.link(a.dataset.zap); a.target = '_blank'; a.rel = 'noopener';
+  trackEvent('whatsapp_click', {origem:a.dataset.origem || a.closest('section[id]')?.id || 'pagina'});
 });
 
-document.body.insertAdjacentHTML('beforeend',
-  '<a class="barra" href="#" data-zap="Oi! Vim pelo site e quero tirar uma dúvida sobre as pranchas.">Tirar dúvida no WhatsApp</a>');
 addEventListener('DOMContentLoaded', () => {
-if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const o = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.remove('longe'); o.unobserve(e.target); } }));
-  document.querySelectorAll('.desliza').forEach(el => { if(el.getBoundingClientRect().top > innerHeight){ el.classList.add('longe'); o.observe(el); } });
-}
-// vídeo mudo: respeita "reduzir movimento" e tem botão de pausa
-document.querySelectorAll('video[data-loop]').forEach(v => {
-  const b = v.parentElement.querySelector('button');
-  const rotulo = () => b.textContent = v.paused ? 'Tocar vídeo' : 'Pausar vídeo';
-  v.addEventListener('play', rotulo); v.addEventListener('pause', rotulo);
-  b.addEventListener('click', () => v.paused ? v.play() : v.pause());
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(()=>{});
-  rotulo();
-});
+  const S=SUP, m=S.modelo, p=S.preco, b=v=>S.brl(v);
+  const textos = {
+    prova:S.prova, faixa:S.promo.faixa, notaPromo:S.promo.nota, endereco:S.endereco,
+    modelo:m.nome, medida:m.medida, bloco:m.bloco, fibra:m.fibra, resina:m.resina, peso:`${m.pesoMax} kg`,
+    resumo:`Prancha ${m.nome}, ${m.largura} de largura, para quem está começando. Kit completo, direto da fábrica.`,
+    aVista:b(p.aVista), parcelado:`ou até ${p.parcelas}x de ${b(p.cartao/p.parcelas)} no cartão (${b(p.cartao)} no total)`,
+    sinal:b(p.sinal), tel1:`${S.contato.nome}: ${S.contato.tel}`, tel2:`${S.contato2.nome}: ${S.contato2.tel}`
+  };
+  document.querySelectorAll('[data-t]').forEach(el => el.textContent = textos[el.dataset.t]);
+  document.querySelectorAll('[data-pendente]').forEach(el => { const [campo,marca]=el.dataset.pendente.split('|'); el.innerHTML = S.ou(S[campo], marca); });
+  const urls = { maps:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(S.endereco), insta:'https://www.instagram.com/'+S.instagram,
+                 tel1:'tel:+'+S.contato.zap, tel2:'tel:+'+S.contato2.zap };
+  document.querySelectorAll('[data-url]').forEach(el => el.href = urls[el.dataset.url]);
+
+  document.body.insertAdjacentHTML('beforeend',
+    '<a class="barra fora" href="#contato" data-origem="barra" data-zap="Oi! Vim pelo site e quero tirar uma dúvida sobre as pranchas.">Tirar dúvida no WhatsApp</a>');
+  document.querySelectorAll('a[data-zap]').forEach(a => { a.href = S.link(a.dataset.zap); a.target='_blank'; a.rel='noopener'; });
+
+  // a barra do rodapé só aparece depois que a primeira dobra sai da tela
+  const barra = document.querySelector('.barra'), topo = document.querySelector('[data-hero]');
+  if(topo && 'IntersectionObserver' in window)
+    new IntersectionObserver(([e]) => barra.classList.toggle('fora', e.isIntersecting || e.boundingClientRect.top > 0)).observe(topo);
+  else barra.classList.remove('fora');
+
+  // vídeo mudo: respeita "reduzir movimento" e tem botão de pausa
+  document.querySelectorAll('video[data-loop]').forEach(v => {
+    const bt = v.parentElement.querySelector('button');
+    const rotulo = () => bt.textContent = v.paused ? 'Tocar vídeo' : 'Pausar vídeo';
+    v.addEventListener('play', rotulo); v.addEventListener('pause', rotulo);
+    bt.addEventListener('click', () => v.paused ? v.play() : v.pause());
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(()=>{});
+    rotulo();
+  });
 });

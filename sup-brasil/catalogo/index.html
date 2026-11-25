@@ -5,46 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Catálogo de artes · SUP Brasil</title>
-<meta name="description" content="Artes de pranchas SUP Brasil para personalizar o modelo 10'0.">
+<meta name="description" content="Artes de pranchas SUP Brasil para personalizar a sua.">
 <link rel="icon" href="../imagens/logo-sup-brasil.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../estilo.css">
+<script src="../dados.js"></script>
 <style>
-.abre{padding:var(--alto) var(--lado) 2rem;display:grid;gap:1rem}
+.abre{padding:2.5rem var(--lado) 1.5rem;display:grid;gap:1rem}
 .indice{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
-.arte{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,6vw,6rem);padding:var(--alto) var(--lado);align-items:center;scroll-margin-top:1rem}
-.arte:nth-of-type(even){background:var(--ceu2)}.arte:nth-of-type(even) .fotos{order:2}
-.fotos{display:flex;gap:1rem;justify-content:center;align-items:flex-start}
-.fotos figure{flex:0 1 240px;min-width:0}.fotos img{width:auto;max-width:100%;max-height:640px}.fotos video{width:100%}.fotos figure+figure{margin-top:2.5rem}
+.arte{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.25rem,6vw,6rem);padding:2rem var(--lado);align-items:center;scroll-margin-top:1rem}
+.arte:nth-of-type(even) .fotos{order:2}
+.fotos{display:flex;gap:1rem;justify-content:center;align-items:center;background:var(--ceu2);border-radius:18px;padding:1.25rem;height:620px}
+.fotos figure{flex:0 1 190px;min-width:0;display:grid;justify-items:center}.fotos img{width:auto;max-width:100%;height:540px;object-fit:contain}
 .fotos figcaption{font-size:.85rem;margin-top:.4rem}
-.fotos button{min-height:44px;background:none;border:0;font:600 .9rem var(--sans);color:var(--tinta);text-decoration:underline;cursor:pointer}
-.arte h2{font-size:clamp(2.6rem,6vw,5rem)}
-@media(max-width:760px){.arte{grid-template-columns:1fr}.arte:nth-of-type(even) .fotos{order:0}}
+.arte h2{font-size:clamp(2.2rem,5vw,4rem)}
+@media(max-width:760px){.arte{grid-template-columns:1fr}.arte:nth-of-type(even) .fotos{order:0}.fotos{height:470px;padding:.75rem}.fotos img{height:400px}}
 </style>
 </head>
 <body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><a class="marca" href="../"><img src="../imagens/logo-sup-brasil.jpg" width="52" height="52" alt="">SUP Brasil</a><nav aria-label="Páginas"><a href="../">Oficina</a><a href="../catalogo/" aria-current="page">Catálogo</a><a href="../loja/">Loja</a></nav></header>
+<a class="promo" href="#contato" data-origem="faixa" data-zap="Oi! Quero aproveitar a Black Week da SUP Brasil."><span data-t="faixa">Black Week SUP Brasil</span></a>
 <main id="conteudo">
-<div class="abre"><h1>Artes que já saíram da casa</h1><p>Escolha uma como ponto de partida. Todas as encomendas abaixo são cotadas sobre o modelo 10'0: 33" de largura, 4" de espessura, até 120 kg, kit completo.</p>
-<p><strong>R$ 2.400 à vista</strong> ou R$ 2.700 em até 6x no cartão.</p><nav class="indice" id="indice" aria-label="Ir para a arte"></nav></div>
+<div class="abre" data-hero><h1>Artes que já saíram da casa</h1><p>Escolha uma como ponto de partida. As encomendas são cotadas sobre o modelo <span data-t="modelo">da casa</span>, com kit completo.</p>
+<p><strong data-t="aVista">Preço no WhatsApp</strong> <strong>à vista</strong>, <span data-t="parcelado">ou no cartão</span>.</p><p class="so-promo pequeno" data-t="notaPromo"></p>
+<noscript><p><strong>Ative o JavaScript para ver as artes, ou chame no WhatsApp pelo link no fim da página.</strong></p></noscript><nav class="indice" id="indice" aria-label="Ir para a arte"></nav></div>
 <div id="lista"></div>
 </main>
 <div class="assinatura" aria-hidden="true"></div>
-<footer><h2>Tem outra ideia de arte?</h2><p>Mande a referência pelo WhatsApp.</p>
-<a class="btn claro" href="#" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
-<small>SUP Brasil. <a href="https://www.google.com/maps/search/?api=1&amp;query=R.+S%C3%A3o+Donaciano%2C+234a%2C+Cidade+Patriarca%2C+S%C3%A3o+Paulo%2C+SP%2C+03553-090" target="_blank" rel="noopener">R. São Donaciano, 234a, Cidade Patriarca, São Paulo, SP, 03553-090</a>. <a href="https://www.instagram.com/supbrasil2020" target="_blank" rel="noopener">Instagram @supbrasil2020</a>. Protótipo de demonstração por ezf.tech.</small></footer>
-<script src="../dados.js"></script>
+<footer id="contato"><h2>Tem outra ideia de arte?</h2><p>Mande a referência pelo WhatsApp.</p>
+<a class="btn claro" href="#contato" data-zap="Oi! Quero falar sobre uma prancha SUP Brasil.">Chamar no WhatsApp</a>
+<small>SUP Brasil. <a data-url="maps" href="#contato" target="_blank" rel="noopener" data-t="endereco">Cidade Patriarca, São Paulo</a>.<br>
+<a data-url="tel1" href="#contato" data-t="tel1">Telefone</a> · <a data-url="tel2" href="#contato" data-t="tel2">Segundo telefone</a><br>
+<a data-url="insta" href="#contato" target="_blank" rel="noopener">Instagram</a>. Protótipo de demonstração por ezf.tech.</small>
+<noscript><p>Chame no WhatsApp: <a href="https://wa.me/5511954334404">(11) 95433-4404</a></p></noscript></footer>
 <script>
 const I='../imagens/';
 document.getElementById('indice').innerHTML=SUP.pranchas.map(p=>`<a class="link" href="#${p.id}">${p.nome}</a>`).join('');
 document.getElementById('lista').innerHTML=SUP.pranchas.map(p=>`<section class="arte" id="${p.id}">
-<div class="fotos">${p.video
- ?`<figure><video data-loop muted loop playsinline preload="none" width="360" height="640" poster="${I}tartaruga-poster.jpg" aria-label="Vídeo sem som da prancha ${p.nome}"><source src="${I}tartaruga.mp4" type="video/mp4"></video><button type="button">Tocar vídeo</button></figure>`
- :p.fotos.map(([f,w,h,r])=>`<figure><img src="${I}${f}.jpg" width="${w}" height="${h}" loading="lazy" alt="Prancha ${p.nome}, ${r}"><figcaption>${r}</figcaption></figure>`).join('')}</div>
-<div class="pilha desliza"><h2>${p.nome}</h2><p>${p.texto}</p><p class="mono">modelo 10'0" × 33" × 4"</p>
-<a class="btn" href="#" data-zap="Oi! Quero encomendar uma prancha 10'0 com arte inspirada em ${p.nome}.">Quero essa arte</a></div></section>`).join('');
+<div class="fotos">${p.fotos.map(([f,w,h,r])=>`<figure><img src="${I}${f}.webp" width="${w}" height="${h}" loading="lazy" alt="Prancha ${p.nome}, ${r}"><figcaption>${r}</figcaption></figure>`).join('')}</div>
+<div class="pilha"><h2>${p.nome}</h2><p>${p.texto}</p><p class="mono">${SUP.modelo.medida}</p>${p.video?'<a class="link" href="../#filme">Ver o vídeo desta prancha</a>':''}
+<a class="btn" href="#contato" data-zap="Oi! Quero encomendar uma prancha ${SUP.modelo.nome} com arte inspirada em ${p.nome}.">Quero essa arte</a></div></section>`).join('');
 </script>
 
 </body></html>
