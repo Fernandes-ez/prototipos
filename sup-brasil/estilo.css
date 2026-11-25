@@ -26,6 +26,8 @@ p{max-width:62ch}
 #contatos::backdrop{background:rgba(17,34,51,.55)}
 #contatos h2{font-size:1.6rem}
 #contatos .btn{width:100%}
+.promo{max-width:none;background:#A93F10;color:#fff;border-bottom:var(--b);padding:.4rem 1.25rem;font-weight:600;text-align:center}
+.promo a{display:inline-block;padding:.6rem .4rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.3rem;border:var(--b);border-radius:0;background:var(--tinta);color:var(--papel);font:600 .95rem var(--sans);text-decoration:none;cursor:pointer}
 .btn:hover{background:#A93F10}
 .btn.claro{background:var(--papel);color:var(--tinta)}
@@ -39,4 +41,4 @@ td{font-family:var(--mono);font-size:.84rem}
 footer{border-top:var(--b);background:var(--tinta);color:var(--papel);padding:2.5rem 1.25rem;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:end}
 footer .btn{border-color:var(--papel);background:var(--papel);color:var(--tinta)}
 footer small{display:block;width:100%;opacity:.85}
-footer small a{display:inline-block;padding:.7rem 0}
+footer small{line-height:2.4}

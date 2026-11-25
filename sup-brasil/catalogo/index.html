@@ -53,8 +53,9 @@ function desenha(){
     ?['frente','verso'].map(v=>`<figure><img src="${I+p.id}-${v}.jpg" alt="Prancha ${p.nome}, ${v}"><figcaption>${v==='frente'?'Frente (deck)':'Verso (fundo)'}</figcaption></figure>`).join('')
     :`<figure class="unica"><img src="${I+p.detalhe.img}" alt="${p.detalhe.alt}"><figcaption>${p.detalhe.legenda}</figcaption></figure>`;
   $('.ficha').innerHTML=`<h1>${p.nome}</h1><p class="mono">Ficha ${p.ref}</p><p>${p.texto}</p>
-  <table>${Object.entries(p.medidas).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</table>
-  <p class="nota">Medidas e linhas de exemplo, a confirmar com a oficina.</p>
+  <table>${Object.entries(SUP.modelo.medidas).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</table>
+  <p><strong>${SUP.brl(SUP.modelo.aVista)} à vista</strong> ou ${SUP.brl(SUP.modelo.cartao)} em até 6x no cartão, com kit completo.</p>
+  <p class="nota">Ficha do modelo 10'0. ${p.nome} é uma referência de arte para personalizar. Kit: ${SUP.modelo.kit.join(', ').toLowerCase()}.</p>
   <a class="btn" href="#" data-zap="Oi! Quero reservar a prancha ${p.nome} (ref. ${p.ref}).">Reservar a ${p.nome}</a>`;
 }
 document.addEventListener('click',e=>{
